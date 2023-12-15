@@ -43,7 +43,7 @@ docker up prefered-name
 ```
 
 ## State management and data fetching
-To fetch data and also for state management, In this project we will use react-query which is known as TanStack Query. To get more information about how you should use react-query in a project, please click [here](https://tanstack.com/query/latest):
+To fetch data and also for state management, In this project we will use[ react-query](https://tanstack.com/query/latest) which is known as TanStack Query. To get more information about how you should use react-query in a project, please click [here](https://tanstack.com/query/latest):
 
 
 ## Clean code and comments
