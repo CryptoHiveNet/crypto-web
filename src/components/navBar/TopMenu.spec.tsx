@@ -7,7 +7,7 @@ test("loads and displays TopMenu", async () => {
   render(<TopMenu />);
 
   // ASSERT
-  expect(screen.getByText("Home1"));
+  expect(screen.getByText("Home"));
   expect(screen.getByText("About"));
   expect(screen.getByText("Services"));
   expect(screen.getByText("Pricing"));
