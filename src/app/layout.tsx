@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import React_query_provider from "@/components/react-query/react-query-provider";
 import TopMenu from "@/components/navBar/TopMenu";
+import ThemeProvider from "@/theme/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,8 +18,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <React_query_provider>
-          <TopMenu />
-          {children}
+          <ThemeProvider>
+            <TopMenu />
+            {children}
+          </ThemeProvider>
         </React_query_provider>
       </body>
     </html>
