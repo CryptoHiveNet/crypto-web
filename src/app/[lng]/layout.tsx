@@ -3,6 +3,12 @@ import "./globals.css";
 import React_query_provider from "@/components/react-query/react-query-provider";
 import TopMenu from "@/components/navBar/TopMenu";
 import ThemeProvider from "@/theme/ThemeProvider";
+import { dir } from "i18next";
+import { languages } from "../../utils/i18n/settings";
+
+export async function generateStaticParams() {
+  return languages.map((lng) => ({ lng }));
+}
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -11,11 +17,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  params: { lng },
 }: {
   children: React.ReactNode;
+  params: { lng: any };
 }) {
   return (
-    <html lang="en">
+    <html lang={lng} dir={dir(lng)}>
       <body>
         <React_query_provider>
           <ThemeProvider>
