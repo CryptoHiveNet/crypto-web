@@ -1,7 +1,7 @@
 {
   "i18n-ally.localesPaths": [
-    "src/locales",
     "src/components/i18n",
+    "src/infrastructures/locales",
     "src/utils/i18n",
     "coverage/lcov-report/utils/i18n"
   ]
