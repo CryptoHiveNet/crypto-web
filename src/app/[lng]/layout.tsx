@@ -3,9 +3,9 @@ import './globals.css';
 
 import { dir } from 'i18next';
 
-import TopMenu from '@/components/navBar/TopMenu';
-import React_query_provider from '@/components/react-query/react-query-provider';
-import ThemeProvider from '@/theme/ThemeProvider';
+import TopMenu from '@/types/components/navBar/TopMenu';
+import React_query_provider from '@/types/components/react-query/react-query-provider';
+import ThemeProvider from '@/types/theme/ThemeProvider';
 
 import { languages } from '../../utils/i18n/settings';
 

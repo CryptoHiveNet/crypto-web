@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useTranslation } from "../../utils/i18n";
-import { LanguageSwitcher } from "@/components/i18n/LanguageSwitcher";
+import { LanguageSwitcher } from "@/types/components/i18n/LanguageSwitcher";
 
 export default async function Page({ params: { lng } }: any) {
   const { t } = await useTranslation(lng);
