@@ -1,7 +1,7 @@
 "use client";
-import { TextInputType } from "@/types/components/textbox";
-import { Label, TextInput } from "flowbite-react";
 import React, { FC, SVGProps } from "react";
+import { Label, TextInput } from "flowbite-react";
+import { TextInputType } from "@/types/types/components/textbox";
 
 export type iTextBoxProps = {
   type: TextInputType;
