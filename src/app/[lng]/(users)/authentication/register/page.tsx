@@ -1,5 +1,5 @@
+import RegistrationPage from "@/types/modules/user/pages/registrationPage/RegistrationPage";
 import React from "react";
-import RegistrationPage from "../../../../modules/user/pages/RegistrationPage/RegistrationPage";
 
 const UserRegistrationHomePage = () => {
   return <RegistrationPage />;
