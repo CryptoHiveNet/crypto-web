@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import React_query_provider from "@/components/react-query/react-query-provider";
-import TopMenu from "@/components/navBar/TopMenu";
-import ThemeProvider from "@/theme/ThemeProvider";
 import { dir } from "i18next";
 import { languages } from "../../utils/i18n/settings";
+import React_query_provider from "@/types/components/react-query/react-query-provider";
+import ThemeProvider from "@/types/theme/ThemeProvider";
+import TopMenu from "@/types/components/navBar/TopMenu";
 
 export async function generateStaticParams() {
   return languages.map((lng) => ({ lng }));
