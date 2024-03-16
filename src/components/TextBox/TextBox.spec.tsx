@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import TextBox from "./TextBox"; // Adjust the import path as necessary
+import TextBox from "./TextBox";
 import "@testing-library/jest-dom";
-import { TextInputType } from "@/types/components/textbox";
+import { TextInputType } from "../../types/components/textbox";
 
 it("renders correctly with required props", () => {
   render(<TextBox type={TextInputType.text} labelText="Test Label" />);
