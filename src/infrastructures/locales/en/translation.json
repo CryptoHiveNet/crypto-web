@@ -1,5 +1,9 @@
 {
-  "title": "Hi there!",
-  "to-second-page": "To second page",
-  "name" : "Amir"
+  "your-email": "Your email",
+  "email-place-holder": "Your email address",
+  "your-password": "Your password",
+  "enter-your-password": "Enter your password",
+  "repeat-your-password": "Repeat your password",
+  "terms-and-conditions": "Terms and conditions",
+  "register-new-user": "Register new user"
 }
