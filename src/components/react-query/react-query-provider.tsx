@@ -7,7 +7,6 @@ const queryClient = new QueryClient();
 
 const React_query_provider = ({ children }: { children: ReactNode }) => {
   return (
-    // Provide the client to your App
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };
