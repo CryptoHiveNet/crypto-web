@@ -94,6 +94,7 @@ const config: Config = {
   moduleNameMapper: {
     // Don't remove or edit this line. It handles dependency loading issues in test files that in next.js it's handled by @
     "^@/types/(.*)$": "<rootDir>/src/$1",
+    '\\.(css|less|scss|sass)$': '<rootDir>/src/__mocks__/styleMock.js',
   },
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
@@ -147,8 +148,8 @@ const config: Config = {
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  //testEnvironment: "jsdom",
-  testEnvironment: 'jest-environment-jsdom',
+  testEnvironment: "jsdom",
+  // testEnvironment: 'jest-environment-jsdom',
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},

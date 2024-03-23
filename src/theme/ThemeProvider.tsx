@@ -1,3 +1,4 @@
+"use client"
 import type { CustomFlowbiteTheme } from "flowbite-react";
 import { Flowbite } from "flowbite-react";
 import { ReactNode } from "react";
