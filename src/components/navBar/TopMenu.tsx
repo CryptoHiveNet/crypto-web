@@ -1,7 +1,34 @@
 'use client';
 import { Avatar, DarkThemeToggle, Dropdown, Navbar } from 'flowbite-react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 
 const TopMenu = () => {
+  const { data: session } = useSession();
+
+  function userAuthStatus() {
+    if (session)
+      return (
+        <>
+          {session.user.name},
+          <button
+            type='button'
+            onClick={() => signOut()}
+          >
+            Sign out
+          </button>
+        </>
+      );
+
+    return (
+      <button
+        type='button'
+        onClick={() => signIn()}
+      >
+        Sign in
+      </button>
+    );
+  }
+
   return (
     <Navbar
       fluid
