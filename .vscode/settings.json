@@ -1,0 +1,9 @@
+{
+  "cSpell.words": ["nextauth"],
+  "i18n-ally.localesPaths": [
+    "src/infrastructures/locales",
+    "src/components/i18n",
+    "src/utils/i18n",
+    "coverage/lcov-report/utils/i18n"
+  ]
+}
