@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 import {
   Avatar,
@@ -10,6 +11,16 @@ import {
 } from "flowbite-react";
 
 const TopMenu = () => {
+  const {data: session} = useSession();
+
+  function userAuthStatus(){
+    if(session) return <>{session.user.name}, 
+    <button type="button" onClick={() => signOut()}>Sign out</button>
+    </>;
+
+    return <button type="button" onClick={() => signIn()}>Sign in</button>
+  }
+
   return (
     <Flowbite>
       <Navbar fluid rounded>
@@ -54,6 +65,7 @@ const TopMenu = () => {
           <Navbar.Link href="#">Services</Navbar.Link>
           <Navbar.Link href="#">Pricing</Navbar.Link>
           <Navbar.Link href="#">Contact</Navbar.Link>
+          <Navbar.Link href="#">{userAuthStatus()}</Navbar.Link>
         </Navbar.Collapse>
       </Navbar>
     </Flowbite>
