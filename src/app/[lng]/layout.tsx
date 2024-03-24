@@ -19,20 +19,15 @@ export const metadata: Metadata = {
 
 export type RootLayoutProps = {
   children: React.ReactNode;
-  params: { lng: string, session: Session | null }; 
+  params: { lng: string }; 
 }
 
-export async function getServerSideProps(){
-  const session = await getServerSession();
-  return {
-    props: {session}
-  }
-}
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
-  params: { lng, session }
+  params: { lng }
 }: RootLayoutProps) {
+
+  const session = await getServerSession();
 
   return (
     <html lang={lng} dir={dir(lng)}>
