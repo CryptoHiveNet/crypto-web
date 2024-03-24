@@ -1,10 +1,41 @@
-import { RootLayoutProps, metadata } from "./layout";
+import { ReactNode } from "react";
+import { getServerSession } from "next-auth";
+import { render, screen } from "@testing-library/react";
+import RootLayout, { RootLayoutProps, metadata } from "./layout";
 import { expect } from '@jest/globals';
+
+jest.mock("next-auth", () => ({
+  getServerSession: jest.fn(),
+}));
+
+jest.mock("@/types/components/react-query/react-query-provider", () => {
+  return function DummyReactQueryProvider({
+    children,
+  }: {
+    children: ReactNode;
+  }) {
+    return <>{children}</>;
+  };
+});
+
+jest.mock("@/types/theme/ThemeProvider", () => {
+  return function DummyThemeProvider({ children }: { children: ReactNode }) {
+    return <>{children}</>;
+  };
+});
+
+const mockGetServerSession = getServerSession as jest.MockedFunction<
+  typeof getServerSession
+>;
 
 const rootLayoutProps: RootLayoutProps = {
   children: <>The content goes here</>,
   params: { lng: "en" },
 };
+
+beforeEach(() => {
+  mockGetServerSession.mockResolvedValue({ user: null });
+});
 
 describe('metadata', () => {
   it('contains the expected title', () => {
