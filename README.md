@@ -1,5 +1,6 @@
-#CryptoWeb
-This a crypto curreny software that has been developed by a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). This original project comprises three distinct parts, each corresponding to one of three different platforms. Here you are working on the web part which is a Next.js software. Below are some important considerations to keep in mind while working on this project(if you join to this project). You can refer to this file as the project's documentation.
+# CryptoWeb
+
+This is a crypto currency software that has been developed by a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). This original project comprises three distinct parts, each corresponding to one of three different platforms. Here you are working on the web part which is a Next.js software. Below are some important considerations to keep in mind while working on this project(if you join to this project). You can refer to this file as the project's documentation.
 
 ## Getting Started
 
@@ -22,13 +23,21 @@ Each new feature will be added to the development branch, with no direct pull re
 We will then use a regular merge command to move changes from the development branch to the demo branch, and similarly from the demo to the production branch.
 
 ## Unit Tests
-We will use Jest for unit testing. All test files will be located alongside their corresponding files, enabling us to easily update or develop tests when new features are added to specific components. 
+We will use jest and react test library for unit testing. All test files will be located alongside their corresponding files, enabling us to easily update or develop tests when new features are added to specific components. 
 
-Additionally, we have a __tests__ directory within the src directory for cases where separate test organization is necessary. 
+Additionally, we have a __tests__ and __mocks__ directories within the src directory for cases where separate test organization are necessary. 
+
+Please always write proper unit tests for your changes to catch everything. Writing enough unit tests show how much you are profession. Don't forget to run your tests manually to make sure everything is working correctly. Also after sending changes on the remote branch and making a MR you need to make sure all automatic tests have passed.
+
+Your changes must'nt make any issues on other tests. In case of having error in other changes you need to make sure your changes are correct and 100 percent in the right path and then you have to talk with the developers to solve the issue. 
+
+When you are going to write a unit test always thing about making an isolation environment for the component/functionality you are going to implement.
 
 
 ## E2E Tests
 For end-to-end (E2E) testing, we will use Cypress. E2E tests will be implemented upon the completion of each part of the application. Once the E2E tests are finalized, the feature will be committed to the remote branch, ready to be squash merged into the development branch.
+
+Writing E2E tests is not necessary for all developers and will be done by the team leader on demo branch. However if you thing you need to write some E2E tests for specific components you are welcome to do it. Also if there are some situations where should be considered, Please let the other knows that as a comment in the MR. Also it should be logged in the issue comment part.
 
 ## Docker
 Please ensure that Docker is installed and running on your machine. To install the Docker image, you just need to run the following command:
@@ -97,7 +106,7 @@ git push origin feature-{feature name}
 
 - Repeat the above steps to finalize the feature.
 
-When you are working on a feature, Please consider thaese concepts:
+When you are working on a feature, Please consider these concepts:
 
 - Don't ask for a review otherwise you are totally sure that the feature is ready to be reviewed.
 - Each time before pushing commits to the feature branch on the remote server, Please make sure that your local feature branch is up to date with the remote development branch.
