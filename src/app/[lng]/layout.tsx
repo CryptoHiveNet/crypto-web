@@ -32,10 +32,12 @@ export async function getServerSideProps() {
   };
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-  params: { lng, session },
+  params: { lng },
 }: RootLayoutProps) {
+  const session = await getServerSession();
+
   return (
     <html
       lang={lng}
