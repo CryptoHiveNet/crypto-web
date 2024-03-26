@@ -1,4 +1,4 @@
-import TextBox from "@/types/components/TextBox/TextBox";
+import TextBox from "@/types/components/textBox/TextBox";
 import { TextInputType } from "@/types/types/components/textbox";
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import { t } from "i18next";
