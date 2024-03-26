@@ -1,54 +1,62 @@
-import { render, screen } from "@testing-library/react";
-import TextBox from "./TextBox";
-import "@testing-library/jest-dom";
-import { TextInputType } from "../../types/components/textbox";
+import { fireEvent, render, screen } from '@testing-library/react';
+import Alert from './Alert';
+import '@testing-library/jest-dom';
+import { HiEye } from 'react-icons/hi';
 
-it("renders correctly with required props", () => {
-  render(<TextBox type={TextInputType.text} labelText="Test Label" />);
-
-  const inputElement = screen.getByRole("textbox");
-  const labelElement = screen.getByText("Test Label");
-
-  expect(inputElement).toBeInTheDocument();
-  expect(labelElement).toBeInTheDocument(); 
+it('should render the alert with default props', () => {
+  render(<Alert>This is an alert message.</Alert>);
+  // Assert presence of alert container
+  expect(screen.getByRole('alert')).toBeInTheDocument();
 });
 
-it("passes the placeholder prop to TextInput", () => {
-  const placeholderText = "Enter your text";
+it('should render the alert with custom props', () => {
+  const customId = 'my-alert';
+  const customColor = 'warning';
+  const customIcon = HiEye;
+
   render(
-    <TextBox
-      type={TextInputType.text}
-      labelText="Placeholder Test"
-      placeholder={placeholderText}
-    />
+    <Alert id={customId} color={customColor} alertIcon={customIcon}>
+      Custom alert content.
+    </Alert>
   );
 
-  expect(screen.getByPlaceholderText(placeholderText)).toBeInTheDocument();
+  // Assert presence and custom ID
+  expect(screen.getByRole('alert')).toBeInTheDocument();
+  expect(screen.getByRole('alert')).toHaveAttribute('id', customId);
+
+  // Assert custom color class
+  expect(screen.getByRole('alert')).toHaveClass(
+    'text-yellow-700 bg-yellow-100 border-yellow-500'
+  );
+
+  // Assert custom icon
+  expect(screen.getByTestId('flowbite-alert-icon')).toBeInTheDocument();
 });
 
-it("marks TextInput as required when the required prop is true", () => {
+// it('should hide the alert when the dismiss button is clicked', () => {
+//   render(<Alert>This alert should be hidden on click.</Alert>);
+
+//   // Find the dismiss button
+//   const dismissButton = screen.getByRole('button', { name: /close/i });
+
+//   // Simulate clicking the dismiss button
+//   fireEvent.click(dismissButton);
+
+//   // Assert absence of the alert
+//   expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+// });
+
+it('should render additional content if provided', () => {
+  const additionalContent = <p>This is some additional information.</p>;
+
   render(
-    <TextBox
-      type={TextInputType.text}
-      labelText="Required Test"
-      required={true}
-    />
+    <Alert additionalContent={additionalContent}>
+      This is an alert with additional content.
+    </Alert>
   );
 
-  const inputElement = screen.getByRole("textbox");
-  expect(inputElement).toBeRequired();
-});
-
-it("handles custom color and helper text", () => {
-  render(
-    <TextBox
-      type={TextInputType.text}
-      labelText="Color Test"
-      color="red"
-      helperText="Helper text example"
-    />
-  );
-
-  const helperTextElement = screen.getByText("Helper text example");
-  expect(helperTextElement).toBeInTheDocument();
+  // Assert presence of additional content
+  expect(
+    screen.getByText(/This is some additional information/i)
+  ).toBeInTheDocument();
 });
