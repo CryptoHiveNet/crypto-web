@@ -1,4 +1,4 @@
-import RegistrationPage from "@/types/modules/user/pages/registrationPage/RegistrationPage";
+import RegistrationPage from "@/types/modules/user/pages/RegistrationPage/RegistrationPage";
 import React from "react";
 
 const UserRegistrationHomePage = () => {
