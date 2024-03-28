@@ -33,19 +33,6 @@ it('should render the alert with custom props', () => {
   expect(screen.getByTestId('flowbite-alert-icon')).toBeInTheDocument();
 });
 
-// it('should hide the alert when the dismiss button is clicked', () => {
-//   render(<Alert>This alert should be hidden on click.</Alert>);
-
-//   // Find the dismiss button
-//   const dismissButton = screen.getByRole('button', { name: /close/i });
-
-//   // Simulate clicking the dismiss button
-//   fireEvent.click(dismissButton);
-
-//   // Assert absence of the alert
-//   expect(screen.queryByRole('alert')).not.toBeInTheDocument();
-// });
-
 it('should render additional content if provided', () => {
   const additionalContent = <p>This is some additional information.</p>;
 
@@ -59,4 +46,22 @@ it('should render additional content if provided', () => {
   expect(
     screen.getByText(/This is some additional information/i)
   ).toBeInTheDocument();
+});
+
+it('should render the close button and close the alert when clicked', () => {
+  const { getByLabelText, queryByText } = render(
+    <Alert>
+      <span>Alert message</span>
+    </Alert>
+  );
+
+  // Check that the alert is initially rendered
+  expect(queryByText('Alert message')).toBeInTheDocument();
+
+  // Find the close button and click it
+  const closeButton = getByLabelText('Dismiss');
+  fireEvent.click(closeButton);
+
+  // Check that the alert is no longer in the document
+  expect(queryByText('Alert message')).not.toBeInTheDocument();
 });

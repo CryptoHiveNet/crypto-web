@@ -1,19 +1,18 @@
-'use client';
-import React, { FC, SVGProps, useState } from 'react';
+import React from 'react';
 import { Button as FlowbiteButton } from 'flowbite-react';
-import { HiHashtag } from 'react-icons/hi';
 
 export type iButtonProps = {
   id?: string;
-  color?: string; // String for color name
+  color?: string;
   gradientMonochrome?: string;
+  gradientDuoTone?: string;
   outline?: boolean;
   size?: string;
   label?: string;
   isProcessing?: boolean;
   processingSpinner?: JSX.Element;
   disabled?: boolean;
-  children: JSX.Element | string;
+  children: JSX.Element | string; // Adjusted to accept JSX.Element
   onClick?: () => void;
 };
 
@@ -21,6 +20,7 @@ const Button = ({
   id,
   color,
   gradientMonochrome,
+  gradientDuoTone,
   outline = false,
   size,
   label,
@@ -29,12 +29,14 @@ const Button = ({
   disabled = false,
   children,
   onClick,
+  ...rest
 }: iButtonProps) => {
   return (
     <FlowbiteButton
       id={id}
       color={color}
       gradientMonochrome={gradientMonochrome}
+      gradientDuoTone={gradientDuoTone}
       outline={outline}
       size={size}
       label={label}
@@ -42,6 +44,7 @@ const Button = ({
       processingSpinner={processingSpinner}
       disabled={disabled}
       onClick={onClick}
+      {...rest}
     >
       {children}
     </FlowbiteButton>
