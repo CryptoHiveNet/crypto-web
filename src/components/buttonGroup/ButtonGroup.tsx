@@ -6,6 +6,10 @@ export type iButtonGroupProps = {
   outline?: boolean;
   className?: string;
   children: React.ReactNode;
+  testId?: string;
+  onClick?: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 };
 
 const ButtonGroup = ({
@@ -13,9 +17,23 @@ const ButtonGroup = ({
   outline,
   children,
   className,
+  testId,
+  onClick,
+  onMouseEnter,
+  onMouseLeave,
+  ...rest
 }: iButtonGroupProps) => {
   return (
-    <FlowbiteButton.Group id={id} outline={outline} className={className}>
+    <FlowbiteButton.Group
+      id={id}
+      outline={outline}
+      className={className}
+      data-testid={testId}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      {...rest}
+    >
       {children}
     </FlowbiteButton.Group>
   );
