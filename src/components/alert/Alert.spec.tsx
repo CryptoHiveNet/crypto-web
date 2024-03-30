@@ -1,11 +1,10 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import Alert from './Alert';
 import '@testing-library/jest-dom';
 import { HiEye } from 'react-icons/hi';
 
 it('should render the alert with default props', () => {
   render(<Alert>This is an alert message.</Alert>);
-  // Assert presence of alert container
   expect(screen.getByRole('alert')).toBeInTheDocument();
 });
 
@@ -15,53 +14,45 @@ it('should render the alert with custom props', () => {
   const customIcon = HiEye;
 
   render(
-    <Alert id={customId} color={customColor} alertIcon={customIcon}>
+    <Alert id={customId} color={customColor} icon={customIcon}>
       Custom alert content.
-    </Alert>
+    </Alert>,
   );
-
-  // Assert presence and custom ID
-  expect(screen.getByRole('alert')).toBeInTheDocument();
-  expect(screen.getByRole('alert')).toHaveAttribute('id', customId);
-
-  // Assert custom color class
-  expect(screen.getByRole('alert')).toHaveClass(
-    'text-yellow-700 bg-yellow-100 border-yellow-500'
-  );
-
-  // Assert custom icon
+  const alert = screen.getByRole('alert');
+  expect(alert).toBeInTheDocument();
+  expect(alert).toHaveAttribute('id', customId);
+  expect(alert).toHaveClass('text-yellow-700 bg-yellow-100 border-yellow-500');
   expect(screen.getByTestId('flowbite-alert-icon')).toBeInTheDocument();
 });
 
-it('should render additional content if provided', () => {
-  const additionalContent = <p>This is some additional information.</p>;
-
-  render(
-    <Alert additionalContent={additionalContent}>
-      This is an alert with additional content.
-    </Alert>
-  );
-
-  // Assert presence of additional content
-  expect(
-    screen.getByText(/This is some additional information/i)
-  ).toBeInTheDocument();
-});
-
-it('should render the close button and close the alert when clicked', () => {
-  const { getByLabelText, queryByText } = render(
+it('should render the close button and close the alert when clicked', async () => {
+  const { queryByText, getByLabelText } = render(
     <Alert>
       <span>Alert message</span>
     </Alert>
   );
-
-  // Check that the alert is initially rendered
   expect(queryByText('Alert message')).toBeInTheDocument();
-
-  // Find the close button and click it
   const closeButton = getByLabelText('Dismiss');
   fireEvent.click(closeButton);
+  await waitFor(() => {
+    expect(queryByText('Alert message')).not.toBeInTheDocument();
+  });
+});
 
-  // Check that the alert is no longer in the document
-  expect(queryByText('Alert message')).not.toBeInTheDocument();
+it('renders additional content correctly', () => {
+  const AdditionalContent = () => <div>Additional Content</div>;
+  render(<Alert additionalContent={<AdditionalContent />}>Hello</Alert>);
+  expect(screen.getByText('Additional Content')).toBeInTheDocument();
+});
+
+it('calls onDismiss function when dismiss button is clicked', () => {
+  const onDismissMock = jest.fn();
+  const { getByLabelText } = render(
+    <Alert onDismiss={onDismissMock} testId='alert-dismiss-button'>
+      Hello
+    </Alert>,
+  );
+  const closeButton = getByLabelText('Dismiss');
+  fireEvent.click(closeButton);
+  expect(onDismissMock).toHaveBeenCalledTimes(1);
 });
