@@ -12,6 +12,7 @@ export type iButtonProps = {
   isProcessing?: boolean;
   processingSpinner?: JSX.Element;
   disabled?: boolean;
+  className?: string;
   children: JSX.Element | string; // Adjusted to accept JSX.Element
   onClick?: () => void;
 };
@@ -27,6 +28,7 @@ const Button = ({
   isProcessing = false,
   processingSpinner,
   disabled = false,
+  className,
   children,
   onClick,
   ...rest
@@ -34,6 +36,7 @@ const Button = ({
   return (
     <FlowbiteButton
       id={id}
+      className={className}
       color={color}
       gradientMonochrome={gradientMonochrome}
       gradientDuoTone={gradientDuoTone}
