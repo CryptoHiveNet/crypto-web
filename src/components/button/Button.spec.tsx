@@ -14,12 +14,6 @@ it('executes onClick handler when clicked', () => {
   expect(handleClick).toHaveBeenCalled();
 });
 
-// it('applies specified color prop', () => {
-//   const { getByText } = render(<Button color='blue'>Blue Button</Button>);
-//   const buttonElement = getByText('Blue Button');
-//   expect(buttonElement).toHaveClass('bg-blue-700');
-// });
-
 it('renders as disabled when disabled prop is true', () => {
   const { container } = render(<Button disabled>Disabled Button</Button>);
   expect(container.firstChild).toBeDisabled();
