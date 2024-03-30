@@ -14,6 +14,10 @@ export type iTextBoxProps = {
   icon?: FC<SVGProps<SVGSVGElement>> | undefined;
   color?: string;
   helperText?: string;
+  testId?: string;
+  onClick?: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 };
 
 const TextBox = ({
@@ -27,6 +31,10 @@ const TextBox = ({
   icon,
   color,
   helperText,
+  testId,
+  onClick,
+  onMouseEnter,
+  onMouseLeave,
   ...rest
 }: iTextBoxProps) => {
   return (
@@ -45,6 +53,10 @@ const TextBox = ({
         value={value}
         icon={icon}
         required={required}
+        data-testid={testId}
+        onClick={onClick}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
         {...rest}
       />
     </div>
