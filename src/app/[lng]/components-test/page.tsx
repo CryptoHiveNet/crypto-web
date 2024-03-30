@@ -1,6 +1,9 @@
 import Alert from '@/types/components/alert/Alert';
 import Button from '@/types/components/button/Button';
 import ButtonGroup from '@/types/components/buttonGroup/ButtonGroup';
+import TextBox from '@/types/components/textBox/TextBox';
+import { TextInputType } from '@/types/types/components/textbox';
+import { t } from 'i18next';
 
 export default async function Page({ params: { lng } }: any) {
   return (
@@ -15,6 +18,12 @@ export default async function Page({ params: { lng } }: any) {
           test Button
         </Button>
       </ButtonGroup>
+      <TextBox
+        required
+        type={TextInputType.text}
+        labelText={t('email-place-holder')}
+        placeholder={t('your-email')}
+      />
     </div>
   );
 }
