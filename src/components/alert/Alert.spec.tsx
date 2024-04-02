@@ -3,9 +3,10 @@ import Alert from './Alert';
 import '@testing-library/jest-dom';
 import { HiEye } from 'react-icons/hi';
 
-it('should render the alert with default props', () => {
-  render(<Alert>This is an alert message.</Alert>);
-  expect(screen.getByRole('alert')).toBeInTheDocument();
+it('should render the alert with default props and message', () => {
+  render(<Alert testId='my-alert'>This is an alert message.</Alert>);
+  const alertComponent = screen.getByTestId('my-alert');
+  expect(alertComponent).toHaveTextContent('This is an alert message.');
 });
 it('renders with the provided testId prop', () => {
   const testId = 'test-alert';
@@ -34,7 +35,7 @@ it('should render the close button and close the alert when clicked', async () =
   const { queryByText, getByLabelText } = render(
     <Alert>
       <span>Alert message</span>
-    </Alert>
+    </Alert>,
   );
   expect(queryByText('Alert message')).toBeInTheDocument();
   const closeButton = getByLabelText('Dismiss');
