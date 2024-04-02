@@ -65,34 +65,8 @@ const Alert = ({
   return (
     isMounted && (
       <div
-        className={`overflow-hidden ${showAlert ? 'opacity-100 max-h-full' : 'opacity-0 max-h-0 pointer-events-none'}`}
-        style={{
-          animation: `${showAlert ? 'showAlert' : 'hideAlert'} ${transitionDurations / 1000}s ease forwards`,
-        }}
+        className={`transition-all duration-${transitionDurations} ease ${showAlert ? 'max-h-40 opacity-1' : 'max-h-0 opacity-0'}`}
       >
-        <style>{`
-        @keyframes showAlert {
-          from {
-            max-height: 0;
-            opacity: 0;
-          }
-          to {
-            max-height: 1000px; /* Adjust this value as needed */
-            opacity: 1;
-          }
-        }
-
-        @keyframes hideAlert {
-          from {
-            max-height: 1000px; /* Adjust this value as needed */
-            opacity: 1;
-          }
-          to {
-            max-height: 0;
-            opacity: 0;
-          }
-        }
-      `}</style>
         <FlowbiteAlert
           id={id}
           className={className}
