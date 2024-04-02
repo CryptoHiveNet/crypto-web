@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Button from './Button';
 
@@ -7,11 +7,13 @@ it('renders children correctly', () => {
   expect(getByText('Hello')).toBeInTheDocument();
 });
 
-it('executes onClick handler when clicked', () => {
+it('executes onClick handler when clicked', async () => {
   const handleClick = jest.fn();
   const { getByText } = render(<Button onClick={handleClick}>Click Me</Button>);
   fireEvent.click(getByText('Click Me'));
-  expect(handleClick).toHaveBeenCalled();
+  await waitFor(() => {
+    expect(handleClick).toHaveBeenCalled();
+  });
 });
 
 it('renders as disabled when disabled prop is true', () => {
@@ -26,7 +28,7 @@ it('renders a processing spinner when isProcessing prop is true', () => {
       processingSpinner={<div data-testid='spinner'>Spinner</div>}
     >
       Submit
-    </Button>
+    </Button>,
   );
   expect(getByTestId('spinner')).toBeInTheDocument();
 });
