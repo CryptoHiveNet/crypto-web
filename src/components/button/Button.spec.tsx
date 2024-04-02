@@ -11,8 +11,9 @@ it('executes onClick handler when clicked', async () => {
   const handleClick = jest.fn();
   const { getByText } = render(<Button onClick={handleClick}>Click Me</Button>);
   fireEvent.click(getByText('Click Me'));
+  fireEvent.click(getByText('Click Me'));
   await waitFor(() => {
-    expect(handleClick).toHaveBeenCalled();
+    expect(handleClick).toHaveBeenCalledTimes(2);
   });
 });
 
