@@ -7,7 +7,12 @@ it('should render the alert with default props', () => {
   render(<Alert>This is an alert message.</Alert>);
   expect(screen.getByRole('alert')).toBeInTheDocument();
 });
-
+it('renders with the provided testId prop', () => {
+  const testId = 'test-alert';
+  const { getByTestId } = render(<Alert testId={testId}>Test Alert</Alert>);
+  const alertElement = getByTestId(testId);
+  expect(alertElement).toBeInTheDocument();
+});
 it('should render the alert with custom props', () => {
   const customId = 'my-alert';
   const customColor = 'warning';
