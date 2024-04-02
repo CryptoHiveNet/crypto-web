@@ -6,7 +6,7 @@ import { HiInformationCircle } from 'react-icons/hi';
 export type iAlertProps = {
   id?: string;
   additionalContent?: JSX.Element;
-  color?: string; // String for color name
+  role?: string;
   icon?: FC<SVGProps<SVGSVGElement>>;
   className?: string;
   children: JSX.Element | string;
@@ -21,7 +21,7 @@ export type iAlertProps = {
 const Alert = ({
   id,
   additionalContent,
-  color = 'warning',
+  role = 'blue',
   icon = HiInformationCircle,
   className,
   children,
@@ -97,7 +97,7 @@ const Alert = ({
           id={id}
           className={className}
           additionalContent={additionalContent}
-          color={color}
+          color={role}
           icon={icon}
           rounded
           data-testid={testId}
