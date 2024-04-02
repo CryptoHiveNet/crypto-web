@@ -33,3 +33,31 @@ it('renders a processing spinner when isProcessing prop is true', () => {
   );
   expect(getByTestId('spinner')).toBeInTheDocument();
 });
+
+it('should call onMouseEnter when mouse enters', async () => {
+  const onMouseEnterMock = jest.fn();
+  const { getByTestId } = render(
+    <Button testId='my-button' onMouseEnter={onMouseEnterMock}>
+      Hoverable Button
+    </Button>,
+  );
+  const buttonComponent = getByTestId('my-button');
+  fireEvent.mouseEnter(buttonComponent);
+  await waitFor(() => {
+    expect(onMouseEnterMock).toHaveBeenCalled();
+  });
+});
+
+it('should call onMouseLeave when mouse leaves', async () => {
+  const onMouseLeaveMock = jest.fn();
+  const { getByTestId } = render(
+    <Button testId='my-button' onMouseLeave={onMouseLeaveMock}>
+      Hoverable button
+    </Button>,
+  );
+  const buttonComponent = getByTestId('my-button');
+  fireEvent.mouseLeave(buttonComponent);
+  await waitFor(() => {
+    expect(onMouseLeaveMock).toHaveBeenCalled();
+  });
+});
