@@ -3,6 +3,7 @@ import Alert from './Alert';
 import '@testing-library/jest-dom';
 import { HiEye } from 'react-icons/hi';
 
+const onDismissMock = jest.fn();
 it('should render the alert with default props and message', () => {
   render(<Alert testId='my-alert'>This is an alert message.</Alert>);
   const alertComponent = screen.getByTestId('my-alert');
@@ -32,16 +33,23 @@ it('should render the alert with custom props', () => {
 });
 
 it('should render the close button and close the alert when clicked', async () => {
-  const { queryByText, getByLabelText } = render(
-    <Alert>
-      <span>Alert message</span>
-    </Alert>,
+  render(<Alert testId='my-alert'>This is an alert message.</Alert>);
+  const alertComponent = screen.getByTestId('my-alert');
+  const closeButton = alertComponent.querySelector(
+    'button[aria-label="Dismiss"]',
   );
-  expect(queryByText('Alert message')).toBeInTheDocument();
-  const closeButton = getByLabelText('Dismiss');
+
+  expect(alertComponent).toBeInTheDocument();
+  expect(closeButton).toBeInTheDocument();
+
+  if (!closeButton) {
+    throw new Error('Close button not found');
+  }
+
   fireEvent.click(closeButton);
+
   await waitFor(() => {
-    expect(queryByText('Alert message')).not.toBeInTheDocument();
+    expect(alertComponent).not.toBeInTheDocument();
   });
 });
 
@@ -51,8 +59,7 @@ it('renders additional content correctly', () => {
   expect(screen.getByText('Additional Content')).toBeInTheDocument();
 });
 
-it('calls onDismiss function when dismiss button is clicked', () => {
-  const onDismissMock = jest.fn();
+it('calls onDismiss function when dismiss button is clicked', async () => {
   const { getByLabelText } = render(
     <Alert onDismiss={onDismissMock} testId='alert-dismiss-button'>
       Hello
@@ -60,5 +67,49 @@ it('calls onDismiss function when dismiss button is clicked', () => {
   );
   const closeButton = getByLabelText('Dismiss');
   fireEvent.click(closeButton);
-  expect(onDismissMock).toHaveBeenCalledTimes(1);
+  await waitFor(() => {
+    expect(onDismissMock).toHaveBeenCalledTimes(1);
+  });
+});
+
+it('should call onClick when clicked', async () => {
+  const onClickMock = jest.fn();
+  const { getByTestId } = render(
+    <Alert testId='my-alert' onClick={onClickMock}>
+      Clickable Alert
+    </Alert>,
+  );
+  const alertComponent = getByTestId('my-alert');
+  fireEvent.click(alertComponent);
+  await waitFor(() => {
+    expect(onClickMock).toHaveBeenCalled();
+  });
+});
+
+it('should call onMouseEnter when mouse enters', async () => {
+  const onMouseEnterMock = jest.fn();
+  const { getByTestId } = render(
+    <Alert testId='my-alert' onMouseEnter={onMouseEnterMock}>
+      Hoverable Alert
+    </Alert>,
+  );
+  const alertComponent = getByTestId('my-alert');
+  fireEvent.mouseEnter(alertComponent);
+  await waitFor(() => {
+    expect(onMouseEnterMock).toHaveBeenCalled();
+  });
+});
+
+it('should call onMouseLeave when mouse leaves', async () => {
+  const onMouseLeaveMock = jest.fn();
+  const { getByTestId } = render(
+    <Alert testId='my-alert' onMouseLeave={onMouseLeaveMock}>
+      Hoverable Alert
+    </Alert>,
+  );
+  const alertComponent = getByTestId('my-alert');
+  fireEvent.mouseLeave(alertComponent);
+  await waitFor(() => {
+    expect(onMouseLeaveMock).toHaveBeenCalled();
+  });
 });
