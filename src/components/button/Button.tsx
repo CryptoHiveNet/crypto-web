@@ -11,9 +11,10 @@ export type iButtonProps = {
   label?: string;
   isProcessing?: boolean;
   processingSpinner?: JSX.Element;
+  pill?: boolean;
   disabled?: boolean;
   className?: string;
-  children: JSX.Element | string; // Adjusted to accept JSX.Element
+  children: JSX.Element | string;
   testId?: string;
   onClick?: () => void;
   onMouseEnter?: () => void;
@@ -30,6 +31,7 @@ const Button = ({
   label,
   isProcessing = false,
   processingSpinner,
+  pill = false,
   disabled = false,
   className,
   children,
@@ -51,6 +53,7 @@ const Button = ({
       label={label}
       isProcessing={isProcessing}
       processingSpinner={processingSpinner}
+      pill={pill}
       disabled={disabled}
       data-testid={testId}
       onClick={onClick}
