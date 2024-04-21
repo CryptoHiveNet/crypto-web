@@ -26,20 +26,20 @@ export type RootLayoutProps = {
   params: { lng: string };
 };
 
-const vazirmatn = Vazirmatn({
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-  subsets: ['arabic'],
-});
-const roboto = Roboto({
-  weight: ['100', '300', '400', '500', '700', '900'],
-  subsets: ['latin'],
-  style: ['normal', 'italic'],
-  display: 'swap',
-});
 export default async function RootLayout({
   children,
   params: { lng },
 }: RootLayoutProps) {
+  const vazirmatn = Vazirmatn({
+    weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+    subsets: ['arabic'],
+  });
+  const roboto = Roboto({
+    weight: ['100', '300', '400', '500', '700', '900'],
+    subsets: ['latin'],
+    style: ['normal', 'italic'],
+    display: 'swap',
+  });
   const session = await getServerSession();
 
   if (dir(lng) === 'rtl') {
