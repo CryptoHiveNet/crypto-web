@@ -1,30 +1,32 @@
 'use client';
-import { Checkbox as CHB } from 'flowbite-react';
+import { FileInput as FLI } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { iCheckBoxProps } from '@/types/types/components/checkBox';
+import { iFileInputProps } from '@/types/types/components/fileInput';
 
-const CheckBox = forwardRef<any, iCheckBoxProps>(
+const FileInput = forwardRef<any, iFileInputProps>(
   (
     {
       id,
       className,
-      defaultChecked,
-      disabled,
+      helperText,
+      multiple,
+      sizing,
       testId,
       onClick,
       onMouseEnter,
       onMouseLeave,
       ...rest
-    }: iCheckBoxProps,
+    }: iFileInputProps,
     ref: React.Ref<any> | null,
   ) => {
     return (
-      <CHB
+      <FLI
         id={id}
         className={className}
-        defaultChecked={defaultChecked}
-        disabled={disabled}
+        helperText={helperText}
+        multiple={multiple}
+        sizing={sizing}
         data-testid={testId}
         onClick={onClick}
         onMouseEnter={onMouseEnter}
@@ -36,4 +38,4 @@ const CheckBox = forwardRef<any, iCheckBoxProps>(
   },
 );
 
-export default CheckBox;
+export default FileInput;
