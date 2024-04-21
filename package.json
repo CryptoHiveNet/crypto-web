@@ -35,8 +35,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",
+    "@babel/plugin-syntax-jsx": "^7.24.1",
     "@babel/preset-env": "^7.23.9",
-    "@babel/preset-react": "^7.23.3",
+    "@babel/preset-react": "^7.24.1",
     "@babel/preset-typescript": "^7.23.3",
     "@jest/globals": "^29.7.0",
     "@swc/cli": "^0.3.12",
