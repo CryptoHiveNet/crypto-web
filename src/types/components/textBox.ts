@@ -1,4 +1,4 @@
-import { FC, SVGProps } from 'react';
+import { FC, ReactNode, SVGProps } from 'react';
 
 export enum TextInputType {
   text = 'text',
@@ -7,16 +7,21 @@ export enum TextInputType {
   email = 'email',
 }
 export type iTextBoxProps = {
-  type: TextInputType;
-  labelText: string;
   id?: string;
+  type: TextInputType;
+  sizing?: string;
+  labelText: string;
   className?: string;
   placeholder?: string;
+  shadow?: boolean;
   required?: boolean;
+  disabled?: boolean;
   value?: string;
-  icon?: FC<SVGProps<SVGSVGElement>> | undefined;
+  icon?: FC<SVGProps<SVGSVGElement>>;
+  rightIcon?: FC<SVGProps<SVGSVGElement>>;
   color?: string;
-  helperText?: string;
+  helperText?: ReactNode | string;
+  addon?: string;
   testId?: string;
   onClick?: () => void;
   onMouseEnter?: () => void;
