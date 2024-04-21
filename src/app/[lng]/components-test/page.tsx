@@ -2,7 +2,7 @@ import Alert from '@/types/components/alert/Alert';
 import Button from '@/types/components/button/Button';
 import ButtonGroup from '@/types/components/buttonGroup/ButtonGroup';
 import TextBox from '@/types/components/textBox/TextBox';
-import { TextInputType } from '@/types/types/components/textbox';
+import { TextInputType } from '@/types/types/components/textBox';
 import { useTranslation } from '@/types/utils/i18n';
 
 export default async function Page({ params: { lng } }: any) {
