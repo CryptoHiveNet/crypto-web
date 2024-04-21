@@ -1,7 +1,10 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import Alert from './Alert';
 import '@testing-library/jest-dom';
+
 import { HiEye } from 'react-icons/hi';
+
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+
+import Alert from './Alert';
 
 const onDismissMock = jest.fn();
 it('should render the alert with default props and message', () => {
@@ -21,7 +24,11 @@ it('should render the alert with custom props', () => {
   const customIcon = HiEye;
 
   render(
-    <Alert id={customId} color={customColor} icon={customIcon}>
+    <Alert
+      id={customId}
+      color={customColor}
+      icon={customIcon}
+    >
       Custom alert content.
     </Alert>,
   );
@@ -61,7 +68,10 @@ it('renders additional content correctly', () => {
 
 it('calls onDismiss function when dismiss button is clicked', async () => {
   const { getByLabelText } = render(
-    <Alert onDismiss={onDismissMock} testId='alert-dismiss-button'>
+    <Alert
+      onDismiss={onDismissMock}
+      testId='alert-dismiss-button'
+    >
       Hello
     </Alert>,
   );
@@ -75,7 +85,10 @@ it('calls onDismiss function when dismiss button is clicked', async () => {
 it('should call onClick when clicked', async () => {
   const onClickMock = jest.fn();
   const { getByTestId } = render(
-    <Alert testId='my-alert' onClick={onClickMock}>
+    <Alert
+      testId='my-alert'
+      onClick={onClickMock}
+    >
       Clickable Alert
     </Alert>,
   );
@@ -89,7 +102,10 @@ it('should call onClick when clicked', async () => {
 it('should call onMouseEnter when mouse enters', async () => {
   const onMouseEnterMock = jest.fn();
   const { getByTestId } = render(
-    <Alert testId='my-alert' onMouseEnter={onMouseEnterMock}>
+    <Alert
+      testId='my-alert'
+      onMouseEnter={onMouseEnterMock}
+    >
       Hoverable Alert
     </Alert>,
   );
@@ -103,7 +119,10 @@ it('should call onMouseEnter when mouse enters', async () => {
 it('should call onMouseLeave when mouse leaves', async () => {
   const onMouseLeaveMock = jest.fn();
   const { getByTestId } = render(
-    <Alert testId='my-alert' onMouseLeave={onMouseLeaveMock}>
+    <Alert
+      testId='my-alert'
+      onMouseLeave={onMouseLeaveMock}
+    >
       Hoverable Alert
     </Alert>,
   );
