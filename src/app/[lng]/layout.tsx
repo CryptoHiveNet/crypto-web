@@ -43,7 +43,11 @@ export default async function RootLayout({
 
   if (dir(lng) === 'rtl') {
     return (
-      <html lang={lng} dir={dir(lng)} className={vazirmatn.className}>
+      <html
+        lang={lng}
+        dir={dir(lng)}
+        className={vazirmatn.className}
+      >
         <body>
           <React_query_provider>
             <SessionProvider session={session}>
@@ -58,7 +62,11 @@ export default async function RootLayout({
     );
   } else {
     return (
-      <html lang={lng} dir={dir(lng)} className={roboto.className}>
+      <html
+        lang={lng}
+        dir={dir(lng)}
+        className={roboto.className}
+      >
         <body>
           <React_query_provider>
             <SessionProvider session={session}>
