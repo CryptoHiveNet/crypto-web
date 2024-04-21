@@ -1,0 +1,16 @@
+import { FC, SVGProps } from 'react';
+
+export type iAlertProps = {
+  id?: string;
+  additionalContent?: JSX.Element;
+  role?: string;
+  icon?: FC<SVGProps<SVGSVGElement>>;
+  className?: string;
+  children: JSX.Element | string;
+  testId?: string;
+  onClick?: () => void;
+  onDismiss?: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
+  dismissAfter?: number; // Optional time in milliseconds to automatically dismiss the alert
+};
