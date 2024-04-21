@@ -3,7 +3,7 @@ import { Alert as FlowbiteAlert } from 'flowbite-react';
 import React, { forwardRef, useEffect, useState } from 'react';
 import { HiInformationCircle } from 'react-icons/hi';
 
-import { iAlertProps } from '@/types/types/components/components';
+import { iAlertProps } from '@/types/types/components/alert';
 
 const Alert = forwardRef<any, iAlertProps>(
   (
