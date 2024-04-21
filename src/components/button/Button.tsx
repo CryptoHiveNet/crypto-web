@@ -1,7 +1,7 @@
 import { Button as FlowbiteButton } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { iButtonProps } from '@/types/types/components/components';
+import { iButtonProps } from '@/types/types/components/button';
 
 const Button = forwardRef<any, iButtonProps>(
   (
