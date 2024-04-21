@@ -3,26 +3,27 @@ import Button from '@/types/components/button/Button';
 import ButtonGroup from '@/types/components/buttonGroup/ButtonGroup';
 import TextBox from '@/types/components/textBox/TextBox';
 import { TextInputType } from '@/types/types/components/textbox';
-import { t } from 'i18next';
+import { useTranslation } from '@/types/utils/i18n';
 
 export default async function Page({ params: { lng } }: any) {
+  const { t } = await useTranslation(lng);
   return (
     <div className='p-10'>
       <Alert id='test-Alert' testId='2323'>
-        test Alert
+        {t('test')}
       </Alert>
-      <Button id='test-Button'>test Button</Button>
+      <Button id='test-Button'>{t('test')}</Button>
       <ButtonGroup>
-        <Button id='test-Button2'>test Button2</Button>
+        <Button id='test-Button2'>{t('test')}</Button>
         <Button id='test-Button3' color='blue'>
-          test Button
+          {t('test')}
         </Button>
       </ButtonGroup>
       <TextBox
         required
         type={TextInputType.text}
-        labelText={t('email-place-holder')}
-        placeholder={t('your-email')}
+        labelText={t('test')}
+        placeholder={t('test')}
       />
     </div>
   );
