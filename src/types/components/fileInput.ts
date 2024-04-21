@@ -1,8 +1,9 @@
-export type iCheckBoxProps = {
+export type iFileInputProps = {
   id: string;
   className?: string;
-  defaultChecked?: boolean;
-  disabled?: boolean;
+  helperText?: string;
+  multiple?: boolean;
+  sizing?: 'string';
   testId?: string;
   onClick?: () => void;
   onMouseEnter?: () => void;
