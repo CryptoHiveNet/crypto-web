@@ -10,30 +10,21 @@ const TopMenu = () => {
       return (
         <>
           {session.user.name},
-          <button
-            type='button'
-            onClick={() => signOut()}
-          >
+          <button type='button' onClick={() => signOut()}>
             Sign out
           </button>
         </>
       );
 
     return (
-      <button
-        type='button'
-        onClick={() => signIn()}
-      >
+      <button type='button' onClick={() => signIn()}>
         Sign in
       </button>
     );
   }
 
   return (
-    <Navbar
-      fluid
-      rounded
-    >
+    <Navbar fluid rounded>
       <Navbar.Brand href='#'>
         <DarkThemeToggle />
         img here
@@ -68,10 +59,7 @@ const TopMenu = () => {
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
-        <Navbar.Link
-          href='#'
-          active
-        >
+        <Navbar.Link href='#' active>
           Home
         </Navbar.Link>
         <Navbar.Link href='#'>About</Navbar.Link>
