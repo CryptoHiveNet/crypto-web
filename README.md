@@ -24,8 +24,8 @@ Git flow for before when you start working on a new feature or fixing a bug is a
 
 Git flow for after you finish working on a new feature or fixing a bug is as follows:
 1. Pull request to development branch
-2. Rebase it against the development
-3. Solving the conflicts
+2. Rebase it against the production
+3. Resolve the conflicts
 4. Request for review
 
 The feature branch should be created in the below format:
