@@ -1,5 +1,6 @@
 import { render, waitFor } from '@testing-library/react';
 
+import Sidebar from '../Sidebar';
 import SidebarLogo from './SidebarLogo';
 
 // Describe block for SidebarLogo component tests
@@ -16,7 +17,11 @@ describe('SidebarLogo component', () => {
     };
 
     // Act
-    const { getByTestId } = render(<SidebarLogo {...mockProps} />);
+    const { getByTestId } = render(
+      <Sidebar>
+        <SidebarLogo {...mockProps} />
+      </Sidebar>,
+    );
 
     // Assert
     waitFor(() => {
