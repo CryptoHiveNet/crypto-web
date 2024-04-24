@@ -1,6 +1,10 @@
 import { ReactNode } from 'react';
 
+<<<<<<< HEAD:src/shared/types/components/carousel.ts
 export type CarouselProps = {
+=======
+export type iCarouselProps = {
+>>>>>>> 5cfdb47 (feat: added carousel component and it unit tests):src/types/components/carousel.ts
   id?: string;
   className?: string;
   slide?: boolean;
