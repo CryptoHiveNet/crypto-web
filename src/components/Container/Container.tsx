@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-
 import { cn } from '@/types/modules/shared/utils/cn';
 
 type ContainerProps = {
