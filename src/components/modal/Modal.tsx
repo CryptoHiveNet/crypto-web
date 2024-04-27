@@ -1,0 +1,51 @@
+import { Modal as FlowbiteModal } from 'flowbite-react';
+import { forwardRef } from 'react';
+
+import { iModalProps } from '@/types/types/components/modal';
+
+const Modal = forwardRef<any, iModalProps>(
+  (
+    {
+      id,
+      show,
+      onClose,
+      dismissible,
+      size,
+      popup,
+      initialFocus,
+      position,
+      className,
+      children,
+      testId,
+      onClick,
+      onMouseEnter,
+      onMouseLeave,
+      ...rest
+    }: iModalProps,
+    ref: React.Ref<any> | null,
+  ) => {
+    return (
+      <FlowbiteModal
+        id={id}
+        show={show}
+        onClose={onClose}
+        dismissible={dismissible}
+        size={size}
+        popup={popup}
+        initialFocus={initialFocus}
+        position={position}
+        className={className}
+        data-testid={testId}
+        onClick={onClick}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        ref={ref}
+        {...rest}
+      >
+        {children}
+      </FlowbiteModal>
+    );
+  },
+);
+
+export default Modal;
