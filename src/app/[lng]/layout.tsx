@@ -5,9 +5,9 @@ import { dir } from 'i18next';
 import { getServerSession } from 'next-auth';
 import { Roboto, Vazirmatn } from 'next/font/google';
 
-import TopMenu from '@/types/components/navBar_old/TopMenu';
-import React_query_provider from '@/types/components/react-query/react-query-provider';
-import SessionProvider from '@/types/components/session/SessionProvider';
+import React_query_provider from '@/types/components/ReactQueryProvider/react-query-provider';
+import SessionProvider from '@/types/components/Session/SessionProvider';
+import TopMenu from '@/types/components/TopMenu/TopMenu';
 import ThemeProvider from '@/types/theme/ThemeProvider';
 
 import { languages } from '../../utils/i18n/settings';

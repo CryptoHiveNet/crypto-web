@@ -2,7 +2,7 @@ import { Button, Checkbox, Label } from 'flowbite-react';
 import { t } from 'i18next';
 import Link from 'next/link';
 
-import TextBox from '@/types/components/textBox/TextBox';
+import TextBox from '@/types/components/TextBox/TextBox';
 import { TextInputType } from '@/types/types/components/textBox';
 
 const RegistrationPage = () => {
@@ -35,7 +35,10 @@ const RegistrationPage = () => {
         </div>
         <div className='flex items-center gap-2'>
           <Checkbox id='agree' />
-          <Label htmlFor='agree' className='flex'>
+          <Label
+            htmlFor='agree'
+            className='flex'
+          >
             I agree with the&nbsp;
             <Link
               href='#'
