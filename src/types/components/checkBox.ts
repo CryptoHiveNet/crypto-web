@@ -1,5 +1,5 @@
 export type iCheckBoxProps = {
-  id: string;
+  id?: string;
   className?: string;
   defaultChecked?: boolean;
   disabled?: boolean;

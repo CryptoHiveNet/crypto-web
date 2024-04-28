@@ -5,6 +5,7 @@ import { expect } from '@jest/globals';
 
 import RootLayout, { metadata, RootLayoutProps } from './layout';
 
+jest.mock('next/font/google');
 jest.mock('next-auth', () => ({
   getServerSession: jest.fn(),
 }));
