@@ -33,7 +33,13 @@ const Alert = forwardRef<any, iAlertProps>(
       if (dismissAfter) {
         timeoutId = setTimeout(() => {
           setShowAlert(false);
-          if (onDismiss) onDismiss;
+          if (onDismiss) {
+            if (typeof onDismiss === 'function') {
+              onDismiss();
+            } else {
+              onDismiss;
+            }
+          }
           setTimeout(() => {
             setIsMounted(false);
           }, transitionDurations);
@@ -47,7 +53,13 @@ const Alert = forwardRef<any, iAlertProps>(
 
     const handleDismiss = () => {
       setShowAlert(false);
-      if (onDismiss) onDismiss;
+      if (onDismiss) {
+        if (typeof onDismiss === 'function') {
+          onDismiss();
+        } else {
+          onDismiss;
+        }
+      }
       setTimeout(() => {
         setIsMounted(false);
       }, transitionDurations);
