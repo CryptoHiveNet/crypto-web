@@ -9,7 +9,7 @@ export function getOptions(lng = fallbackLng, ns = defaultNS) {
     supportedLngs: languages,
     fallbackLng,
     lng,
-    fallbackNS: defaultNS,
+    fallbackNS: fallbackLng,
     defaultNS,
     ns,
   };

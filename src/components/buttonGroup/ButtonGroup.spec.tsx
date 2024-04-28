@@ -1,7 +1,7 @@
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import ButtonGroup from './ButtonGroup';
-import Button from '../button/Button';
+import Button from '../Button/Button';
 
 it('renders children correctly', () => {
   const { getByText } = render(
