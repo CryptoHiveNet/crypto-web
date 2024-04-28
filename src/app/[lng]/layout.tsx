@@ -41,43 +41,22 @@ export default async function RootLayout({
   });
   const session = await getServerSession();
 
-  if (dir(lng) === 'rtl') {
-    return (
-      <html
-        lang={lng}
-        dir={dir(lng)}
-        className={vazirmatn.className}
-      >
-        <body>
-          <React_query_provider>
-            <SessionProvider session={session}>
-              <ThemeProvider>
-                <TopMenu />
-                {children}
-              </ThemeProvider>
-            </SessionProvider>
-          </React_query_provider>
-        </body>
-      </html>
-    );
-  } else {
-    return (
-      <html
-        lang={lng}
-        dir={dir(lng)}
-        className={roboto.className}
-      >
-        <body>
-          <React_query_provider>
-            <SessionProvider session={session}>
-              <ThemeProvider>
-                <TopMenu />
-                {children}
-              </ThemeProvider>
-            </SessionProvider>
-          </React_query_provider>
-        </body>
-      </html>
-    );
-  }
+  return (
+    <html
+      lang={lng}
+      dir={dir(lng)}
+      className={dir(lng) === 'rtl' ? vazirmatn.className : roboto.className}
+    >
+      <body>
+        <React_query_provider>
+          <SessionProvider session={session}>
+            <ThemeProvider>
+              <TopMenu />
+              {children}
+            </ThemeProvider>
+          </SessionProvider>
+        </React_query_provider>
+      </body>
+    </html>
+  );
 }
