@@ -1,5 +1,5 @@
 export type iFileInputProps = {
-  id: string;
+  id?: string;
   className?: string;
   helperText?: string;
   multiple?: boolean;

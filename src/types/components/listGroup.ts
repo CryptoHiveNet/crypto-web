@@ -2,7 +2,7 @@ import { FC, SVGProps } from 'react';
 
 export type iListGroupContainerProps = {
   children: React.ReactNode;
-  id: string;
+  id?: string;
   className?: string;
   testId?: string;
   onClick?: () => void;
@@ -12,7 +12,7 @@ export type iListGroupContainerProps = {
 
 export type iListGroupItemProps = {
   children: React.ReactNode;
-  id: string;
+  id?: string;
   className?: string;
   disabled?: boolean;
   href?: string;
