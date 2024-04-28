@@ -1,51 +1,23 @@
-import { ElementType } from 'react';
+import {
+  NavbarBrandProps,
+  NavbarCollapseProps,
+  NavbarComponentProps,
+  NavbarLinkProps,
+  NavbarToggleProps,
+} from 'flowbite-react';
 
-export type iNavbarProps = {
-  id?: string;
-  className?: string;
-  fluid?: boolean;
-  rounded?: boolean;
-  children: React.ReactNode;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
-export type iNavbarBrandProps = {
-  id?: string;
-  className?: string;
-  as?: ElementType;
-  href?: string;
-  children: React.ReactNode;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
-export type iNavbarToggleProps = {
-  id?: string;
-  className?: string;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
-export type iNavbarCollapseProps = {
-  id?: string;
-  className?: string;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
+import { BaseProps } from '../global/base';
+import { UserReactionProps } from '../global/userReaction';
 
-export type iNavbarLinkProps = {
-  id?: string;
-  className?: string;
-  href?: string;
-  children: React.ReactNode;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
+export type iNavbarProps = NavbarComponentProps & UserReactionProps & BaseProps;
+export type iNavbarBrandProps = NavbarBrandProps &
+  UserReactionProps &
+  BaseProps;
+export type iNavbarToggleProps = NavbarToggleProps &
+  UserReactionProps &
+  BaseProps;
+export type iNavbarCollapseProps = NavbarCollapseProps &
+  UserReactionProps &
+  BaseProps;
+
+export type iNavbarLinkProps = NavbarLinkProps & UserReactionProps & BaseProps;

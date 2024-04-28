@@ -1,20 +1,9 @@
-import { ReactNode } from 'react';
+import { ToastProps, ToastToggleProps } from 'flowbite-react';
 
-export type iToastProps = {
-  id?: string;
-  className?: string;
-  children?: ReactNode;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
-export type iToastToggleProps = {
-  id?: string;
-  className?: string;
-  testId?: string;
-  onDismiss?: () => void;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
+import { BaseProps } from '../global/base';
+import { UserReactionProps } from '../global/userReaction';
+
+export type iToastProps = ToastProps & UserReactionProps & BaseProps;
+export type iToastToggleProps = ToastToggleProps &
+  UserReactionProps &
+  BaseProps;

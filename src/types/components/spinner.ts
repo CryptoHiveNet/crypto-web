@@ -1,11 +1,8 @@
-export type iSpinnerProps = {
-  id?: string;
-  ariaLabel?: string;
-  color?: string;
-  size?: string;
-  className?: string;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
+import { SpinnerProps } from 'flowbite-react';
+
+import { BaseProps } from '../global/base';
+import { UserReactionProps } from '../global/userReaction';
+
+export type iSpinnerProps = { ariaLabel: string } & SpinnerProps &
+  UserReactionProps &
+  BaseProps;

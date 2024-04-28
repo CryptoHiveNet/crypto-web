@@ -1,25 +1,11 @@
-import { FC, SVGProps } from 'react';
+import { ListGroupItemProps, ListGroupProps } from 'flowbite-react';
 
-export type iListGroupContainerProps = {
-  children: React.ReactNode;
-  id?: string;
-  className?: string;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
+import { BaseProps } from '../global/base';
+import { UserReactionProps } from '../global/userReaction';
 
-export type iListGroupItemProps = {
-  children: React.ReactNode;
-  id?: string;
-  className?: string;
-  disabled?: boolean;
-  href?: string;
-  active?: boolean;
-  icon?: FC<SVGProps<SVGSVGElement>>;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
+export type iListGroupContainerProps = ListGroupProps &
+  UserReactionProps &
+  BaseProps;
+export type iListGroupItemProps = ListGroupItemProps &
+  UserReactionProps &
+  BaseProps;

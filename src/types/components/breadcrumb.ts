@@ -1,23 +1,13 @@
-import { FC, SVGProps } from 'react';
+import { BreadcrumbComponentProps, BreadcrumbItemProps } from 'flowbite-react';
+
+import { BaseProps } from '../global/base';
+import { UserReactionProps } from '../global/userReaction';
 
 export type iBreadcrumbProps = {
-  id?: string;
   ariaLabel?: string;
-  className?: string;
-  children: React.ReactNode;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
-export type iBreadcrumbItemProps = {
-  id?: string;
-  href?: string;
-  icon?: FC<SVGProps<SVGSVGElement>>;
-  className?: string;
-  children: React.ReactNode;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
+} & BreadcrumbComponentProps &
+  UserReactionProps &
+  BaseProps;
+export type iBreadcrumbItemProps = BreadcrumbItemProps &
+  UserReactionProps &
+  BaseProps;

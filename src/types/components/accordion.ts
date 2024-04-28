@@ -1,24 +1,14 @@
+import { AccordionProps } from 'flowbite-react';
 import { ReactNode } from 'react';
 
-export type iAccordionProps = {
-  id?: string;
-  collapseAll?: boolean;
-  className?: string;
-  children: any;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
+import { BaseProps } from '../global/base';
+import { UserReactionProps } from '../global/userReaction';
+
+export type iAccordionProps = AccordionProps & UserReactionProps & BaseProps;
 export type iAccordionItemProps = {
-  id?: string;
-  className?: string;
   titleClassName?: string;
   contentClassName?: string;
   title: string;
   content: ReactNode;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
+} & UserReactionProps &
+  BaseProps;

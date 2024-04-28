@@ -1,28 +1,9 @@
-import { TabStyles } from 'flowbite-react';
-import { FC, SVGProps } from 'react';
+import { TabItemProps, TabsProps } from 'flowbite-react';
 
-export type iTabsProps = {
-  id?: string;
-  ariaLabel?: string;
-  onActiveTabChange?: () => void;
-  style?: keyof TabStyles;
-  className?: string;
-  children: React.ReactNode;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
-export type iTabsItemProps = {
-  id?: string;
-  active?: boolean;
-  disabled?: boolean;
-  title?: string;
-  icon?: FC<SVGProps<SVGSVGElement>>;
-  className?: string;
-  children: React.ReactNode;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
+import { BaseProps } from '../global/base';
+import { UserReactionProps } from '../global/userReaction';
+
+export type iTabsProps = { ariaLabel: string } & TabsProps &
+  UserReactionProps &
+  BaseProps;
+export type iTabsItemProps = TabItemProps & UserReactionProps & BaseProps;

@@ -1,19 +1,12 @@
-export type iBannerProps = {
-  id?: string;
-  className?: string;
-  children: React.ReactNode;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
-export type iBannerCollapseButtonProps = {
-  id?: string;
-  color?: string;
-  className?: string;
-  children: React.ReactNode;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
+import {
+  BannerCollapseButtonProps,
+  BannerComponentProps,
+} from 'flowbite-react';
+
+import { BaseProps } from '../global/base';
+import { UserReactionProps } from '../global/userReaction';
+
+export type iBannerProps = BannerComponentProps & UserReactionProps & BaseProps;
+export type iBannerCollapseButtonProps = BannerCollapseButtonProps &
+  UserReactionProps &
+  BaseProps;

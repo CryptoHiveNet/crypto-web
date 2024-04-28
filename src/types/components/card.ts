@@ -1,14 +1,6 @@
-export type iCardProps = {
-  id?: string;
-  href?: string;
-  imgAlt?: string;
-  imgSrc?: string;
-  renderImage?: any;
-  horizontal?: boolean;
-  className?: string;
-  children: React.ReactNode;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
+import { CardProps } from 'flowbite-react';
+
+import { BaseProps } from '../global/base';
+import { UserReactionProps } from '../global/userReaction';
+
+export type iCardProps = CardProps & UserReactionProps & BaseProps;

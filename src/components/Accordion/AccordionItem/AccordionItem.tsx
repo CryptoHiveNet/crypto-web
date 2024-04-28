@@ -1,8 +1,4 @@
-import {
-  AccordionContent,
-  AccordionPanel,
-  AccordionTitle,
-} from 'flowbite-react';
+import { AccordionContent, AccordionPanel, AccordionTitle } from 'flowbite-react';
 import { forwardRef } from 'react';
 
 import { iAccordionItemProps } from '@/types/types/components/accordion';

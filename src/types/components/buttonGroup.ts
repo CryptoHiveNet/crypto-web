@@ -1,10 +1,8 @@
-export type iButtonGroupProps = {
-  id?: string;
-  outline?: boolean;
-  className?: string;
-  children: React.ReactNode;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
+import { ButtonGroupProps } from 'flowbite-react';
+
+import { BaseProps } from '../global/base';
+import { UserReactionProps } from '../global/userReaction';
+
+export type iButtonGroupProps = ButtonGroupProps &
+  UserReactionProps &
+  BaseProps;

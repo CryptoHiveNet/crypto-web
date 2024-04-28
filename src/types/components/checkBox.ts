@@ -1,10 +1,6 @@
-export type iCheckBoxProps = {
-  id?: string;
-  className?: string;
-  defaultChecked?: boolean;
-  disabled?: boolean;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
+import { CheckboxProps } from 'flowbite-react';
+
+import { BaseProps } from '../global/base';
+import { UserReactionProps } from '../global/userReaction';
+
+export type iCheckBoxProps = CheckboxProps & UserReactionProps & BaseProps;

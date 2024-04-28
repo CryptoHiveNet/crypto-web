@@ -1,67 +1,33 @@
-import { FC, SVGProps } from 'react';
+import {
+  TimelineBodyProps,
+  TimelineContentProps,
+  TimelineItemProps,
+  TimelineProps,
+  TimelineTimeProps,
+  TimelineTitleProps,
+  TimelnePointProps,
+} from 'flowbite-react';
 
-export type iTimelineProps = {
-  id?: string;
-  horizontal?: boolean;
-  className?: string;
-  children: React.ReactNode;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
-export type iTimelineItemProps = {
-  id?: string;
-  className?: string;
-  children: React.ReactNode;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
-export type iTimelinePointProps = {
-  id?: string;
-  className?: string;
-  icon?: FC<SVGProps<SVGSVGElement>>;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
+import { BaseProps } from '../global/base';
+import { UserReactionProps } from '../global/userReaction';
 
-export type iTimelineContentProps = {
-  id?: string;
-  className?: string;
-  children: React.ReactNode;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
-export type iTimelineTimeProps = {
-  id?: string;
-  className?: string;
-  children: React.ReactNode;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
-export type iTimelineBodyProps = {
-  id?: string;
-  className?: string;
-  children: React.ReactNode;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
-export type iTimelineTitleProps = {
-  id?: string;
-  className?: string;
-  children: React.ReactNode;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
+export type iTimelineProps = TimelineProps & UserReactionProps & BaseProps;
+export type iTimelineItemProps = TimelineItemProps &
+  UserReactionProps &
+  BaseProps;
+export type iTimelinePointProps = TimelnePointProps &
+  UserReactionProps &
+  BaseProps;
+
+export type iTimelineContentProps = TimelineContentProps &
+  UserReactionProps &
+  BaseProps;
+export type iTimelineTimeProps = TimelineTimeProps &
+  UserReactionProps &
+  BaseProps;
+export type iTimelineBodyProps = TimelineBodyProps &
+  UserReactionProps &
+  BaseProps;
+export type iTimelineTitleProps = TimelineTitleProps &
+  UserReactionProps &
+  BaseProps;

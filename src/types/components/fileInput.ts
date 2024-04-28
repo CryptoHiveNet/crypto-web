@@ -1,11 +1,6 @@
-export type iFileInputProps = {
-  id?: string;
-  className?: string;
-  helperText?: string;
-  multiple?: boolean;
-  sizing?: 'string';
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
+import { FileInputProps } from 'flowbite-react';
+
+import { BaseProps } from '../global/base';
+import { UserReactionProps } from '../global/userReaction';
+
+export type iFileInputProps = FileInputProps & BaseProps & UserReactionProps;

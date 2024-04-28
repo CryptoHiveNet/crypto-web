@@ -1,84 +1,33 @@
-import { FC, SVGProps } from 'react';
+import {
+  CopyrightProps,
+  FooterBrandProps,
+  FooterDividerProps,
+  FooterIconProps,
+  FooterLinkGroupProps,
+  FooterLinkProps,
+  FooterProps,
+  FooterTitleProps,
+} from 'flowbite-react';
 
-export type iFooterProps = {
-  id?: string;
-  className?: string;
-  container?: boolean;
-  bgDark?: boolean;
-  children: React.ReactNode;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
-export type iFooterCopyrightProps = {
-  id?: string;
-  className?: string;
-  href?: string;
-  by: string;
-  year?: number;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
-export type iFooterLinkGroupProps = {
-  id?: string;
-  className?: string;
-  col?: boolean;
-  children: React.ReactNode;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
-export type iFooterLinkProps = {
-  id?: string;
-  className?: string;
-  href: string;
-  children: React.ReactNode;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
+import { BaseProps } from '../global/base';
+import { UserReactionProps } from '../global/userReaction';
 
-export type iFooterBrandProps = {
-  id?: string;
-  className?: string;
-  href?: string;
-  src: string;
-  alt?: string;
-  name?: string;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
-export type iFooterDividerProps = {
-  id?: string;
-  className?: string;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
-export type iFooterTitleProps = {
-  id?: string;
-  title: string;
-  className?: string;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
-export type iFooterIconProps = {
-  id?: string;
-  href?: string;
-  icon: FC<SVGProps<SVGSVGElement>>;
-  className?: string;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
+export type iFooterProps = FooterProps & UserReactionProps & BaseProps;
+export type iFooterCopyrightProps = CopyrightProps &
+  UserReactionProps &
+  BaseProps;
+export type iFooterLinkGroupProps = FooterLinkGroupProps &
+  UserReactionProps &
+  BaseProps;
+export type iFooterLinkProps = FooterLinkProps & UserReactionProps & BaseProps;
+
+export type iFooterBrandProps = FooterBrandProps &
+  UserReactionProps &
+  BaseProps;
+export type iFooterDividerProps = FooterDividerProps &
+  UserReactionProps &
+  BaseProps;
+export type iFooterTitleProps = FooterTitleProps &
+  UserReactionProps &
+  BaseProps;
+export type iFooterIconProps = FooterIconProps & UserReactionProps & BaseProps;

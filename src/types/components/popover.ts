@@ -1,18 +1,8 @@
-import { ReactNode } from 'react';
+import { PopoverProps } from 'flowbite-react';
 
-export type iPopoverProps = {
-  id?: string;
-  ariaLabelledby?: string;
-  content?: ReactNode;
-  trigger?: string;
-  open?: boolean;
-  onOpenChange?: () => void;
-  placement?: string;
-  arrow?: boolean;
-  className?: string;
-  children?: ReactNode;
-  testId?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
+import { BaseProps } from '../global/base';
+import { UserReactionProps } from '../global/userReaction';
+
+export type iPopoverProps = { ariaLabelledby: string } & PopoverProps &
+  UserReactionProps &
+  BaseProps;

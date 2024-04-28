@@ -1,4 +1,3 @@
-'use client';
 import { Alert as FlowbiteAlert } from 'flowbite-react';
 import React, { forwardRef, useEffect, useState } from 'react';
 import { HiInformationCircle } from 'react-icons/hi';
@@ -34,7 +33,7 @@ const Alert = forwardRef<any, iAlertProps>(
       if (dismissAfter) {
         timeoutId = setTimeout(() => {
           setShowAlert(false);
-          if (onDismiss) onDismiss();
+          if (onDismiss) onDismiss;
           setTimeout(() => {
             setIsMounted(false);
           }, transitionDurations);
@@ -48,7 +47,7 @@ const Alert = forwardRef<any, iAlertProps>(
 
     const handleDismiss = () => {
       setShowAlert(false);
-      if (onDismiss) onDismiss();
+      if (onDismiss) onDismiss;
       setTimeout(() => {
         setIsMounted(false);
       }, transitionDurations);
