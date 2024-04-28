@@ -1,38 +1,35 @@
 import { render, waitFor } from '@testing-library/react';
 
-import Card from './Card';
+import Datepicker from './Datepicker';
 
-describe('Card', () => {
-  it('renders a card with the provided content', () => {
+describe('Datepicker', () => {
+  it('renders a datepicker with the provided label for today button', () => {
     // Arrange
-    const content = 'This is the content of the card';
+    const labelTodayButton = 'Today';
 
     // Act
-    const { getByText } = render(<Card>{content}</Card>);
-
-    // Assert
-    waitFor(() => {
-      expect(getByText(content)).toBeInTheDocument();
-    });
-  });
-
-  it('renders a card with an image', () => {
-    // Arrange
-    const imgSrc = 'https://example.com/image.jpg';
-    const imgAlt = 'Example Image';
-
-    // Act
-    const { getByAltText } = render(
-      <Card
-        imgSrc={imgSrc}
-        imgAlt={imgAlt}
-      />,
+    const { getByText } = render(
+      <Datepicker labelTodayButton={labelTodayButton} />,
     );
 
     // Assert
     waitFor(() => {
-      expect(getByAltText(imgAlt)).toBeInTheDocument();
-      expect(getByAltText(imgAlt)).toHaveAttribute('src', imgSrc);
+      expect(getByText(labelTodayButton)).toBeInTheDocument();
+    });
+  });
+
+  it('renders a datepicker with the provided label for clear button', () => {
+    // Arrange
+    const labelClearButton = 'Clear';
+
+    // Act
+    const { getByText } = render(
+      <Datepicker labelClearButton={labelClearButton} />,
+    );
+
+    // Assert
+    waitFor(() => {
+      expect(getByText(labelClearButton)).toBeInTheDocument();
     });
   });
 });
