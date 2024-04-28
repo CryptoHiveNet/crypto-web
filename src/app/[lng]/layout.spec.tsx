@@ -9,7 +9,7 @@ jest.mock('next-auth', () => ({
   getServerSession: jest.fn(),
 }));
 
-jest.mock('@/types/components/react-query/react-query-provider', () => {
+jest.mock('@/types/components/ReactQueryProvider/ReactQueryProvider', () => {
   return function DummyReactQueryProvider({
     children,
   }: {
@@ -19,7 +19,7 @@ jest.mock('@/types/components/react-query/react-query-provider', () => {
   };
 });
 
-jest.mock('@/types/components/session/SessionProvider', () => {
+jest.mock('@/types/components/SessionProvider/SessionProvider', () => {
   return function DummySessionProvider({
     children,
     session,

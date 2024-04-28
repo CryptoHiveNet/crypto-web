@@ -5,8 +5,8 @@ import { dir } from 'i18next';
 import { getServerSession } from 'next-auth';
 import { Roboto, Vazirmatn } from 'next/font/google';
 
-import React_query_provider from '@/types/components/ReactQueryProvider/react-query-provider';
-import SessionProvider from '@/types/components/Session/SessionProvider';
+import React_query_provider from '@/types/components/ReactQueryProvider/ReactQueryProvider';
+import SessionProvider from '@/types/components/SessionProvider/SessionProvider';
 import TopMenu from '@/types/components/TopMenu/TopMenu';
 import ThemeProvider from '@/types/theme/ThemeProvider';
 
