@@ -1,9 +1,10 @@
-'use client';
-import { Checkbox as CHB } from 'flowbite-react';
-import { forwardRef } from 'react';
+"use client";
+import { Checkbox as CHB } from "flowbite-react";
+import { forwardRef } from "react";
 
-import { iCheckBoxProps } from '@/types/types/components/checkBox';
+import { iCheckBoxProps } from "@/types/types/components/checkBox";
 
+// eslint-disable-next-line react/display-name
 const CheckBox = forwardRef<any, iCheckBoxProps>(
   (
     {
@@ -17,7 +18,7 @@ const CheckBox = forwardRef<any, iCheckBoxProps>(
       onMouseLeave,
       ...rest
     }: iCheckBoxProps,
-    ref: React.Ref<any> | null,
+    ref: React.Ref<any> | null
   ) => {
     return (
       <CHB
@@ -33,7 +34,7 @@ const CheckBox = forwardRef<any, iCheckBoxProps>(
         {...rest}
       />
     );
-  },
+  }
 );
 
 export default CheckBox;

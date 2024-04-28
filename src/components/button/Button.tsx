@@ -3,6 +3,7 @@ import { forwardRef } from 'react';
 
 import { iButtonProps } from '@/types/types/components/button';
 
+// eslint-disable-next-line react/display-name
 const Button = forwardRef<any, iButtonProps>(
   (
     {

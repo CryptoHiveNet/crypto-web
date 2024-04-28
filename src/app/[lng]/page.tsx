@@ -2,11 +2,11 @@ import Link from 'next/link';
 import { useTranslation } from '../../utils/i18n';
 import { LanguageSwitcher } from '@/types/components/i18n/LanguageSwitcher';
 import ButtonGroup from '@/types/components/buttonGroup/ButtonGroup';
-import Button from '@/types/components/button/Button';
+import Button from '@/types/components/Button/Button';
 import { Button as BT } from 'flowbite-react';
 
 export default async function Page({ params: { lng } }: any) {
-  const { t } = await useTranslation(lng);
+  const { t } = await useTranslation();
   return (
     <>
       <div>

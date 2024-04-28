@@ -1,3 +1,10 @@
 {
-  "test": "Hello"
+  "test": "Hello",
+  "email-place-holder": "email-place-holder",
+  "your-email": "your-email",
+  "your-password": "your-password",
+  "enter-your-password": "enter-your-password",
+  "repeat-your-password": "repeat-your-password",
+  "terms-and-conditions": "terms-and-conditions",
+  "register-new-user": "register-new-user"
 }

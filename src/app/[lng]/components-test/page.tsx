@@ -1,5 +1,5 @@
 import Alert from '@/types/components/alert/Alert';
-import Button from '@/types/components/button/Button';
+import Button from '@/types/components/Button/Button';
 import ButtonGroup from '@/types/components/buttonGroup/ButtonGroup';
 import TextBox from '@/types/components/textBox/TextBox';
 import { TextInputType } from '@/types/types/components/textBox';

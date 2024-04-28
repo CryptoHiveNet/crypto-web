@@ -3,7 +3,6 @@ import './globals.css';
 
 import { dir } from 'i18next';
 import { getServerSession } from 'next-auth';
-import { Roboto, Vazirmatn } from 'next/font/google';
 
 import TopMenu from '@/types/components/navBar/TopMenu';
 import React_query_provider from '@/types/components/react-query/react-query-provider';
@@ -11,6 +10,7 @@ import SessionProvider from '@/types/components/session/SessionProvider';
 import ThemeProvider from '@/types/theme/ThemeProvider';
 
 import { languages } from '../../utils/i18n/settings';
+import { roboto, vazirmatn } from '@/types/styles/fonts';
 
 export async function generateStaticParams() {
   return languages.map((lng) => ({ lng }));
@@ -29,24 +29,14 @@ export default async function RootLayout({
   children,
   params: { lng },
 }: RootLayoutProps) {
-  const vazirmatn = Vazirmatn({
-    weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-    subsets: ['arabic'],
-  });
-  const roboto = Roboto({
-    weight: ['100', '300', '400', '500', '700', '900'],
-    subsets: ['latin'],
-    style: ['normal', 'italic'],
-    display: 'swap',
-  });
+  
   const session = await getServerSession();
 
-  if (dir(lng) === 'rtl') {
     return (
       <html
         lang={lng}
         dir={dir(lng)}
-        className={vazirmatn.className}
+        className={ dir(lng) === 'rtl' ? vazirmatn.className : roboto.className }
       >
         <body>
           <React_query_provider>
@@ -60,24 +50,4 @@ export default async function RootLayout({
         </body>
       </html>
     );
-  } else {
-    return (
-      <html
-        lang={lng}
-        dir={dir(lng)}
-        className={roboto.className}
-      >
-        <body>
-          <React_query_provider>
-            <SessionProvider session={session}>
-              <ThemeProvider>
-                <TopMenu />
-                {children}
-              </ThemeProvider>
-            </SessionProvider>
-          </React_query_provider>
-        </body>
-      </html>
-    );
-  }
 }
