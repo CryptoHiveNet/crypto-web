@@ -1,7 +1,7 @@
 import { iAccordionProps } from '@/types/types/components/accordion';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 
-import Accordion from './Accordion'; // Adjust path if necessary
+import Accordion from './Accordion';
 
 describe('Accordion component', () => {
   it('should render the FlowbiteAccordion component with passed props', () => {

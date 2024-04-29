@@ -5,19 +5,14 @@ import TimelineContent from '../TimelineContent/TimelineContent';
 import TimelineItem from '../TimelineItem/TimelineItem';
 import TimelineTime from './TimelineTime';
 
-// Describe block for TimelineTime component tests
 describe('TimelineTime component', () => {
-  // Test case 1: Renders the component with required props
   it('should render TimelineTime component with required props', () => {
-    // Arrange
     const mockProps = {
       id: 'test-timeline-time',
       className: 'timeline-time',
       testId: 'test-timeline-time',
-      onClick: jest.fn(), // Mock onClick function
+      onClick: jest.fn(),
     };
-
-    // Act
     const { getByTestId } = render(
       <Timeline>
         <TimelineItem>
@@ -27,8 +22,6 @@ describe('TimelineTime component', () => {
         </TimelineItem>
       </Timeline>,
     );
-
-    // Assert
     waitFor(() => {
       const timelineTime = getByTestId('test-timeline-time');
       expect(timelineTime).toBeInTheDocument();

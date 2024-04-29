@@ -5,11 +5,8 @@ import SidebarItemGroup from '../SidebarItemGroup/SidebarItemGroup';
 import SidebarItems from '../SidebarItems/SidebarItems';
 import SidebarItem from './SidebarItem';
 
-// Describe block for SidebarItem component tests
 describe('SidebarItem component', () => {
-  // Test case 1: Renders the component with required props
   it('should render SidebarItem component with required props', () => {
-    // Arrange
     const mockProps = {
       id: 'test-sidebar-item',
       href: '#',
@@ -19,8 +16,6 @@ describe('SidebarItem component', () => {
       className: 'sidebar-item',
       testId: 'test-sidebar-item',
     };
-
-    // Act
     const { getByTestId } = render(
       <Sidebar>
         <SidebarItemGroup>
@@ -30,8 +25,6 @@ describe('SidebarItem component', () => {
         </SidebarItemGroup>
       </Sidebar>,
     );
-
-    // Assert
     waitFor(() => {
       expect(getByTestId('test-sidebar-item')).toBeInTheDocument();
     });

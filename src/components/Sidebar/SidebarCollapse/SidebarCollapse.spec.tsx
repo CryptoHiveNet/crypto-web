@@ -6,21 +6,16 @@ import SidebarItemGroup from '../SidebarItemGroup/SidebarItemGroup';
 import SidebarItems from '../SidebarItems/SidebarItems';
 import SidebarCollapse from './SidebarCollapse';
 
-// Describe block for SidebarCollapse component tests
 describe('SidebarCollapse component', () => {
-  // Test case 1: Renders the component with required props
   it('should render SidebarCollapse component with required props', () => {
-    // Arrange
     const mockProps = {
       id: 'test-sidebar-collapse',
       icon: 'icon',
       label: 'Collapse',
       className: 'sidebar-collapse',
       testId: 'test-sidebar-collapse',
-      onClick: jest.fn(), // Mock onClick function
+      onClick: jest.fn(),
     };
-
-    // Act
     const { getByTestId } = render(
       <Sidebar>
         <SidebarItems>
@@ -32,8 +27,6 @@ describe('SidebarCollapse component', () => {
         </SidebarItems>
       </Sidebar>,
     );
-
-    // Assert
     waitFor(() => {
       const sidebarCollapse = getByTestId('test-sidebar-collapse');
       expect(sidebarCollapse).toBeInTheDocument();
