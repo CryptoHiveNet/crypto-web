@@ -1,9 +1,13 @@
 import { Button as FlowbiteButton } from 'flowbite-react';
 import React, { forwardRef } from 'react';
 
+<<<<<<< HEAD:src/components/buttonGroup/ButtonGroup.tsx
 import { iButtonGroupProps } from '@/types/shared/types/components/buttonGroup';
+=======
+import { ButtonGroupProps } from '@/types/types/components/buttonGroup';
+>>>>>>> 1ff0979 (feat: refactor button group, card, and carousel components):src/components/ButtonGroup/ButtonGroup.tsx
 
-const ButtonGroup = forwardRef<any, iButtonGroupProps>(
+const ButtonGroup = forwardRef<any, ButtonGroupProps>(
   (
     {
       id,
@@ -15,7 +19,7 @@ const ButtonGroup = forwardRef<any, iButtonGroupProps>(
       onMouseEnter,
       onMouseLeave,
       ...rest
-    }: iButtonGroupProps,
+    }: ButtonGroupProps,
     ref: React.Ref<any> | null,
   ) => {
     return (
