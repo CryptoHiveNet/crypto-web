@@ -18,6 +18,21 @@ This project has three different branches:
 - demo
 - development
 
+Git flow for before when you start working on a new feature or fixing a bug is as follows:
+1. Pull repo from production
+2. Create a new feature/fix branch
+
+Git flow for after you finish working on a new feature or fixing a bug is as follows:
+1. Pull request to development branch
+2. Rebase from production
+3. Solving the conflicts
+4. Request for review
+
+The feature branch should be created in the below format:
+```bash
+feature/{issue-number}-{issue-title}
+```
+
 Each new feature will be added to the development branch, with no direct pull requests (PRs) to the demo or production branches. New features will be incorporated into the development branch using a squash merge command, resulting in a single commit for each feature. 
 
 We will then use a regular merge command to move changes from the development branch to the demo branch, and similarly from the demo to the production branch.
