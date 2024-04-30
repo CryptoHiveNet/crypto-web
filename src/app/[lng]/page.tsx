@@ -1,9 +1,11 @@
-import Link from 'next/link';
-import { useTranslation } from '../../utils/i18n';
-import { LanguageSwitcher } from '@/types/components/i18n/LanguageSwitcher';
-import ButtonGroup from '@/types/components/buttonGroup/ButtonGroup';
-import Button from '@/types/components/Button/Button';
 import { Button as BT } from 'flowbite-react';
+import Link from 'next/link';
+
+import Button from '@/types/components/button/Button';
+import ButtonGroup from '@/types/components/buttonGroup/ButtonGroup';
+import { LanguageSwitcher } from '@/types/components/i18n/LanguageSwitcher';
+
+import { useTranslation } from '../../utils/i18n';
 
 export default async function Page({ params: { lng } }: any) {
   const { t } = await useTranslation();
@@ -17,7 +19,10 @@ export default async function Page({ params: { lng } }: any) {
       </div>
       <div>
         <ButtonGroup>
-          <Button id='test-Button3' color='blue'>
+          <Button
+            id='test-Button3'
+            color='blue'
+          >
             test Button
           </Button>
           <Button id='test-Button4'>test Button2</Button>
@@ -28,7 +33,7 @@ export default async function Page({ params: { lng } }: any) {
         {t('name')}
         {t('title')}
       </h1>
-      <Link href={`/${lng}/second-page`}>{t('to-second-page')}</Link>
+      <Link href={`/${lng}/second-page`}>{t('hello')}</Link>
       <LanguageSwitcher />
     </>
   );
