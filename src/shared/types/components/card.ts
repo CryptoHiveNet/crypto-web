@@ -1,6 +1,10 @@
-export type ButtonGroupProps = {
+export type CardProps = {
   id?: string;
-  outline?: boolean;
+  href?: string;
+  imgAlt?: string;
+  imgSrc?: string;
+  renderImage?: () => void;
+  horizontal?: boolean;
   className?: string;
   children: React.ReactNode;
   testId?: string;
