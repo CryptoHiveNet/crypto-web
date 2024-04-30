@@ -2,15 +2,16 @@ import { Alert as FlowbiteAlert } from 'flowbite-react';
 import React, { forwardRef, useEffect, useState } from 'react';
 import { HiInformationCircle } from 'react-icons/hi';
 
-import { iAlertProps } from '@/types/types/components/alert';
+import { AlertProps } from '@/types/types/components/alert';
 
-const Alert = forwardRef<any, iAlertProps>(
+const Alert = forwardRef<any, AlertProps>(
   (
     {
       id,
       additionalContent,
       role = 'blue',
       icon = HiInformationCircle,
+      transitionDurations = 300,
       className,
       children,
       testId,
@@ -20,29 +21,18 @@ const Alert = forwardRef<any, iAlertProps>(
       onMouseLeave,
       dismissAfter,
       ...rest
-    }: iAlertProps,
+    }: AlertProps,
     ref: React.Ref<any> | null,
   ) => {
     const [showAlert, setShowAlert] = useState(true);
     const [isMounted, setIsMounted] = useState(true);
-    const transitionDurations = 300;
 
     useEffect(() => {
       let timeoutId: NodeJS.Timeout;
 
       if (dismissAfter) {
         timeoutId = setTimeout(() => {
-          setShowAlert(false);
-          if (onDismiss) {
-            if (typeof onDismiss === 'function') {
-              onDismiss();
-            } else {
-              onDismiss;
-            }
-          }
-          setTimeout(() => {
-            setIsMounted(false);
-          }, transitionDurations);
+          handleDismiss();
         }, dismissAfter);
       }
 
