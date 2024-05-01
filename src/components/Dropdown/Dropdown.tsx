@@ -1,7 +1,7 @@
 import { Dropdown as FlowbiteDropdown } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { DropdownProps } from '@/types/types/components/dropdown';
+import { DropdownProps } from '@/types/shared/types/components/dropdown';
 
 const Dropdown = forwardRef<any, DropdownProps>(
   (
