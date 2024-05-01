@@ -1,7 +1,7 @@
 import { Tabs as FlowbiteTabs } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { TabsProps } from '@/types/types/components/tabs';
+import { TabsProps } from '@/types/shared/types/components/tabs';
 
 const Tabs = forwardRef<any, TabsProps>(
   (
