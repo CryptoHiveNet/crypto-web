@@ -16,13 +16,7 @@ export type Address = {
   email?: string;
   phone?: string;
   mobile?: string;
-  paymentAddress?: boolean;
-  shipmentAddress?: boolean;
-  skipAddressCheck?: boolean;
   birthdayDay?: string;
   birthdayMonth?: string;
   birthdayYear?: string;
-  addition?: string;
-  parcelShopId?: string;
-  pickingPointName?: string;
 };

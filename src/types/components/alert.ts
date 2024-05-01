@@ -1,6 +1,6 @@
 import { FC, SVGProps } from 'react';
 
-export type iAlertProps = {
+export type AlertProps = {
   id?: string;
   additionalContent?: JSX.Element;
   role?: string;
