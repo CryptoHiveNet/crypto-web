@@ -2,7 +2,7 @@
 import { ListGroup } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { iListGroupContainerProps } from '@/types/types/components/listGroup';
+import { iListGroupContainerProps } from '@/types/shared/types/components/listGroup';
 
 const ListGroupContainer = forwardRef<any, iListGroupContainerProps>(
   (

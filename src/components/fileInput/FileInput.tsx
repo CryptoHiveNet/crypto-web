@@ -2,7 +2,7 @@
 import { FileInput as FLI } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { iFileInputProps } from '@/types/types/components/fileInput';
+import { iFileInputProps } from '@/types/shared/types/components/fileInput';
 
 const FileInput = forwardRef<any, iFileInputProps>(
   (

@@ -1,7 +1,7 @@
 import { Button as FlowbiteButton } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { iButtonProps } from '@/types/types/components/button';
+import { iButtonProps } from '@/types/shared/types/components/button';
 
 // eslint-disable-next-line react/display-name
 const Button = forwardRef<any, iButtonProps>(
