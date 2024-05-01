@@ -1,6 +1,6 @@
 import { FC, SVGProps } from 'react';
 
-export type iListGroupContainerProps = {
+export type ListGroupContainerProps = {
   children: React.ReactNode;
   id: string;
   className?: string;
@@ -10,7 +10,7 @@ export type iListGroupContainerProps = {
   onMouseLeave?: () => void;
 };
 
-export type iListGroupItemProps = {
+export type ListGroupItemProps = {
   children: React.ReactNode;
   id: string;
   className?: string;
