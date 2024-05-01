@@ -1,11 +1,42 @@
-import React from 'react'
+import { forwardRef } from 'react';
 
-const Footer = () => {
-  return (
-    <div>
-      Footer
-    </div>
-  )
-}
+import { Footer as FlowbiteFooter } from 'flowbite-react';
 
-export default Footer
+import { FooterProps } from '@/types/shared/types/components/footer';
+
+const Footer = forwardRef<any, FooterProps>(
+    (
+        {
+            id,
+            className,
+            container,
+            bgDark,
+            children,
+            testId,
+            onClick,
+            onMouseEnter,
+            onMouseLeave,
+            ...rest
+        }: FooterProps,
+        ref: React.Ref<any> | null,
+    ) => {
+        return (
+            <FlowbiteFooter
+                id={id}
+                className={className}
+                container={container}
+                bgDark={bgDark}
+                data-testid={testId}
+                onClick={onClick}
+                onMouseEnter={onMouseEnter}
+                onMouseLeave={onMouseLeave}
+                ref={ref}
+                {...rest}
+            >
+                {children}
+            </FlowbiteFooter>
+        );
+    },
+);
+
+export default Footer;
