@@ -1,7 +1,7 @@
 import { Tooltip as FlowbiteTooltip } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { TooltipProps } from '@/types/types/components/tooltip';
+import { TooltipProps } from '@/types/shared/types/components/tooltip';
 
 const Tooltip = forwardRef<any, TooltipProps>(
   (
