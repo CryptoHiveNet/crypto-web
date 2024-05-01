@@ -1,25 +1,24 @@
-'use client';
-import { ListGroup } from 'flowbite-react';
+import { ModalHeader as FlowbiteModalHeader } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { iListGroupContainerProps } from '@/types/shared/types/components/listGroup';
+import { ModalHeaderProps } from '@/types/types/components/modal';
 
-const ListGroupContainer = forwardRef<any, iListGroupContainerProps>(
+const ModalHeader = forwardRef<any, ModalHeaderProps>(
   (
     {
-      children,
       id,
       className,
+      children,
       testId,
       onClick,
       onMouseEnter,
       onMouseLeave,
       ...rest
-    }: iListGroupContainerProps,
+    }: ModalHeaderProps,
     ref: React.Ref<any> | null,
   ) => {
     return (
-      <ListGroup
+      <FlowbiteModalHeader
         id={id}
         className={className}
         data-testid={testId}
@@ -30,9 +29,9 @@ const ListGroupContainer = forwardRef<any, iListGroupContainerProps>(
         {...rest}
       >
         {children}
-      </ListGroup>
+      </FlowbiteModalHeader>
     );
   },
 );
 
-export default ListGroupContainer;
+export default ModalHeader;
