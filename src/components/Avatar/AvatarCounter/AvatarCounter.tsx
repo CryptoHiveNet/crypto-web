@@ -1,7 +1,7 @@
 import { Avatar } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { AvatarCounterProps } from '@/types/types/components/avatar';
+import { AvatarCounterProps } from '@/types/shared/types/components/avatar';
 
 const AvatarCounter = forwardRef<any, AvatarCounterProps>(
   (
