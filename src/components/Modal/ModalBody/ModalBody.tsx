@@ -1,7 +1,7 @@
 import { ModalBody as FlowbiteModalBody } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { ModalBodyProps } from '@/types/types/components/modal';
+import { ModalBodyProps } from '@/types/shared/types/components/modal';
 
 const ModalBody = forwardRef<any, ModalBodyProps>(
   (
