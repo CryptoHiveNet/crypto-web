@@ -1,7 +1,7 @@
 import { Banner as FlowbiteBanner } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { BannerProps } from '@/types/types/components/banner';
+import { BannerProps } from '@/types/shared/types/components/banner';
 
 const Banner = forwardRef<any, BannerProps>(
   (
