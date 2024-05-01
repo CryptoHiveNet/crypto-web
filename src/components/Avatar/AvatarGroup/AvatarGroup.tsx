@@ -1,7 +1,7 @@
 import { AvatarGroup as FlowbiteAvatarGroup } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { AvatarGroupProps } from '@/types/types/components/avatar';
+import { AvatarGroupProps } from '@/types/shared/types/components/avatar';
 
 const AvatarGroup = forwardRef<any, AvatarGroupProps>(
   (
