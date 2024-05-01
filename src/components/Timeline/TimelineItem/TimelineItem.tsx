@@ -1,7 +1,7 @@
 import { TimelineItem as FlowbiteTimelineItem } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { TimelineItemProps } from '@/types/types/components/timeline';
+import { TimelineItemProps } from '@/types/shared/types/components/timeline';
 
 const TimelineItem = forwardRef<any, TimelineItemProps>(
   (
