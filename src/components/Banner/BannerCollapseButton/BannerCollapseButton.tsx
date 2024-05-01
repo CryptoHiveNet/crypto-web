@@ -1,7 +1,7 @@
 import { BannerCollapseButton as FlowbiteBannerCollapseButton } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { BannerCollapseButtonProps } from '@/types/types/components/banner';
+import { BannerCollapseButtonProps } from '@/types/shared/types/components/banner';
 
 const BannerCollapseButton = forwardRef<any, BannerCollapseButtonProps>(
   (

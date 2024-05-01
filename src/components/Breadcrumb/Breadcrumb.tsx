@@ -1,7 +1,7 @@
 import { Breadcrumb as FlowbiteBreadcrumb } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { BreadcrumbProps } from '@/types/types/components/breadcrumb';
+import { BreadcrumbProps } from '@/types/shared/types/components/breadcrumb';
 
 const Breadcrumb = forwardRef<any, BreadcrumbProps>(
   (
