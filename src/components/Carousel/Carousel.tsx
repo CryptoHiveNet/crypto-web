@@ -1,7 +1,7 @@
 import { Carousel as FlowbiteCarousel } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { CarouselProps } from '@/types/types/components/carousel';
+import { CarouselProps } from '@/types/shared/types/components/carousel';
 
 const Carousel = forwardRef<any, CarouselProps>(
   (
