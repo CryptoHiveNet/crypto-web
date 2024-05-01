@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-export type AddressDto = z.infer<typeof UserAddressDtoSchema>;
+export type AddressType = z.infer<typeof UserAddressSchema>;
 
-export const UserAddressDtoSchema = z.object({
+export const UserAddressSchema = z.object({
   id: z.string().optional(),
   firstName: z.string(),
   lastName: z.string(),
