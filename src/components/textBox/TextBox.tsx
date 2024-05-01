@@ -2,7 +2,7 @@
 import { TextInput } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { iTextBoxProps } from '@/types/types/components/textBox';
+import { iTextBoxProps } from '@/types/shared/types/components/textBox';
 
 const TextBox = forwardRef<any, iTextBoxProps>(
   (
