@@ -1,7 +1,7 @@
 import { Card as FlowbiteCard } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { CardProps } from '@/types/types/components/card';
+import { CardProps } from '@/types/shared/types/components/card';
 
 const Card = forwardRef<any, CardProps>(
   (
