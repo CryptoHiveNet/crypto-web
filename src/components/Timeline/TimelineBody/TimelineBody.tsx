@@ -1,7 +1,7 @@
 import { TimelineBody as FlowbiteTimelineBody } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { TimelineBodyProps } from '@/types/types/components/timeline';
+import { TimelineBodyProps } from '@/types/shared/types/components/timeline';
 
 const TimelineBody = forwardRef<any, TimelineBodyProps>(
   (
