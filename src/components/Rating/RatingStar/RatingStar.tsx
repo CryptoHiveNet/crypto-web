@@ -1,7 +1,7 @@
 import { RatingStar as FlowbiteRatingStar } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { RatingStarProps } from '@/types/types/components/rating';
+import { RatingStarProps } from '@/types/shared/types/components/rating';
 
 const RatingStar = forwardRef<any, RatingStarProps>(
   (
