@@ -1,9 +1,9 @@
-import { GenderType } from "@/types/user/userProfile";
+import { GenderType } from "@/types/shared/types/user/userProfile";
 import { z } from "zod";
 
-export type UserProfileDto = z.infer<typeof UserProfileDtoSchema>;
+export type UserProfileType = z.infer<typeof UserProfileSchema>;
 
-export const UserProfileDtoSchema = z.object({
+export const UserProfileSchema = z.object({
   userId: z.string(),
   loginUserName: z.string(),
   email: z.string().email(),
