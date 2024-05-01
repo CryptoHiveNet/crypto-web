@@ -1,7 +1,7 @@
 import { Toast as FlowbiteToast } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { ToastProps } from '@/types/types/components/toast';
+import { ToastProps } from '@/types/shared/types/components/toast';
 
 const Toast = forwardRef<any, ToastProps>(
   (
