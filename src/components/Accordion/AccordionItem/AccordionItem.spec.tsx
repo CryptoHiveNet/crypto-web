@@ -1,4 +1,4 @@
-import { AccordionItemProps } from '@/types/types/components/accordion';
+import { AccordionItemProps } from '@/types/shared/types/components/accordion';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 
 import AccordionItem from './AccordionItem';

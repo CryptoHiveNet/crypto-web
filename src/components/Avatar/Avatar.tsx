@@ -1,7 +1,7 @@
 import { Avatar as FlowbiteAvatar } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { AvatarProps } from '@/types/types/components/avatar';
+import { AvatarProps } from '@/types/shared/types/components/avatar';
 
 const Avatar = forwardRef<any, AvatarProps>(
   (
