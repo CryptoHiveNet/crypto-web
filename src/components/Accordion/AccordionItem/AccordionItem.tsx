@@ -1,7 +1,11 @@
-import { AccordionContent, AccordionPanel, AccordionTitle } from 'flowbite-react';
+import {
+  AccordionContent,
+  AccordionPanel,
+  AccordionTitle,
+} from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { AccordionItemProps } from '@/types/types/components/accordion';
+import { AccordionItemProps } from '@/types/shared/types/components/accordion';
 
 const AccordionItem = forwardRef<any, AccordionItemProps>(
   (
