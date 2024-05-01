@@ -1,7 +1,7 @@
 import { Datepicker as FlowbiteDatepicker } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { DatepickerProps } from '@/types/types/components/datepicker';
+import { DatepickerProps } from '@/types/shared/types/components/datepicker';
 
 const Datepicker = forwardRef<any, DatepickerProps>(
   (
