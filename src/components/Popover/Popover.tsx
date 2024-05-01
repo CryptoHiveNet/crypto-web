@@ -1,7 +1,7 @@
 import { Popover as FlowbitePopover } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { PopoverProps } from '@/types/types/components/popover';
+import { PopoverProps } from '@/types/shared/types/components/popover';
 
 const Popover = forwardRef<any, PopoverProps>(
   (

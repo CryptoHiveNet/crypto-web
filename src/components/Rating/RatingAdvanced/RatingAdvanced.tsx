@@ -1,7 +1,7 @@
 import { RatingAdvanced as FlowbiteRatingAdvanced } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { RatingAdvancedProps } from '@/types/types/components/rating';
+import { RatingAdvancedProps } from '@/types/shared/types/components/rating';
 
 const RatingAdvanced = forwardRef<any, RatingAdvancedProps>(
   (

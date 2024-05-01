@@ -1,7 +1,7 @@
 import { Progress as FlowbiteProgress } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { ProgressProps } from '@/types/types/components/progress';
+import { ProgressProps } from '@/types/shared/types/components/progress';
 
 const Progress = forwardRef<any, ProgressProps>(
   (
