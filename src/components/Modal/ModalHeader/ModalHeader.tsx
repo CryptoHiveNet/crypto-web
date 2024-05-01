@@ -1,7 +1,7 @@
 import { ModalHeader as FlowbiteModalHeader } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { ModalHeaderProps } from '@/types/types/components/modal';
+import { ModalHeaderProps } from '@/types/shared/types/components/modal';
 
 const ModalHeader = forwardRef<any, ModalHeaderProps>(
   (
