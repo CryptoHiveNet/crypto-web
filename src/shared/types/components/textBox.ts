@@ -6,7 +6,7 @@ export enum TextInputType {
   number = 'number',
   email = 'email',
 }
-export type iTextBoxProps = {
+export type TextBoxProps = {
   id?: string;
   type: TextInputType;
   sizing?: string;
