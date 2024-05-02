@@ -3,6 +3,7 @@ import { forwardRef } from 'react';
 
 import { TooltipProps } from '@/types/shared/types/components/tooltip';
 
+// eslint-disable-next-line react/display-name
 const Tooltip = forwardRef<any, TooltipProps>(
   (
     {

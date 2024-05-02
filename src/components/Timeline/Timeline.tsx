@@ -3,6 +3,7 @@ import { forwardRef } from 'react';
 
 import { TimelineProps } from '@/types/shared/types/components/timeline';
 
+// eslint-disable-next-line react/display-name
 const Timeline = forwardRef<any, TimelineProps>(
   (
     {
