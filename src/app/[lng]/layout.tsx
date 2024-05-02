@@ -19,7 +19,6 @@ export const metadata: Metadata = {
   title: t('metadata_title'),
   description: t('metadata_description'),
 };
-
 export default async function RootLayout({
   children,
   params: { lng },

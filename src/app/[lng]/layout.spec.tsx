@@ -39,6 +39,11 @@ jest.mock('@/types/theme/ThemeProvider', () => {
   };
 });
 
+jest.mock('next/font/google', () => ({
+  Roboto: jest.fn(),
+  Vazirmatn: jest.fn(),
+}));
+
 const mockGetServerSession = getServerSession as jest.MockedFunction<
   typeof getServerSession
 >;
