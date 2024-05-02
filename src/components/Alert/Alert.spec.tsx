@@ -42,7 +42,7 @@ describe('Alert component unit tests', () => {
     expect(screen.getByTestId('flowbite-alert-icon')).toBeInTheDocument();
   });
 
-  it('should render the close button and close the alert when clicked', async () => {
+  it('should render the close button and close the alert when clicked', () => {
     render(<Alert testId='my-alert'>This is an alert message.</Alert>);
     const alertComponent = screen.getByTestId('my-alert');
     const closeButton = alertComponent.querySelector(
@@ -58,7 +58,7 @@ describe('Alert component unit tests', () => {
 
     fireEvent.click(closeButton);
 
-    await waitFor(() => {
+    waitFor(() => {
       expect(alertComponent).not.toBeInTheDocument();
     });
   });

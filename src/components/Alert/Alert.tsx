@@ -1,9 +1,11 @@
+'use client';
 import { Alert as FlowbiteAlert } from 'flowbite-react';
 import React, { forwardRef, useEffect, useState } from 'react';
 import { HiInformationCircle } from 'react-icons/hi';
 
-import { AlertProps } from '@/types/types/components/alert';
+import { AlertProps } from '@/types/shared/types/components/alert';
 
+// eslint-disable-next-line react/display-name
 const Alert = forwardRef<any, AlertProps>(
   (
     {
@@ -28,28 +30,24 @@ const Alert = forwardRef<any, AlertProps>(
     const [isMounted, setIsMounted] = useState(true);
 
     useEffect(() => {
-      let timeoutId: NodeJS.Timeout;
+      let timeoutId: number;
 
       if (dismissAfter) {
-        timeoutId = setTimeout(() => {
+        timeoutId = window.setTimeout(() => {
           handleDismiss();
         }, dismissAfter);
       }
 
       return () => {
-        if (timeoutId) clearTimeout(timeoutId);
+        if (timeoutId) window.clearTimeout(timeoutId);
       };
     }, [dismissAfter, id, onDismiss]);
 
     const handleDismiss = () => {
       setShowAlert(false);
-      if (onDismiss) {
-        if (typeof onDismiss === 'function') {
-          onDismiss();
-        } else {
-          onDismiss;
-        }
-      }
+      if (!onDismiss) return;
+      else if (onDismiss && typeof onDismiss === 'function') onDismiss();
+      else onDismiss;
       setTimeout(() => {
         setIsMounted(false);
       }, transitionDurations);
