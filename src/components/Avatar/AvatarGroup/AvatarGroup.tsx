@@ -3,6 +3,7 @@ import { forwardRef } from 'react';
 
 import { AvatarGroupProps } from '@/types/shared/types/components/avatar';
 
+// eslint-disable-next-line react/display-name
 const AvatarGroup = forwardRef<any, AvatarGroupProps>(
   (
     {

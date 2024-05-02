@@ -3,6 +3,7 @@ import { forwardRef } from 'react';
 
 import { AccordionProps } from '@/types/shared/types/components/accordion';
 
+// eslint-disable-next-line react/display-name
 const Accordion = forwardRef<any, AccordionProps>(
   (
     {
