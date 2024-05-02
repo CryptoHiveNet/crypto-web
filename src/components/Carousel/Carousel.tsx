@@ -3,6 +3,7 @@ import { forwardRef } from 'react';
 
 import { CarouselProps } from '@/types/shared/types/components/carousel';
 
+// eslint-disable-next-line react/display-name
 const Carousel = forwardRef<any, CarouselProps>(
   (
     {

@@ -4,6 +4,7 @@ import { Button as FlowbiteButton } from 'flowbite-react';
 
 import { ButtonGroupProps } from '@/types/shared/types/components/buttonGroup';
 
+// eslint-disable-next-line react/display-name
 const ButtonGroup = forwardRef<any, ButtonGroupProps>(
     (
         {
