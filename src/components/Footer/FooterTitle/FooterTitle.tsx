@@ -1,8 +1,9 @@
 import { FooterTitle as FlowbiteFooterTitle } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { FooterTitleProps } from '@/types/types/components/footer';
+import { FooterTitleProps } from '@/types/shared/types/components/footer';
 
+// eslint-disable-next-line react/display-name
 const FooterTitle = forwardRef<any, FooterTitleProps>(
   (
     {

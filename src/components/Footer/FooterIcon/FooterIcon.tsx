@@ -1,8 +1,9 @@
 import { FooterIcon as FlowbiteFooterIcon } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { FooterIconProps } from '@/types/types/components/footer';
+import { FooterIconProps } from '@/types/shared/types/components/footer';
 
+// eslint-disable-next-line react/display-name
 const FooterIcon = forwardRef<any, FooterIconProps>(
   (
     {
