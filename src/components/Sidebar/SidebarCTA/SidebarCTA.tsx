@@ -1,8 +1,9 @@
 import { SidebarCTA as FlowbiteSidebarCTA } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { SidebarCTAProps } from '@/types/types/components/sidebar';
+import { SidebarCTAProps } from '@/types/shared/types/components/sidebar';
 
+// eslint-disable-next-line react/display-name
 const SidebarCTA = forwardRef<any, SidebarCTAProps>(
   (
     {

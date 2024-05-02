@@ -1,8 +1,9 @@
 import { SidebarItem as FlowbiteSidebarItem } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { SidebarItemProps } from '@/types/types/components/sidebar';
+import { SidebarItemProps } from '@/types/shared/types/components/sidebar';
 
+// eslint-disable-next-line react/display-name
 const SidebarItem = forwardRef<any, SidebarItemProps>(
   (
     {
