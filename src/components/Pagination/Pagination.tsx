@@ -1,8 +1,9 @@
 import { Pagination as FlowbitePagination } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { PaginationProps } from '@/types/types/components/pagination';
+import { PaginationProps } from '@/types/shared/types/components/pagination';
 
+// eslint-disable-next-line react/display-name
 const Pagination = forwardRef<any, PaginationProps>(
   (
     {
