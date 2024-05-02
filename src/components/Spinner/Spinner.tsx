@@ -1,8 +1,9 @@
 import { Spinner as FlowbiteSpinner } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { SpinnerProps } from '@/types/types/components/spinner';
+import { SpinnerProps } from '@/types/shared/types/components/spinner';
 
+// eslint-disable-next-line react/display-name
 const Spinner = forwardRef<any, SpinnerProps>(
   (
     {
