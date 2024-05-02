@@ -3,6 +3,7 @@ import { forwardRef } from 'react';
 
 import { ModalHeaderProps } from '@/types/shared/types/components/modal';
 
+// eslint-disable-next-line react/display-name
 const ModalHeader = forwardRef<any, ModalHeaderProps>(
   (
     {
