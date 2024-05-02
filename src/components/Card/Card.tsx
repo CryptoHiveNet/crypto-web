@@ -3,6 +3,7 @@ import { forwardRef } from 'react';
 
 import { CardProps } from '@/types/shared/types/components/card';
 
+// eslint-disable-next-line react/display-name
 const Card = forwardRef<any, CardProps>(
   (
     {
