@@ -1,8 +1,9 @@
 import { SidebarCollapse as FlowbiteSidebarCollapse } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { SidebarCollapseProps } from '@/types/types/components/sidebar';
+import { SidebarCollapseProps } from '@/types/shared/types/components/sidebar';
 
+// eslint-disable-next-line react/display-name
 const SidebarCollapse = forwardRef<any, SidebarCollapseProps>(
   (
     {
