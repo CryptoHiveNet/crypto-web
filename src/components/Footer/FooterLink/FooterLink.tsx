@@ -1,8 +1,9 @@
 import { FooterLink as FlowbiteFooterLink } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { FooterLinkProps } from '@/types/types/components/footer';
+import { FooterLinkProps } from '@/types/shared/types/components/footer';
 
+// eslint-disable-next-line react/display-name
 const FooterLink = forwardRef<any, FooterLinkProps>(
   (
     {
