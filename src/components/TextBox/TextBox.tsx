@@ -5,6 +5,7 @@ import { TextInput } from 'flowbite-react';
 
 import { TextBoxProps } from '@/types/shared/types/components/textBox';
 
+// eslint-disable-next-line react/display-name
 const TextBox = forwardRef<any, TextBoxProps>(
     (
         {
