@@ -3,6 +3,7 @@ import { forwardRef } from 'react';
 
 import { RatingAdvancedProps } from '@/types/shared/types/components/rating';
 
+// eslint-disable-next-line react/display-name
 const RatingAdvanced = forwardRef<any, RatingAdvancedProps>(
   (
     {

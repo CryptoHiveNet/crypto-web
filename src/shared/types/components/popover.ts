@@ -4,10 +4,10 @@ export type PopoverProps = {
   id?: string;
   ariaLabelledby?: string;
   content?: ReactNode;
-  trigger?: string;
+  trigger?: 'hover' | 'click';
   open?: boolean;
   onOpenChange?: () => void;
-  placement?: string;
+  placement?: any;
   arrow?: boolean;
   className?: string;
   children?: ReactNode;

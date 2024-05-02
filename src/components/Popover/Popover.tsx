@@ -3,6 +3,7 @@ import { forwardRef } from 'react';
 
 import { PopoverProps } from '@/types/shared/types/components/popover';
 
+// eslint-disable-next-line react/display-name
 const Popover = forwardRef<any, PopoverProps>(
   (
     {

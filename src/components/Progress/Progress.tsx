@@ -3,6 +3,7 @@ import { forwardRef } from 'react';
 
 import { ProgressProps } from '@/types/shared/types/components/progress';
 
+// eslint-disable-next-line react/display-name
 const Progress = forwardRef<any, ProgressProps>(
   (
     {
