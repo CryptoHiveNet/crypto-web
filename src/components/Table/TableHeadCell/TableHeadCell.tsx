@@ -1,8 +1,9 @@
 import { TableHeadCell as FlowbiteTableHeadCell } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { TableHeadCellProps } from '@/types/types/components/table';
+import { TableHeadCellProps } from '@/types/shared/types/components/table';
 
+// eslint-disable-next-line react/display-name
 const TableHeadCell = forwardRef<any, TableHeadCellProps>(
   (
     {
