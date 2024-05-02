@@ -1,8 +1,9 @@
 import { FooterDivider as FlowbiteFooterDivider } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { FooterDividerProps } from '@/types/types/components/footer';
+import { FooterDividerProps } from '@/types/shared/types/components/footer';
 
+// eslint-disable-next-line react/display-name
 const FooterDivider = forwardRef<any, FooterDividerProps>(
   (
     {

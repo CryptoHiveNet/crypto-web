@@ -1,8 +1,9 @@
 import { FooterBrand as FlowbiteFooterBrand } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { FooterBrandProps } from '@/types/types/components/footer';
+import { FooterBrandProps } from '@/types/shared/types/components/footer';
 
+// eslint-disable-next-line react/display-name
 const FooterBrand = forwardRef<any, FooterBrandProps>(
   (
     {

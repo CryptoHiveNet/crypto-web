@@ -1,8 +1,9 @@
 import { FooterCopyright as FlowbiteFooterCopyright } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { FooterCopyrightProps } from '@/types/types/components/footer';
+import { FooterCopyrightProps } from '@/types/shared/types/components/footer';
 
+// eslint-disable-next-line react/display-name
 const FooterCopyright = forwardRef<any, FooterCopyrightProps>(
   (
     {

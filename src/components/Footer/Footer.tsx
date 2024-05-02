@@ -4,6 +4,7 @@ import { Footer as FlowbiteFooter } from 'flowbite-react';
 
 import { FooterProps } from '@/types/shared/types/components/footer';
 
+// eslint-disable-next-line react/display-name
 const Footer = forwardRef<any, FooterProps>(
     (
         {

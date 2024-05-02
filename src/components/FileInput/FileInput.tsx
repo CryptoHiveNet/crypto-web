@@ -5,6 +5,7 @@ import { FileInput as FLI } from 'flowbite-react';
 
 import { FileInputProps } from '@/types/shared/types/components/fileInput';
 
+// eslint-disable-next-line react/display-name
 const FileInput = forwardRef<any, FileInputProps>(
     (
         {
