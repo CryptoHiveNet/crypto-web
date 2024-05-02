@@ -3,6 +3,7 @@ import { forwardRef } from 'react';
 
 import { TabsItemProps } from '@/types/shared/types/components/tabs';
 
+// eslint-disable-next-line react/display-name
 const TabsItem = forwardRef<any, TabsItemProps>(
   (
     {

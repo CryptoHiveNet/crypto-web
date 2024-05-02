@@ -3,6 +3,7 @@ import { forwardRef } from 'react';
 
 import { ToastToggleProps } from '@/types/shared/types/components/toast';
 
+// eslint-disable-next-line react/display-name
 const ToastToggle = forwardRef<any, ToastToggleProps>(
   (
     {
