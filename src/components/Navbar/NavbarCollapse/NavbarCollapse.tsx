@@ -1,8 +1,9 @@
 import { NavbarCollapse as FlowbiteNavbarCollapse } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { NavbarCollapseProps } from '@/types/types/components/navbar';
+import { NavbarCollapseProps } from '@/types/shared/types/components/navbar';
 
+// eslint-disable-next-line react/display-name
 const NavbarCollapse = forwardRef<any, NavbarCollapseProps>(
   (
     {

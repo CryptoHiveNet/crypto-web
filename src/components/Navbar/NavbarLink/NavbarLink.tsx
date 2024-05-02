@@ -1,8 +1,9 @@
 import { NavbarLink as FlowbiteNavbarLink } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { NavbarLinkProps } from '@/types/types/components/navbar';
+import { NavbarLinkProps } from '@/types/shared/types/components/navbar';
 
+// eslint-disable-next-line react/display-name
 const NavbarLink = forwardRef<any, NavbarLinkProps>(
   (
     {

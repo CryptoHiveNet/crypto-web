@@ -1,8 +1,9 @@
 import { NavbarBrand as FlowbiteNavbarBrand } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { NavbarBrandProps } from '@/types/types/components/navbar';
+import { NavbarBrandProps } from '@/types/shared/types/components/navbar';
 
+// eslint-disable-next-line react/display-name
 const NavbarBrand = forwardRef<any, NavbarBrandProps>(
   (
     {
