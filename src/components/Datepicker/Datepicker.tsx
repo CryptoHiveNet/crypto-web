@@ -3,6 +3,7 @@ import { forwardRef } from 'react';
 
 import { DatepickerProps } from '@/types/shared/types/components/datepicker';
 
+// eslint-disable-next-line react/display-name
 const Datepicker = forwardRef<any, DatepickerProps>(
   (
     {

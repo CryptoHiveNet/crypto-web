@@ -3,6 +3,7 @@ import { forwardRef } from 'react';
 
 import { DropdownProps } from '@/types/shared/types/components/dropdown';
 
+// eslint-disable-next-line react/display-name
 const Dropdown = forwardRef<any, DropdownProps>(
   (
     {
