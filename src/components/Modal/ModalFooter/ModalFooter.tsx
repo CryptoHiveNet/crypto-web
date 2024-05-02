@@ -3,6 +3,7 @@ import { forwardRef } from 'react';
 
 import { ModalFooterProps } from '@/types/shared/types/components/modal';
 
+// eslint-disable-next-line react/display-name
 const ModalFooter = forwardRef<any, ModalFooterProps>(
   (
     {
