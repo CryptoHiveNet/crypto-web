@@ -5,6 +5,7 @@ import { ListGroup } from 'flowbite-react';
 
 import { ListGroupContainerProps } from '@/types/shared/types/components/listGroup';
 
+// eslint-disable-next-line react/display-name
 const ListGroupContainer = forwardRef<any, ListGroupContainerProps>(
     (
         {
