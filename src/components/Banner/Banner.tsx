@@ -3,6 +3,7 @@ import { forwardRef } from 'react';
 
 import { BannerProps } from '@/types/shared/types/components/banner';
 
+// eslint-disable-next-line react/display-name
 const Banner = forwardRef<any, BannerProps>(
   (
     {
