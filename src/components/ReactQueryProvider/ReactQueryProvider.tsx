@@ -2,7 +2,6 @@
 import { ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-// Create a client
 const queryClient = new QueryClient();
 
 const ReactQueryProvider = ({ children }: { children: ReactNode }) => {
