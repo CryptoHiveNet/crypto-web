@@ -3,6 +3,7 @@ import { forwardRef } from 'react';
 
 import { BreadcrumbProps } from '@/types/shared/types/components/breadcrumb';
 
+// eslint-disable-next-line react/display-name
 const Breadcrumb = forwardRef<any, BreadcrumbProps>(
   (
     {
