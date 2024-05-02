@@ -1,8 +1,9 @@
 import { SidebarLogo as FlowbiteSidebarLogo } from 'flowbite-react';
 import { forwardRef } from 'react';
 
-import { SidebarLogoProps } from '@/types/types/components/sidebar';
+import { SidebarLogoProps } from '@/types/shared/types/components/sidebar';
 
+// eslint-disable-next-line react/display-name
 const SidebarLogo = forwardRef<any, SidebarLogoProps>(
   (
     {
