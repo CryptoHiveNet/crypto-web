@@ -5,6 +5,7 @@ export type AlertProps = {
   additionalContent?: JSX.Element;
   role?: string;
   icon?: FC<SVGProps<SVGSVGElement>>;
+  transitionDurations?: number;
   className?: string;
   children: JSX.Element | string;
   testId?: string;
