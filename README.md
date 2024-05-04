@@ -128,9 +128,11 @@ When you are working on a feature, Please consider these concepts:
 - Each time after following to preceding step, If you saw some conflicts, you have to solve those conflicts without removing the other people code!
 - Choose the right and the most appropriate title for your commits.
 
-
-
-
+## Agreement
+- All PRs should be reviewed by at least one other developer.
+- German and Persian Translation files should be modified by Sepehr after each Pull Request of Amir.
+- Components Props types should be named as `{ComponentName}Props`.
+- We are using double quotation for anything that is not a string like classNames (mean JS string).
 
 
 
