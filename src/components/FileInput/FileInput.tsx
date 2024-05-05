@@ -10,6 +10,7 @@ const FileInput = forwardRef<any, FileInputProps>(
     (
         {
             id,
+            name,
             className,
             helperText,
             multiple,
@@ -25,6 +26,7 @@ const FileInput = forwardRef<any, FileInputProps>(
         return (
             <FLI
                 id={id}
+                name={name}
                 className={className}
                 helperText={helperText}
                 multiple={multiple}
