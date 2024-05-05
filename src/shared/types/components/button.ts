@@ -1,4 +1,4 @@
-export type iButtonProps = {
+export type ButtonProps = {
   id?: string;
   color?: string;
   gradientMonochrome?: string;
