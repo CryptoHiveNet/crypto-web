@@ -1,32 +1,30 @@
 import { forwardRef } from 'react';
 
-import { Footer as FlowbiteFooter } from 'flowbite-react';
+import { FooterLinkGroup as FlowbiteFooterLinkGroup } from 'flowbite-react';
 
-import { FooterProps } from '@/types/shared/types/components/footer';
+import { FooterLinkGroupProps } from '@/types/shared/types/components/footer';
 
 // eslint-disable-next-line react/display-name
-const Footer = forwardRef<any, FooterProps>(
+const FooterLinkGroup = forwardRef<any, FooterLinkGroupProps>(
     (
         {
             id,
             className,
-            container,
-            bgDark,
+            col,
             children,
             testId,
             onClick,
             onMouseEnter,
             onMouseLeave,
             ...rest
-        }: FooterProps,
+        }: FooterLinkGroupProps,
         ref: React.Ref<any> | null,
     ) => {
         return (
-            <FlowbiteFooter
+            <FlowbiteFooterLinkGroup
                 id={id}
                 className={className}
-                container={container}
-                bgDark={bgDark}
+                col={col}
                 data-testid={testId}
                 onClick={onClick}
                 onMouseEnter={onMouseEnter}
@@ -35,9 +33,9 @@ const Footer = forwardRef<any, FooterProps>(
                 {...rest}
             >
                 {children}
-            </FlowbiteFooter>
+            </FlowbiteFooterLinkGroup>
         );
     },
 );
 
-export default Footer;
+export default FooterLinkGroup;

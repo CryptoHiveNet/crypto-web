@@ -1,43 +1,44 @@
 import { forwardRef } from 'react';
 
-import { Footer as FlowbiteFooter } from 'flowbite-react';
+import { FooterBrand as FlowbiteFooterBrand } from 'flowbite-react';
 
-import { FooterProps } from '@/types/shared/types/components/footer';
+import { FooterBrandProps } from '@/types/shared/types/components/footer';
 
 // eslint-disable-next-line react/display-name
-const Footer = forwardRef<any, FooterProps>(
+const FooterBrand = forwardRef<any, FooterBrandProps>(
     (
         {
             id,
             className,
-            container,
-            bgDark,
-            children,
+            href,
+            src,
+            alt,
+            name,
             testId,
             onClick,
             onMouseEnter,
             onMouseLeave,
             ...rest
-        }: FooterProps,
+        }: FooterBrandProps,
         ref: React.Ref<any> | null,
     ) => {
         return (
-            <FlowbiteFooter
+            <FlowbiteFooterBrand
                 id={id}
                 className={className}
-                container={container}
-                bgDark={bgDark}
+                href={href}
+                src={src}
+                alt={alt}
+                name={name}
                 data-testid={testId}
                 onClick={onClick}
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
                 ref={ref}
                 {...rest}
-            >
-                {children}
-            </FlowbiteFooter>
+            />
         );
     },
 );
 
-export default Footer;
+export default FooterBrand;

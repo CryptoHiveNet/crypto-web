@@ -1,43 +1,36 @@
 import { forwardRef } from 'react';
 
-import { Footer as FlowbiteFooter } from 'flowbite-react';
+import { FooterDivider as FlowbiteFooterDivider } from 'flowbite-react';
 
-import { FooterProps } from '@/types/shared/types/components/footer';
+import { FooterDividerProps } from '@/types/shared/types/components/footer';
 
 // eslint-disable-next-line react/display-name
-const Footer = forwardRef<any, FooterProps>(
+const FooterDivider = forwardRef<any, FooterDividerProps>(
     (
         {
             id,
             className,
-            container,
-            bgDark,
-            children,
             testId,
             onClick,
             onMouseEnter,
             onMouseLeave,
             ...rest
-        }: FooterProps,
+        }: FooterDividerProps,
         ref: React.Ref<any> | null,
     ) => {
         return (
-            <FlowbiteFooter
+            <FlowbiteFooterDivider
                 id={id}
                 className={className}
-                container={container}
-                bgDark={bgDark}
                 data-testid={testId}
                 onClick={onClick}
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
                 ref={ref}
                 {...rest}
-            >
-                {children}
-            </FlowbiteFooter>
+            />
         );
     },
 );
 
-export default Footer;
+export default FooterDivider;

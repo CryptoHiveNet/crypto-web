@@ -1,43 +1,45 @@
+'use client';
 import { forwardRef } from 'react';
 
-import { Footer as FlowbiteFooter } from 'flowbite-react';
+import { FileInput as FLI } from 'flowbite-react';
 
-import { FooterProps } from '@/types/shared/types/components/footer';
+import { FileInputProps } from '@/types/shared/types/components/fileInput';
 
 // eslint-disable-next-line react/display-name
-const Footer = forwardRef<any, FooterProps>(
+const FileInput = forwardRef<any, FileInputProps>(
     (
         {
             id,
+            name,
             className,
-            container,
-            bgDark,
-            children,
+            helperText,
+            multiple,
+            sizing,
             testId,
             onClick,
             onMouseEnter,
             onMouseLeave,
             ...rest
-        }: FooterProps,
+        }: FileInputProps,
         ref: React.Ref<any> | null,
     ) => {
         return (
-            <FlowbiteFooter
+            <FLI
                 id={id}
+                name={name}
                 className={className}
-                container={container}
-                bgDark={bgDark}
+                helperText={helperText}
+                multiple={multiple}
+                sizing={sizing}
                 data-testid={testId}
                 onClick={onClick}
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
                 ref={ref}
                 {...rest}
-            >
-                {children}
-            </FlowbiteFooter>
+            />
         );
     },
 );
 
-export default Footer;
+export default FileInput;

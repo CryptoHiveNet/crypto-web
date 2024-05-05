@@ -1,43 +1,42 @@
 import { forwardRef } from 'react';
 
-import { Footer as FlowbiteFooter } from 'flowbite-react';
+import { FooterCopyright as FlowbiteFooterCopyright } from 'flowbite-react';
 
-import { FooterProps } from '@/types/shared/types/components/footer';
+import { FooterCopyrightProps } from '@/types/shared/types/components/footer';
 
 // eslint-disable-next-line react/display-name
-const Footer = forwardRef<any, FooterProps>(
+const FooterCopyright = forwardRef<any, FooterCopyrightProps>(
     (
         {
             id,
             className,
-            container,
-            bgDark,
-            children,
+            href,
+            by,
+            year,
             testId,
             onClick,
             onMouseEnter,
             onMouseLeave,
             ...rest
-        }: FooterProps,
+        }: FooterCopyrightProps,
         ref: React.Ref<any> | null,
     ) => {
         return (
-            <FlowbiteFooter
+            <FlowbiteFooterCopyright
                 id={id}
                 className={className}
-                container={container}
-                bgDark={bgDark}
+                href={href}
+                by={by}
+                year={year}
                 data-testid={testId}
                 onClick={onClick}
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
                 ref={ref}
                 {...rest}
-            >
-                {children}
-            </FlowbiteFooter>
+            />
         );
     },
 );
 
-export default Footer;
+export default FooterCopyright;
