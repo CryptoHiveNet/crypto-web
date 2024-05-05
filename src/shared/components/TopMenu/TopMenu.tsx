@@ -1,6 +1,11 @@
 'use client';
-import { Avatar, DarkThemeToggle, Dropdown, Navbar } from 'flowbite-react';
+import { DarkThemeToggle } from 'flowbite-react';
 import { signIn, signOut, useSession } from 'next-auth/react';
+
+import Avatar from '../Avatar/Avatar';
+import Dropdown from '../Dropdown/Dropdown';
+import Navbar from '../Navbar/Navbar';
+import NavbarBrand from '../Navbar/NavbarBrand/NavbarBrand';
 
 const TopMenu = () => {
     const { data: session } = useSession();
@@ -30,17 +35,14 @@ const TopMenu = () => {
     }
 
     return (
-        <Navbar
-            fluid
-            rounded
-        >
-            <Navbar.Brand href="#">
+        <Navbar>
+            <NavbarBrand href="#">
                 <DarkThemeToggle />
                 img here
                 <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
                     Flowbite React
                 </span>
-            </Navbar.Brand>
+            </NavbarBrand>
             <div className="flex md:order-2">
                 <Dropdown
                     arrowIcon={false}
