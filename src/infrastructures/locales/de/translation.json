@@ -1,7 +1,11 @@
 {
-  "home_page_title": "The DE title of the home page",
-  "hello": "Hallo",
-  "metadata_title": "The DE metadata title of the page",
-  "metadata_description": "The DE metadata description of the page",
-  "second-page": "Zweite Seite"
+    "home_page_title": "The DE title of the home page",
+    "hello": "Hallo",
+    "metadata_title": "The DE metadata title of the page",
+    "metadata_description": "The DE metadata description of the page",
+    "home": "Startseite",
+    "about-us": "Über uns",
+    "rules": "Regeln",
+    "news": "Nachrichten",
+    "blog": "Blog"
 }

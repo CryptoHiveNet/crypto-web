@@ -11,7 +11,7 @@ import { FlowbiteDropdownTheme } from 'flowbite-react';
 
 export type DropdownProps = {
     id?: string;
-    label?: string;
+    label?: ReactNode | string;
     dismissOnClick?: boolean;
     inline?: boolean;
     size?: string;

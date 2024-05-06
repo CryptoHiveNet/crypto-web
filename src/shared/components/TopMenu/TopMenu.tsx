@@ -1,15 +1,30 @@
 'use client';
 import { DarkThemeToggle } from 'flowbite-react';
+import { t } from 'i18next';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import { usePathname } from 'next/navigation';
 
 import Avatar from '../Avatar/Avatar';
 import Dropdown from '../Dropdown/Dropdown';
+import DropdownDivider from '../Dropdown/DropdownDivider/DropdownDivider';
+import DropdownHeader from '../Dropdown/DropdownHeader/DropdownHeader';
+import DropdownItem from '../Dropdown/DropdownItem/DropdownItem';
 import Navbar from '../Navbar/Navbar';
 import NavbarBrand from '../Navbar/NavbarBrand/NavbarBrand';
+import NavbarCollapse from '../Navbar/NavbarCollapse/NavbarCollapse';
+import NavbarLink from '../Navbar/NavbarLink/NavbarLink';
+import NavbarToggle from '../Navbar/NavbarToggle/NavbarToggle';
 
 const TopMenu = () => {
     const { data: session } = useSession();
-
+    const path = usePathname();
+    const links = [
+        { name: t('home'), href: '/' }, // ToDo: there should be a way to get the homepage language and add it here
+        { name: t('about-us'), href: '#' },
+        { name: t('rules'), href: '#' },
+        { name: t('news'), href: '#' },
+        { name: t('blog'), href: '#' },
+    ];
     function userAuthStatus() {
         if (session)
             return (
@@ -29,13 +44,15 @@ const TopMenu = () => {
                 type="button"
                 onClick={() => signIn()}
             >
-                Sign in
+                Login / Register
             </button>
         );
     }
-
     return (
-        <Navbar>
+        <Navbar
+            fluid
+            rounded
+        >
             <NavbarBrand href="#">
                 <DarkThemeToggle />
                 img here
@@ -45,7 +62,6 @@ const TopMenu = () => {
             </NavbarBrand>
             <div className="flex md:order-2">
                 <Dropdown
-                    arrowIcon={false}
                     inline
                     label={
                         <Avatar
@@ -55,33 +71,32 @@ const TopMenu = () => {
                         />
                     }
                 >
-                    <Dropdown.Header>
+                    <DropdownHeader>
                         <span className="block text-sm">Bonnie Green</span>
                         <span className="block truncate text-sm font-medium">
                             name@flowbite.com
                         </span>
-                    </Dropdown.Header>
-                    <Dropdown.Item>Dashboard</Dropdown.Item>
-                    <Dropdown.Item>Settings</Dropdown.Item>
-                    <Dropdown.Item>Earnings</Dropdown.Item>
-                    <Dropdown.Divider />
-                    <Dropdown.Item>Sign out</Dropdown.Item>
+                    </DropdownHeader>
+                    <DropdownItem>Dashboard</DropdownItem>
+                    <DropdownItem>Settings</DropdownItem>
+                    <DropdownItem>Earnings</DropdownItem>
+                    <DropdownDivider />
+                    <DropdownItem>Sign out</DropdownItem>
                 </Dropdown>
-                <Navbar.Toggle />
+                <NavbarToggle />
             </div>
-            <Navbar.Collapse>
-                <Navbar.Link
-                    href="#"
-                    active
-                >
-                    Home
-                </Navbar.Link>
-                <Navbar.Link href="#">About</Navbar.Link>
-                <Navbar.Link href="#">Services</Navbar.Link>
-                <Navbar.Link href="#">Pricing</Navbar.Link>
-                <Navbar.Link href="#">Contact</Navbar.Link>
-                <Navbar.Link href="#">{userAuthStatus()}</Navbar.Link>
-            </Navbar.Collapse>
+            <NavbarCollapse>
+                <NavbarLink href="#">{userAuthStatus()}</NavbarLink>
+                {links.map((link) => (
+                    <NavbarLink
+                        key={link.name}
+                        href={link.href}
+                        active={path === link.href ? true : false}
+                    >
+                        {link.name}
+                    </NavbarLink>
+                ))}
+            </NavbarCollapse>
         </Navbar>
     );
 };

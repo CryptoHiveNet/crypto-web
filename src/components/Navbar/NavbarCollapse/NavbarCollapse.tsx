@@ -9,6 +9,7 @@ const NavbarCollapse = forwardRef<any, NavbarCollapseProps>(
     (
         {
             id,
+            children,
             className,
             testId,
             onClick,
@@ -28,7 +29,9 @@ const NavbarCollapse = forwardRef<any, NavbarCollapseProps>(
                 onMouseLeave={onMouseLeave}
                 ref={ref}
                 {...rest}
-            />
+            >
+                {children}
+            </FlowbiteNavbarCollapse>
         );
     },
 );
