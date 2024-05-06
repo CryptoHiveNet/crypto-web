@@ -5,7 +5,7 @@ import { LanguageSwitcher } from '@/types/components/LanguageSwitcher/LanguageSw
 import { useTranslation } from '../../utils/i18n';
 
 export default async function Page({ params: { lng } }: any) {
-    const { t } = await useTranslation();
+    const { t } = await useTranslation(lng);
     return (
         <>
             <h1>

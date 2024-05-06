@@ -37,7 +37,7 @@ export default async function RootLayout({
                 <ReactQueryProvider>
                     <SessionProvider session={session}>
                         <ThemeProvider>
-                            <TopMenu />
+                            <TopMenu lng={lng} />
                             {children}
                         </ThemeProvider>
                     </SessionProvider>

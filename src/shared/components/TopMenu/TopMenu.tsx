@@ -1,8 +1,8 @@
 'use client';
+import { Suspense } from 'react';
+
 import { DarkThemeToggle } from 'flowbite-react';
-import { t } from 'i18next';
 import { signIn, signOut, useSession } from 'next-auth/react';
-import { usePathname } from 'next/navigation';
 
 import Avatar from '../Avatar/Avatar';
 import Dropdown from '../Dropdown/Dropdown';
@@ -14,17 +14,11 @@ import NavbarBrand from '../Navbar/NavbarBrand/NavbarBrand';
 import NavbarCollapse from '../Navbar/NavbarCollapse/NavbarCollapse';
 import NavbarLink from '../Navbar/NavbarLink/NavbarLink';
 import NavbarToggle from '../Navbar/NavbarToggle/NavbarToggle';
+import { TopMenuLinks } from './TopMenuLinks/TopMenuLinks';
 
-const TopMenu = () => {
+const TopMenu = ({ lng }: any) => {
+    const homeURL = '/'; // ToDo: there should be a way to get the homepage language and add it here
     const { data: session } = useSession();
-    const path = usePathname();
-    const links = [
-        { name: t('home'), href: '/' }, // ToDo: there should be a way to get the homepage language and add it here
-        { name: t('about-us'), href: '#' },
-        { name: t('rules'), href: '#' },
-        { name: t('news'), href: '#' },
-        { name: t('blog'), href: '#' },
-    ];
     function userAuthStatus() {
         if (session)
             return (
@@ -53,12 +47,13 @@ const TopMenu = () => {
             fluid
             rounded
         >
-            <NavbarBrand href="#">
-                <DarkThemeToggle />
-                img here
-                <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-                    Flowbite React
-                </span>
+            <NavbarBrand href={homeURL}>
+                {/* <DarkThemeToggle /> */}
+                <img
+                    src="/favicon.svg"
+                    className="mr-3 h-6 sm:h-9"
+                    alt="Flowbite React Logo"
+                />
             </NavbarBrand>
             <div className="flex md:order-2">
                 <Dropdown
@@ -87,15 +82,9 @@ const TopMenu = () => {
             </div>
             <NavbarCollapse>
                 <NavbarLink href="#">{userAuthStatus()}</NavbarLink>
-                {links.map((link) => (
-                    <NavbarLink
-                        key={link.name}
-                        href={link.href}
-                        active={path === link.href ? true : false}
-                    >
-                        {link.name}
-                    </NavbarLink>
-                ))}
+                <Suspense fallback={<p>loading ...</p>}>
+                    <TopMenuLinks lng={lng} />
+                </Suspense>
             </NavbarCollapse>
         </Navbar>
     );
