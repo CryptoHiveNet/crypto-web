@@ -9,7 +9,7 @@ import NavbarToggle from '../Navbar/NavbarToggle/NavbarToggle';
 import { TopMenuLinks } from './TopMenuLinks/TopMenuLinks';
 import TopMenuUserMenu from './TopMenuUserMenu/TopMenuUserMenu';
 
-const TopMenu = ({ links }: any) => {
+const TopMenu = () => {
     return (
         <Navbar rounded>
             <NavbarBrand href="/">
@@ -25,7 +25,7 @@ const TopMenu = ({ links }: any) => {
                 <NavbarToggle />
             </div>
             <NavbarCollapse>
-                <TopMenuLinks links={links} />
+                <TopMenuLinks />
             </NavbarCollapse>
         </Navbar>
     );

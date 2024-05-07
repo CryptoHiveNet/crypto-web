@@ -13,30 +13,8 @@ const TopMenuUserMenu = () => {
         email: 'name@flowbite.com',
         pic: 'https://flowbite.com/docs/images/people/profile-picture-5.jpg',
     };
-    function userAuthStatus() {
-        if (session)
-            return (
-                <>
-                    {session.user.name},
-                    <button
-                        type="button"
-                        onClick={() => signOut()}
-                    >
-                        Sign out
-                    </button>
-                </>
-            );
 
-        return (
-            <button
-                type="button"
-                onClick={() => signIn()}
-            >
-                Login / Register
-            </button>
-        );
-    }
-    return (
+    return session ? (
         <Dropdown
             inline
             label={
@@ -48,18 +26,31 @@ const TopMenuUserMenu = () => {
             }
         >
             <DropdownHeader>
-                <span className="block text-sm">{userMockData.name}</span>
+                <span className="block text-sm">{session.user.name}</span>
                 <span className="block truncate text-sm font-medium">
-                    {userMockData.email}
+                    {session.user.email}
                 </span>
             </DropdownHeader>
             <DropdownItem>Dashboard</DropdownItem>
             <DropdownItem>Settings</DropdownItem>
             <DropdownItem>Earnings</DropdownItem>
             <DropdownDivider />
-            <DropdownItem>Sign out</DropdownItem>
-            {/* <NavbarLink href="#">{userAuthStatus()}</NavbarLink> */}
+            <DropdownItem>
+                <button
+                    type="button"
+                    onClick={() => signOut()}
+                >
+                    Sign out
+                </button>
+            </DropdownItem>
         </Dropdown>
+    ) : (
+        <button
+            type="button"
+            onClick={() => signIn()}
+        >
+            Login / Register
+        </button>
     );
 };
 

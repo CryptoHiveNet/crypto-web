@@ -25,14 +25,6 @@ export default async function RootLayout({
     params: { lng },
 }: RootLayoutProps) {
     const session = await getServerSession();
-    const { t } = await useTranslation(lng);
-    const links = [
-        { name: t('home'), href: '/' },
-        { name: t('about-us'), href: '#' },
-        { name: t('rules'), href: '#' },
-        { name: t('news'), href: '#' },
-        { name: t('blog'), href: '#' },
-    ];
     return (
         <html
             lang={lng}
@@ -45,7 +37,7 @@ export default async function RootLayout({
                 <ReactQueryProvider>
                     <SessionProvider session={session}>
                         <ThemeProvider>
-                            <TopMenu links={links} />
+                            <TopMenu />
                             {children}
                         </ThemeProvider>
                     </SessionProvider>
