@@ -11,7 +11,7 @@ const mockProps = {
 };
 describe('TableRow component unit tests', () => {
     it('should render TableRow component with required props', () => {
-        const { getByTestId } = render(
+        render(
             <Table>
                 <TableBody>
                     <TableRow {...mockProps} />
@@ -19,7 +19,7 @@ describe('TableRow component unit tests', () => {
             </Table>,
         );
         waitFor(() => {
-            const tableRowComponent = getByTestId('test-table-row');
+            const tableRowComponent = screen.getByTestId('test-table-row');
             expect(tableRowComponent).toBeInTheDocument();
             expect(tableRowComponent).toHaveClass('custom-table-row');
         });

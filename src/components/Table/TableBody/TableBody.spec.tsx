@@ -10,13 +10,13 @@ const mockProps = {
 };
 describe('TableBody component unit tests', () => {
     it('should render TableBody component with required props', () => {
-        const { getByTestId } = render(
+        render(
             <Table>
                 <TableBody {...mockProps} />
             </Table>,
         );
         waitFor(() => {
-            const tableBodyComponent = getByTestId('test-table-body');
+            const tableBodyComponent = screen.getByTestId('test-table-body');
             expect(tableBodyComponent).toBeInTheDocument();
             expect(tableBodyComponent).toHaveClass('custom-table-body');
         });
