@@ -5,7 +5,6 @@ import { TabStyles } from 'flowbite-react';
 export type TabsProps = {
     id?: string;
     ariaLabel?: string;
-    onActiveTabChange?: () => void;
     style?: keyof TabStyles;
     className?: string;
     children: React.ReactNode;
@@ -13,6 +12,7 @@ export type TabsProps = {
     onClick?: () => void;
     onMouseEnter?: () => void;
     onMouseLeave?: () => void;
+    onActiveTabChange?: () => void;
 };
 export type TabsItemProps = {
     id?: string;
