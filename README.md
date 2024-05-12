@@ -48,6 +48,8 @@ Your changes must'nt make any issues on other tests. In case of having error in 
 
 When you are going to write a unit test always thing about making an isolation environment for the component/functionality you are going to implement.
 
+### Always use the English language for tests.
+
 
 ## E2E Tests
 For end-to-end (E2E) testing, we will use Cypress. E2E tests will be implemented upon the completion of each part of the application. Once the E2E tests are finalized, the feature will be committed to the remote branch, ready to be squash merged into the development branch.
