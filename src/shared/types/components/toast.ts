@@ -1,14 +1,16 @@
 import { ReactNode } from 'react';
 
 export type ToastProps = {
+    type: ToastType,
     id?: string;
     className?: string;
-    children?: ReactNode;
+    children: ReactNode;
     testId?: string;
     onClick?: () => void;
     onMouseEnter?: () => void;
     onMouseLeave?: () => void;
 };
+
 export type ToastToggleProps = {
     id?: string;
     className?: string;
@@ -18,3 +20,9 @@ export type ToastToggleProps = {
     onMouseEnter?: () => void;
     onMouseLeave?: () => void;
 };
+
+export enum ToastType {
+    Success = 'critical',
+    Warning = 'warning',
+    Danger = 'danger'
+}
