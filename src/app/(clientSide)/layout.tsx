@@ -15,6 +15,8 @@ import {
     getServerTranslations,
 } from '@/types/utils/i18n/server';
 
+// import { languages } from '@/types/utils/i18n/settings';
+
 // export async function generateStaticParams() {
 //     return languages.map((lng) => ({ lng }));
 // }
@@ -32,6 +34,7 @@ export async function generateMetadata() {
 export default async function RootLayout({ children }: RootLayoutProps) {
     const session = await getServerSession();
     const lng = await detectLanguage();
+    console.log('layout lng:', lng);
     return (
         <I18nProvider language={lng}>
             <html
