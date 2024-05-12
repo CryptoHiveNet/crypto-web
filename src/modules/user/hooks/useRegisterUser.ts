@@ -1,3 +1,4 @@
+"use client"
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -10,6 +11,7 @@ import { HttpError } from "@/types/shared/infrastructures/http/HttpError";
 import { axiosClient } from "@/types/shared/infrastructures/http/AxiosClient";
 import HttpStatus from "@/types/shared/infrastructures/http/HttpStatus";
 import { UnhandledBusinessException } from "@/types/shared/Errors/UnhandledBusinessException";
+import { useMutationWithError } from "@/types/shared/hooks/useMutationWithError";
 
 export type OnInvalidAddressErrorProps = {
   registerUserRequest: RegisterUserRequest;
@@ -22,6 +24,8 @@ export const useRegistration = () => {
   const [invalidAddressError, setInvalidAddressError] = useState<
     OnInvalidAddressErrorProps | undefined
   >();
+
+  const {mutate} = useMutationWithError(() => );
 
   const registerMutation = useMutation<unknown, HttpError, RegisterUserRequest>({
     mutationFn: async (request: RegisterUserRequest) => {
@@ -56,7 +60,6 @@ export const useRegistration = () => {
     submit,
     errorMessages,
     isPending: registerMutation.isPending,
-    invalidAddressError,
-    isSuccess: registerMutation.isSuccess,
+    isSuccess: registerMutation.isSuccess
   };
 };
