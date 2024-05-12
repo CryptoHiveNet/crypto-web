@@ -1,4 +1,3 @@
 export type RootLayoutProps = {
-  children: React.ReactNode;
-  params: { lng: string };
+    children: React.ReactNode;
 };
