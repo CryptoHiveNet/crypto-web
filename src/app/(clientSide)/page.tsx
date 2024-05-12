@@ -6,6 +6,7 @@ import { getServerTranslations } from '@/types/utils/i18n/server';
 export default async function Page() {
     const { t, i18n } = await getServerTranslations();
     const lng = i18n.resolvedLanguage;
+    console.log('page lng:', lng);
     return (
         <>
             <h1>
