@@ -1,27 +1,37 @@
-import Link from 'next/link';
-import { Trans } from 'react-i18next/TransWithoutContext';
+'use client';
+import i18next from 'i18next';
+import { useRouter } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 
-import { languages } from '../../utils/i18n/settings';
+import { languages } from '@/types/utils/i18n/settings';
 
-export const LanguageSwitcher = ({ t, lng }: any) => {
+export const LanguageSwitcher = ({ lng }: any) => {
+    const router = useRouter();
+    const { t, i18n } = useTranslation();
+    const handleChangeLanguage = (e, lang) => {
+        e.preventDefault();
+        i18next.changeLanguage(lang);
+        router.refresh();
+    };
     return (
         <>
-            <Trans
-                i18nKey="languageSwitcher"
-                t={t}
-            >
-                Switch from <strong>{lng}</strong> to:{' '}
-            </Trans>
-            {languages
-                .filter((l) => lng !== l)
-                .map((l, index) => {
+            <div>
+                {languages.map((lang, index) => {
+                    if (lang === lng) {
+                        return null;
+                    }
                     return (
-                        <span key={l}>
-                            {index > 0 && ' or '}
-                            <Link href={`/${l}`}>{l}</Link>
+                        <span key={lang}>
+                            <button
+                                onClick={(e) => handleChangeLanguage(e, lang)}
+                                type="button"
+                            >
+                                {lang}
+                            </button>
                         </span>
                     );
                 })}
+            </div>
         </>
     );
 };
