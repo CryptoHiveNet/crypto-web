@@ -1,57 +1,41 @@
-import '@testing-library/jest-dom';
+import { useRouter } from 'next/router';
 
-import { Session } from 'next-auth';
-import * as nextAuthReact from 'next-auth/react';
+import { render } from '@testing-library/react';
 
-import { render, screen, waitFor } from '@testing-library/react';
+import { TopMenuLinks } from './TopMenuLinks';
 
-import TopMenu from './TopMenu';
-
-jest.mock('next-auth/react', () => ({
-    useSession: jest.fn(),
-    signIn: jest.fn(),
-    signOut: jest.fn(),
+jest.mock('next/router', () => ({
+    useRouter: jest.fn(),
 }));
 
-describe('TopMenu', () => {
-    it('shows user name and sign out button when user is signed in', () => {
-        jest.spyOn(nextAuthReact, 'useSession').mockReturnValue({
-            data: {
-                user: {
-                    name: 'John Doe',
-                    address: '123 Main St',
-                },
-                expires: '',
-            },
-            status: 'authenticated',
-            update: function (data?: any): Promise<Session | null> {
-                throw new Error('Function not implemented.');
-            },
-        });
-
-        render(<TopMenu />);
-        waitFor(() => {
-            expect(screen.getByText('John Doe,')).toBeInTheDocument();
-            expect(
-                screen.getByRole('button', { name: /sign out/i }),
-            ).toBeInTheDocument();
-        });
+describe('TopMenuLinks', () => {
+    beforeEach(() => {
+        jest.clearAllMocks();
     });
 
-    it('shows sign in button when user is not signed in', () => {
-        jest.spyOn(nextAuthReact, 'useSession').mockReturnValue({
-            data: null,
-            status: 'unauthenticated',
-            update: function (data?: any): Promise<Session | null> {
-                throw new Error('Function not implemented.');
-            },
-        });
+    it('renders correct number of links', () => {
+        const { container } = render(<TopMenuLinks lng="en" />);
+        const links = container.querySelectorAll('a');
+        expect(links.length).toBe(5);
+    });
 
-        render(<TopMenu />);
-        waitFor(() => {
-            expect(
-                screen.getByRole('button', { name: /sign in/i }),
-            ).toBeInTheDocument();
-        });
+    it('renders links with correct href attribute', () => {
+        useRouter.mockImplementation(() => ({
+            pathname: '/',
+        }));
+
+        const { getByText } = render(<TopMenuLinks lng="en" />);
+        const homeLink = getByText('Home');
+        expect(homeLink).toHaveAttribute('href', '/');
+    });
+
+    it('activates link based on current pathname', () => {
+        useRouter.mockImplementation(() => ({
+            pathname: '/about-us',
+        }));
+
+        const { getByText } = render(<TopMenuLinks lng="en" />);
+        const aboutUsLink = getByText('About Us');
+        expect(aboutUsLink).toHaveClass('active');
     });
 });

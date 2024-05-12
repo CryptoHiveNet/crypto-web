@@ -10,7 +10,6 @@ import TopMenu from '@/types/components/TopMenu/TopMenu';
 import { RootLayoutProps } from '@/types/shared/types/layout';
 import { roboto, vazirmatn } from '@/types/styles/fonts';
 import ThemeProvider from '@/types/theme/ThemeProvider';
-import { useTranslation } from '@/types/utils/i18n';
 import { languages } from '@/types/utils/i18n/settings';
 
 export async function generateStaticParams() {
@@ -37,7 +36,7 @@ export default async function RootLayout({
                 <ReactQueryProvider>
                     <SessionProvider session={session}>
                         <ThemeProvider>
-                            <TopMenu />
+                            <TopMenu lng={lng} />
                             {children}
                         </ThemeProvider>
                     </SessionProvider>

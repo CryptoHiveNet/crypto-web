@@ -7,5 +7,9 @@
     "about-us": "Über uns",
     "rules": "Regeln",
     "news": "Nachrichten",
-    "blog": "Blog"
+    "blog": "Blog",
+    "language": "DE",
+    "sign-out": "Abmelden",
+    "login": "Anmeldung",
+    "register": "Registrieren"
 }

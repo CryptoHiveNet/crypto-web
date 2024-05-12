@@ -14,5 +14,9 @@
     "about-us": "About us",
     "rules": "Rules",
     "news": "News",
-    "blog": "Blog"
+    "blog": "Blog",
+    "language": "EN",
+    "sign-out": "Sign Out",
+    "login": "Login",
+    "register": "Register"
 }

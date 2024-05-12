@@ -1,5 +1,6 @@
 export type ButtonProps = {
     id?: string;
+    type?: 'button' | 'submit' | 'reset';
     color?: string;
     gradientMonochrome?: string;
     gradientDuoTone?: string;

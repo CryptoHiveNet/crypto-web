@@ -13,12 +13,5 @@ export function getOptions(lng = fallbackLng, ns = defaultNS) {
         fallbackNS: defaultNS,
         defaultNS,
         ns,
-        resources: {
-            [lng]: {
-                [ns]: require(
-                    `../../infrastructures/locales/${lng}/${ns}.json`,
-                ),
-            },
-        },
     };
 }
