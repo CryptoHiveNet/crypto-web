@@ -1,28 +1,48 @@
 import React from 'react';
 
 import TextBox from '@/types/components/textBox/TextBox';
-import { TextInputType } from '@/types/types/components/textBox';
 import { useTranslation } from '@/types/utils/i18n';
-import CheckBox from '@/types/components/CheckBox/CheckBox';
 import { Label } from 'flowbite-react';
 import Link from 'next/link';
 import Button from '@/types/components/Button/Button';
+import { TextInputType } from '@/types/types/components/textBox';
+import CheckBox from '@/types/components/checkBox/CheckBox';
+import { NoticeMessage } from '@/types/shared/types/components/NoticeMessage';
+import { RegisterUserRequest } from '@/types/shared/types/user/register';
+export type RegistrationFormProps = {
+  submit: (request: RegisterUserRequest) => void;
+  isPending: boolean;
+  errorMessages: NoticeMessage[];
+}
 
-export async function  RegistrationForm() {
+enum Fields {
+Username = 'username',
+Password = 'password',
+RePassword = 'repassword',
+Agreement = 'agreement',
+}
+
+export type FieldValues = {
+  [Key in Fields]: string;
+};
+export default async function  RegistrationForm({ submit, isPending, errorMessages } : RegistrationFormProps) {
   const { t } = await useTranslation();
   return (
     <div>
        <form className='flex max-w-md flex-col gap-4' data-testid="registrationForm">
         <div>
           <TextBox
+           name={Fields.Username}
             required
             type={TextInputType.text}
             labelText={t('email-place-holder')}
             placeholder={t('your-email')}
+            icon="HiMail"
           />
         </div>
         <div>
           <TextBox
+          name={Fields.Password}
             required
             type={TextInputType.passwords}
             labelText={t('your-password')}
@@ -31,6 +51,7 @@ export async function  RegistrationForm() {
         </div>
         <div>
           <TextBox
+          name={Fields.RePassword}
             required
             type={TextInputType.passwords}
             labelText={t('repeat-your-password')}
@@ -38,7 +59,7 @@ export async function  RegistrationForm() {
           />
         </div>
         <div className='flex items-center gap-2'>
-          <CheckBox />
+          <CheckBox name={Fields.Agreement} />
           <Label htmlFor='agree' className='flex'>
             I agree with the&nbsp;
             <Link
@@ -49,8 +70,14 @@ export async function  RegistrationForm() {
             </Link>
           </Label>
         </div>
-        <Button>{t('register-new-user')}</Button>
+        <Button disabled={true}>{t('register-new-user')}</Button>
       </form>
     </div>
   )
 }
+
+RegistrationForm.isValid = (values: Partial<FieldValues>): values is FieldValues => {
+  return [RegistrationForm].every((partialForm) =>
+      partialForm.isValid(values)
+  );
+};
