@@ -1,4 +1,4 @@
-export const NEXT_API_ROOT = '/';
+export const NEXT_API_ROOT = '/api';
 
 // User
 export const USER_ROOT = `${NEXT_API_ROOT}/user`;

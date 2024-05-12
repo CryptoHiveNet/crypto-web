@@ -1,10 +1,7 @@
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import TwitterProvider from "next-auth/providers/twitter";
-
-console.log(process.env.GITHUB_ID);
-console.log(process.env.GITHUB_SECRET3564355
-  );
+import FacebookProvider from "next-auth/providers/facebook";
 
 export const authOptions = {
   providers: [
