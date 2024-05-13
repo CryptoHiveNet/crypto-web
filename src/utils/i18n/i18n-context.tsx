@@ -14,7 +14,7 @@ i18next
     .use(LanguageDetector)
     .use(
         resourcesToBackend(
-            (language, namespace) =>
+            (language: string, namespace: string) =>
                 import(
                     `../../infrastructures/locales/${language}/${namespace}.json`
                 ),
@@ -28,7 +28,13 @@ i18next
         },
     });
 
-export function I18nProvider({ children, language }) {
+export function I18nProvider({
+    children,
+    language,
+}: {
+    children: React.ReactNode;
+    language: string;
+}) {
     useMemo(() => {
         i18next.changeLanguage(language);
         // eslint-disable-next-line react-hooks/exhaustive-deps

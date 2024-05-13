@@ -29,7 +29,7 @@
         "**/*.ts",
         "**/*.tsx",
         ".next/types/**/*.ts",
-        "src/utils/i18n_old/index.js",
+        "src/utils/i18n/server.ts",
         "src/**/*",
         "./jest-setup.js"
     ],
