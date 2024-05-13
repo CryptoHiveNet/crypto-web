@@ -1,7 +1,7 @@
 import acceptLanguage from 'accept-language';
 import { NextResponse } from 'next/server';
 
-import { cookieName, fallbackLng, languages } from './utils/i18n_old/settings';
+import { cookieName, fallbackLng, languages } from './utils/i18n/settings';
 
 acceptLanguage.languages(languages);
 
