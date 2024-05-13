@@ -1,3 +1,4 @@
+'use server';
 import { cache } from 'react';
 
 import acceptLanguage from 'accept-language';
@@ -6,15 +7,15 @@ import resourcesToBackend from 'i18next-resources-to-backend';
 import { cookies as getCookies, headers as getHeaders } from 'next/headers';
 import { initReactI18next } from 'react-i18next/initReactI18next';
 
-import { fallbackLng, getOptions, languages } from './settings';
+import { cookieName, fallbackLng, getOptions, languages } from './settings';
 
-const initServerI18next = async (language, ns) => {
+const initServerI18next = async (language: string, ns: string) => {
     const i18nInstance = createInstance();
     await i18nInstance
         .use(initReactI18next)
         .use(
             resourcesToBackend(
-                (language, ns) =>
+                (language: string, ns: string) =>
                     import(
                         `../../infrastructures/locales/${language}/${ns}.json`
                     ),
@@ -25,8 +26,6 @@ const initServerI18next = async (language, ns) => {
 };
 
 acceptLanguage.languages(languages);
-
-const cookieName = 'i18next';
 
 export async function detectLanguage() {
     const cookies = getCookies();
@@ -48,15 +47,17 @@ export async function detectLanguage() {
     return language;
 }
 
-export const getServerTranslations = cache(async (ns, options = {}) => {
-    const language = await detectLanguage();
-    const i18nextInstance = await initServerI18next(language, ns);
-    return {
-        t: i18nextInstance.getFixedT(
-            language,
-            Array.isArray(ns) ? ns[0] : ns,
-            options.keyPrefix,
-        ),
-        i18n: i18nextInstance,
-    };
-});
+export const getServerTranslations = cache(
+    async (ns?: string, options: { keyPrefix?: string } = {}) => {
+        const language = await detectLanguage();
+        const i18nextInstance = await initServerI18next(language, ns);
+        return {
+            t: i18nextInstance.getFixedT(
+                language,
+                Array.isArray(ns) ? ns[0] : ns,
+                options.keyPrefix,
+            ),
+            i18n: i18nextInstance,
+        };
+    },
+);

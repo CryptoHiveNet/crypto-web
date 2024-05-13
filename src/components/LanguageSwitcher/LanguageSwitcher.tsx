@@ -5,35 +5,33 @@ import { useTranslation } from 'react-i18next';
 
 import { languages } from '@/types/utils/i18n/settings';
 
-export const LanguageSwitcher = ({ lng }: any) => {
-    const router = useRouter();
+export const LanguageSwitcher = () => {
     const { t, i18n } = useTranslation();
-    const handleChangeLanguage = (e, lang) => {
-        console.log(lng);
-        e.preventDefault();
-        i18next.changeLanguage(lang);
+    const router = useRouter();
+    const currentLanguage = i18n.resolvedLanguage;
+
+    const changeLanguage = (language: string) => {
+        i18n.changeLanguage(language);
         router.refresh();
     };
-    console.log('LanguageSwitcher lng:', lng);
+
     return (
-        <>
-            <div>
-                {languages.map((lang, index) => {
-                    if (lang === lng) {
-                        return null;
-                    }
-                    return (
-                        <span key={index}>
-                            <button
-                                onClick={(e) => handleChangeLanguage(e, lang)}
-                                type="button"
-                            >
-                                {lang}
-                            </button>
-                        </span>
-                    );
-                })}
-            </div>
-        </>
+        <div>
+            {languages.map((language, index) => {
+                if (language === currentLanguage) {
+                    return null;
+                }
+                return (
+                    <span key={index}>
+                        <button
+                            onClick={() => changeLanguage(language)}
+                            type="button"
+                        >
+                            {language}
+                        </button>
+                    </span>
+                );
+            })}
+        </div>
     );
 };
