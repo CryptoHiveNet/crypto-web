@@ -42,7 +42,7 @@ const TopMenu = () => {
                 </span>
             </Navbar.Brand>
             <div className="flex md:order-2">
-                <Dropdown
+                {/* <Dropdown
                     arrowIcon={false}
                     inline
                     label={
@@ -64,7 +64,7 @@ const TopMenu = () => {
                     <Dropdown.Item>Earnings</Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item>Sign out</Dropdown.Item>
-                </Dropdown>
+                </Dropdown> */}
                 <Navbar.Toggle />
             </div>
             <Navbar.Collapse>

@@ -1,5 +1,4 @@
 'use client';
-import i18next from 'i18next';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 
