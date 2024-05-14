@@ -1,5 +1,5 @@
-'use server';
 import { cache } from 'react';
+import 'server-only';
 
 import acceptLanguage from 'accept-language';
 import { createInstance } from 'i18next';
@@ -7,9 +7,9 @@ import resourcesToBackend from 'i18next-resources-to-backend';
 import { cookies as getCookies, headers as getHeaders } from 'next/headers';
 import { initReactI18next } from 'react-i18next/initReactI18next';
 
-import { cookieName, fallbackLng, getOptions, languages } from './settings';
+import { cookieName, defaultNS, fallbackLng, getOptions, languages } from './settings';
 
-const initServerI18next = async (language: string, ns: string) => {
+const initServerI18next = async (language: string, ns: string = defaultNS) => {
     const i18nInstance = createInstance();
     await i18nInstance
         .use(initReactI18next)
@@ -27,29 +27,9 @@ const initServerI18next = async (language: string, ns: string) => {
 
 acceptLanguage.languages(languages);
 
-export async function detectLanguage() {
-    const cookies = getCookies();
-    const headers = getHeaders();
-
-    // here we can read the session data
-    // const session = await getSession();
-
-    let language;
-    if (!language && cookies.has(cookieName)) {
-        language = acceptLanguage.get(cookies.get(cookieName)?.value);
-    }
-    if (!language) {
-        language = acceptLanguage.get(headers.get('Accept-Language'));
-    }
-    if (!language) {
-        language = fallbackLng;
-    }
-    return language;
-}
-
 export const getServerTranslations = cache(
     async (ns?: string, options: { keyPrefix?: string } = {}) => {
-        const language = await detectLanguage();
+        const language = detectLanguage();
         const i18nextInstance = await initServerI18next(language, ns);
         return {
             t: i18nextInstance.getFixedT(
@@ -61,3 +41,32 @@ export const getServerTranslations = cache(
         };
     },
 );
+
+const detectLanguage = () => {
+    const cookies = getCookies();
+    const headers = getHeaders();
+
+    let language;
+
+    if (typeof window !== 'undefined') {
+        // Only execute this code in the browser environment
+        if (!language && localStorage.getItem('i18nextLng')) {
+            language = localStorage.getItem('i18nextLng');
+        }
+    }
+
+    if (!language && cookies.has(cookieName)) {
+        language = acceptLanguage.get(cookies.get(cookieName)?.value);
+    }
+
+    if (!language) {
+        language = acceptLanguage.get(headers.get('Accept-Language'));
+    }
+
+    if (!language) {
+        language = fallbackLng;
+    }
+
+    return language;
+};
+export default detectLanguage;
