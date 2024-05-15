@@ -5,7 +5,6 @@ import { LanguageSwitcher } from '@/types/components/LanguageSwitcher/LanguageSw
 import { getServerTranslations } from '@/types/utils/i18n/server';
 
 export default async function Page() {
-    // const { t } = useTranslation();
     const { t, i18n } = await getServerTranslations();
     return (
         <>
