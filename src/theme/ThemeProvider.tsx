@@ -1,8 +1,7 @@
 'use client';
 import type { CustomFlowbiteTheme } from 'flowbite-react';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode } from 'react';
 
-import { initFlowbite } from 'flowbite';
 import { DarkThemeToggle, Flowbite } from 'flowbite-react';
 
 const customTheme: CustomFlowbiteTheme = {
@@ -14,13 +13,10 @@ const customTheme: CustomFlowbiteTheme = {
 };
 
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
-    // useEffect(() => {
-    //     initFlowbite();
-    // }, []);
     return (
         <Flowbite theme={{ theme: customTheme }}>
             {children}
-            {/* <DarkThemeToggle /> */}
+            <DarkThemeToggle />
         </Flowbite>
     );
 };

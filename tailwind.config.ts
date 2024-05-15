@@ -1,15 +1,17 @@
-// import flowbite from 'flowbite-react/tailwind';
+import flowbite from 'flowbite/plugin';
 
 import type { Config } from 'tailwindcss';
 
+/** @type {import('tailwindcss').Config} */
 const config: Config = {
     content: [
-        './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+        // './src/app/**/*.{ts,tsx}',
+        // './src/components/**/*.{ts,tsx}',
+        // './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
         './src/components/**/*.{js,ts,jsx,tsx,mdx}',
         './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-        'node_modules/flowbite-react/lib/esm/**/*.js',
-        './node_modules/flowbite/**/*.js',
-        // flowbite.content(),
+        // './node_modules/flowbite-react/lib/**/*.js',
+        './node_modules/flowbite-react/lib/esm/**/*.js',
     ],
     theme: {
         extend: {
@@ -20,6 +22,6 @@ const config: Config = {
             },
         },
     },
-    // plugins: [flowbite.plugin()],
+    plugins: [flowbite],
 };
 export default config;
