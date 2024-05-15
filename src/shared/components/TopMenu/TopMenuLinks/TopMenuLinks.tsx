@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useTranslation } from '@/types/utils/i18n/client';
 import { languages } from '@/types/utils/i18n/settings';
 
-import NavbarLink from '../../Navbar/NavbarLink/NavbarLink';
+import NavbarLink from '../../../../components/Navbar/NavbarLink/NavbarLink';
 
 // eslint-disable-next-line react/display-name
 const TopMenuLinks = forwardRef<any, { lng: string }>(

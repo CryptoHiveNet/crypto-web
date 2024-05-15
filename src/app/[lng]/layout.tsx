@@ -6,7 +6,7 @@ import { getServerSession } from 'next-auth';
 
 import ReactQueryProvider from '@/types/components/ReactQueryProvider/ReactQueryProvider';
 import SessionProvider from '@/types/components/SessionProvider/SessionProvider';
-import TopMenu from '@/types/components/TopMenu/TopMenu';
+import TopMenu from '@/types/shared/components/TopMenu/TopMenu';
 import { RootLayoutProps } from '@/types/shared/types/layout';
 import { roboto, vazirmatn } from '@/types/styles/fonts';
 import ThemeProvider from '@/types/theme/ThemeProvider';

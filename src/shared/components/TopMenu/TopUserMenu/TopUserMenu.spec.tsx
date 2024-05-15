@@ -2,7 +2,7 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 
 import { fireEvent, render, waitFor } from '@testing-library/react';
 
-import TopMenuUserMenu from './TopMenuUserMenu';
+import TopUserMenu from './TopUserMenu';
 
 // Mock the useSession hook
 jest.mock('next-auth/react', () => ({
@@ -11,14 +11,14 @@ jest.mock('next-auth/react', () => ({
     signOut: jest.fn(),
 }));
 
-describe('TopMenuUserMenu', () => {
+describe('TopUserMenu', () => {
     afterEach(() => {
         jest.clearAllMocks(); // Clear mock calls after each test
     });
 
     it('renders login button when user is not authenticated', () => {
         useSession.mockReturnValue({ data: null }); // Mock unauthenticated session
-        const { getByText } = render(<TopMenuUserMenu />);
+        const { getByText } = render(<TopUserMenu />);
         expect(getByText('Login / Register')).toBeInTheDocument();
     });
 
@@ -29,7 +29,7 @@ describe('TopMenuUserMenu', () => {
             pic: 'https://flowbite.com/docs/images/people/profile-picture-5.jpg',
         };
         useSession.mockReturnValue({ data: { user: mockUser } }); // Mock authenticated session
-        const { getByText, getByAltText } = render(<TopMenuUserMenu />);
+        const { getByText, getByAltText } = render(<TopUserMenu />);
         expect(
             getByAltText('Bonnie Green profile picture'),
         ).toBeInTheDocument();
@@ -39,7 +39,7 @@ describe('TopMenuUserMenu', () => {
 
     it('calls signIn when "Login / Register" button is clicked', () => {
         useSession.mockReturnValue({ data: null }); // Mock unauthenticated session
-        const { getByText } = render(<TopMenuUserMenu />);
+        const { getByText } = render(<TopUserMenu />);
         fireEvent.click(getByText('Login / Register'));
         expect(signIn).toHaveBeenCalled();
     });
@@ -51,7 +51,7 @@ describe('TopMenuUserMenu', () => {
             pic: 'https://flowbite.com/docs/images/people/profile-picture-5.jpg',
         };
         useSession.mockReturnValue({ data: { user: mockUser } }); // Mock authenticated session
-        const { getByText } = render(<TopMenuUserMenu />);
+        const { getByText } = render(<TopUserMenu />);
         fireEvent.click(getByText('Sign Out'));
         await waitFor(() => {
             expect(signOut).toHaveBeenCalled();

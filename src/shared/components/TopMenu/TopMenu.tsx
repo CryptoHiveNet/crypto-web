@@ -3,13 +3,13 @@ import { forwardRef } from 'react';
 
 import Image from 'next/image';
 
+import Navbar from '../../../components/Navbar/Navbar';
+import NavbarBrand from '../../../components/Navbar/NavbarBrand/NavbarBrand';
+import NavbarCollapse from '../../../components/Navbar/NavbarCollapse/NavbarCollapse';
+import NavbarToggle from '../../../components/Navbar/NavbarToggle/NavbarToggle';
 import profilePic from '../../../public/next.svg';
-import Navbar from '../Navbar/Navbar';
-import NavbarBrand from '../Navbar/NavbarBrand/NavbarBrand';
-import NavbarCollapse from '../Navbar/NavbarCollapse/NavbarCollapse';
-import NavbarToggle from '../Navbar/NavbarToggle/NavbarToggle';
 import TopMenuLinks from './TopMenuLinks/TopMenuLinks';
-import TopMenuUserMenu from './TopMenuUserMenu/TopMenuUserMenu';
+import TopUserMenu from './TopUserMenu/TopUserMenu';
 
 // eslint-disable-next-line react/display-name
 const TopMenu = forwardRef<any, { lng: string; testId?: string }>(
@@ -31,7 +31,7 @@ const TopMenu = forwardRef<any, { lng: string; testId?: string }>(
                     />
                 </NavbarBrand>
                 <div className="flex md:order-2">
-                    <TopMenuUserMenu lng={lng} />
+                    <TopUserMenu lng={lng} />
                     <NavbarToggle />
                 </div>
                 <NavbarCollapse>

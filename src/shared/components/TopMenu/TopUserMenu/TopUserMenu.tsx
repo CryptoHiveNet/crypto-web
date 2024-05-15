@@ -3,15 +3,15 @@ import { forwardRef } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { useTranslation } from 'react-i18next';
 
-import Avatar from '../../Avatar/Avatar';
-import Button from '../../Button/Button';
-import Dropdown from '../../Dropdown/Dropdown';
-import DropdownDivider from '../../Dropdown/DropdownDivider/DropdownDivider';
-import DropdownHeader from '../../Dropdown/DropdownHeader/DropdownHeader';
-import DropdownItem from '../../Dropdown/DropdownItem/DropdownItem';
+import Avatar from '../../../../components/Avatar/Avatar';
+import Button from '../../../../components/Button/Button';
+import Dropdown from '../../../../components/Dropdown/Dropdown';
+import DropdownDivider from '../../../../components/Dropdown/DropdownDivider/DropdownDivider';
+import DropdownHeader from '../../../../components/Dropdown/DropdownHeader/DropdownHeader';
+import DropdownItem from '../../../../components/Dropdown/DropdownItem/DropdownItem';
 
 // eslint-disable-next-line react/display-name
-const TopMenuUserMenu = forwardRef<any, { lng: string; testId?: string }>(
+const TopUserMenu = forwardRef<any, { lng: string; testId?: string }>(
     (
         { lng, testId }: { lng: string; testId?: string },
         ref: React.Ref<any> | null,
@@ -31,7 +31,9 @@ const TopMenuUserMenu = forwardRef<any, { lng: string; testId?: string }>(
                             ?.split(' ')
                             .map((n) => n[0])
                             .join('')}
-                        img={session.user.pic}
+                        img={
+                            session.user.image ? session.user.image : undefined
+                        }
                         rounded
                         className="space-x-0 md:space-x-4"
                     >
@@ -76,4 +78,4 @@ const TopMenuUserMenu = forwardRef<any, { lng: string; testId?: string }>(
     },
 );
 
-export default TopMenuUserMenu;
+export default TopUserMenu;
