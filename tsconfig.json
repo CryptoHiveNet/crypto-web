@@ -31,7 +31,8 @@
         ".next/types/**/*.ts",
         "src/utils/i18n/server.ts",
         "src/**/*",
-        "./jest-setup.js"
+        "./jest-setup.js",
+        "tailwind.config.ts"
     ],
     "exclude": ["node_modules"]
 }
