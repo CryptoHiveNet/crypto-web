@@ -1,7 +1,8 @@
 'use client';
 import type { CustomFlowbiteTheme } from 'flowbite-react';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 
+import { initFlowbite } from 'flowbite';
 import { DarkThemeToggle, Flowbite } from 'flowbite-react';
 
 const customTheme: CustomFlowbiteTheme = {
