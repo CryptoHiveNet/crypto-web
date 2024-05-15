@@ -9,6 +9,7 @@ import SessionProvider from '@/types/components/SessionProvider/SessionProvider'
 import TopMenu from '@/types/components/TopMenu/TopMenu';
 import { RootLayoutProps } from '@/types/shared/types/layout';
 import { roboto, vazirmatn } from '@/types/styles/fonts';
+import ThemeModeScript from '@/types/theme/ThemeModeScript';
 import ThemeProvider from '@/types/theme/ThemeProvider';
 import { I18nProvider } from '@/types/utils/i18n/i18n-context';
 import detectLanguage, { getServerTranslations } from '@/types/utils/i18n/server';
@@ -50,17 +51,21 @@ export default async function RootLayout({ children }: RootLayoutProps) {
             dir={dir(language)}
             className={getFontClassName(language)}
         >
+            <head>
+                <ThemeModeScript />
+            </head>
             <body>
-                {/* <ReactQueryProvider> */}
-                <SessionProvider session={session}>
-                    {/* <ThemeProvider> */}
-                    <I18nProvider language={language}>
-                        {/* <TopMenu /> */}
-                        {children}
-                    </I18nProvider>
-                    {/* </ThemeProvider> */}
-                </SessionProvider>
-                {/* </ReactQueryProvider> */}
+                <ReactQueryProvider>
+                    <SessionProvider session={session}>
+                        <I18nProvider language={language}>
+                            <ThemeProvider>
+                                {/* The problem is here with flowbite library */}
+                                {/* <TopMenu /> */}
+                                {children}
+                            </ThemeProvider>
+                        </I18nProvider>
+                    </SessionProvider>
+                </ReactQueryProvider>
             </body>
         </html>
     );

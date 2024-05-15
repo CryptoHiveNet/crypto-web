@@ -12,11 +12,15 @@ const customTheme: CustomFlowbiteTheme = {
     },
 };
 
-export default function ThemeProvider({ children }: { children: ReactNode }) {
+const ThemeProvider = ({ children }: { children: ReactNode }) => {
+    // useEffect(() => {
+    //     initFlowbite();
+    // }, []);
     return (
         <Flowbite theme={{ theme: customTheme }}>
             {children}
-            <DarkThemeToggle />
+            {/* <DarkThemeToggle /> */}
         </Flowbite>
     );
-}
+};
+export default ThemeProvider;
