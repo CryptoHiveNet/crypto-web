@@ -1,92 +1,104 @@
-import { AccordionProps } from '@/types/shared/types/components/accordion';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import Accordion from './Accordion';
 import AccordionItem from './AccordionItem/AccordionItem';
 
+const mockOnClick = jest.fn();
+const mockOnMouseEnter = jest.fn();
+const mockOnMouseLeave = jest.fn();
+
+const mockProps = {
+    id: 'test-accordion',
+    className: 'accordion',
+    testId: 'test-accordion',
+    collapseAll: true,
+    onClick: mockOnClick,
+    onMouseEnter: mockOnMouseEnter,
+    onMouseLeave: mockOnMouseLeave,
+};
+
 describe('Accordion component unit tests', () => {
-    it('should render the FlowbiteAccordion component with passed props', () => {
-        const props: AccordionProps = {
-            id: 'my-accordion',
-            className: 'custom-class',
-            testId: 'accordion-test',
-            collapseAll: true,
-        };
-        const { getByTestId } = render(<Accordion {...props} />);
-
-        const accordion = getByTestId('accordion-test');
-        waitFor(() => {
-            expect(accordion).toBeInTheDocument();
-            expect(accordion).toHaveAttribute('id', 'my-accordion');
-            expect(accordion).toHaveClass('custom-class');
-        });
+    beforeEach(() => {
+        mockOnClick.mockClear();
+        mockOnMouseEnter.mockClear();
+        mockOnMouseLeave.mockClear();
     });
 
-    it('should pass down children to the FlowbiteAccordion', () => {
-        const content = (
-            <AccordionItem
-                title="title"
-                content="This is some accordion content."
-            />
-        );
-        const { getByText } = render(<Accordion>{content}</Accordion>);
-        waitFor(() => {
-            expect(getByText(content.props.children)).toBeInTheDocument();
-        });
-    });
-
-    it('should call the onClick handler when user clicked on any where of the Accordion component container', () => {
-        const mockOnClick = jest.fn();
-        const props: AccordionProps = { onClick: mockOnClick };
-        const { getByTestId } = render(<Accordion {...props} />);
-
-        waitFor(() => {
-            const accordion = getByTestId('accordion-test');
-            fireEvent.click(accordion);
-
-            expect(mockOnClick).toHaveBeenCalledTimes(1);
-        });
-    });
-
-    const defaultProps = {
-        id: 'accordion-id',
-        collapseAll: true,
-        className: 'custom-class',
-        testId: 'accordion',
-    };
-
-    it('applies className correctly', () => {
-        render(<Accordion {...defaultProps} />);
-        waitFor(() => {
-            expect(screen.getByTestId('accordion')).toHaveClass('custom-class');
-        });
-    });
-
-    it('calls onMouseEnter handler when mouse enters', () => {
-        const handleMouseEnter = jest.fn();
+    it('should render Accordion component with required props', () => {
         render(
-            <Accordion
-                {...defaultProps}
-                onMouseEnter={handleMouseEnter}
-            />,
+            <Accordion {...mockProps}>
+                <AccordionItem
+                    title="Section 1"
+                    content="Section 1 content"
+                />
+                <AccordionItem
+                    title="Section 2"
+                    content="Section 2 content"
+                />
+            </Accordion>,
         );
-        waitFor(() => {
-            fireEvent.mouseEnter(screen.getByTestId('accordion'));
-            expect(handleMouseEnter).toHaveBeenCalled();
-        });
+
+        const accordionComponent = screen.getByTestId('test-accordion');
+
+        expect(accordionComponent).toBeInTheDocument();
+        expect(accordionComponent).toHaveAttribute('id', 'test-accordion');
+        expect(accordionComponent).toHaveClass('accordion');
     });
 
-    it('calls onMouseLeave handler when mouse leaves', () => {
-        const handleMouseLeave = jest.fn();
+    it('should fire onClick callback when Accordion component is clicked', () => {
         render(
-            <Accordion
-                {...defaultProps}
-                onMouseLeave={handleMouseLeave}
-            />,
+            <Accordion {...mockProps}>
+                <AccordionItem
+                    title="Section 1"
+                    content="Section 1 content"
+                />
+                <AccordionItem
+                    title="Section 2"
+                    content="Section 2 content"
+                />
+            </Accordion>,
         );
-        waitFor(() => {
-            fireEvent.mouseLeave(screen.getByTestId('accordion'));
-            expect(handleMouseLeave).toHaveBeenCalled();
-        });
+
+        fireEvent.click(screen.getByTestId('test-accordion'));
+
+        expect(mockOnClick).toHaveBeenCalledTimes(1);
+    });
+
+    it('should fire onMouseEnter callback when mouse enters Accordion component', () => {
+        render(
+            <Accordion {...mockProps}>
+                <AccordionItem
+                    title="Section 1"
+                    content="Section 1 content"
+                />
+                <AccordionItem
+                    title="Section 2"
+                    content="Section 2 content"
+                />
+            </Accordion>,
+        );
+
+        fireEvent.mouseEnter(screen.getByTestId('test-accordion'));
+
+        expect(mockOnMouseEnter).toHaveBeenCalledTimes(1);
+    });
+
+    it('should fire onMouseLeave callback when mouse leaves Accordion component', () => {
+        render(
+            <Accordion {...mockProps}>
+                <AccordionItem
+                    title="Section 1"
+                    content="Section 1 content"
+                />
+                <AccordionItem
+                    title="Section 2"
+                    content="Section 2 content"
+                />
+            </Accordion>,
+        );
+
+        fireEvent.mouseLeave(screen.getByTestId('test-accordion'));
+
+        expect(mockOnMouseLeave).toHaveBeenCalledTimes(1);
     });
 });
