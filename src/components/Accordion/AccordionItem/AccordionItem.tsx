@@ -18,7 +18,8 @@ const AccordionItem = forwardRef<any, AccordionItemProps>(
             contentClassName,
             title,
             content,
-            testId,
+            titleTestId,
+            contentTestId,
             onClick,
             onMouseEnter,
             onMouseLeave,
@@ -30,17 +31,22 @@ const AccordionItem = forwardRef<any, AccordionItemProps>(
             <AccordionPanel
                 id={id}
                 className={className}
-                data-testid={testId}
                 onClick={onClick}
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
                 ref={ref}
                 {...rest}
             >
-                <AccordionTitle className={titleClassName}>
+                <AccordionTitle
+                    className={titleClassName}
+                    data-testid={titleTestId}
+                >
                     {title}
                 </AccordionTitle>
-                <AccordionContent className={contentClassName}>
+                <AccordionContent
+                    className={contentClassName}
+                    data-testid={contentTestId}
+                >
                     {content}
                 </AccordionContent>
             </AccordionPanel>
