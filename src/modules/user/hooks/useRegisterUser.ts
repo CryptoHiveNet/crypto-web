@@ -5,13 +5,14 @@ import { useTranslation } from "react-i18next";
 
 import { Address } from "@/types/shared/types/user/Address";
 import { RegisterUserRequest } from "@/types/packages/api/contexts/user/application/types/RegisterUserRequest";
-import { NoticeMessage } from "@/types/shared/types/components/NoticeMessage";
+import { NoticeMessage, Severity } from "@/types/shared/types/components/NoticeMessage";
 import { REGISTER } from "../../shared/constants/apiRoutes";
 import { HttpError } from "@/types/shared/infrastructures/http/HttpError";
 import { axiosClient } from "@/types/shared/infrastructures/http/AxiosClient";
 import HttpStatus from "@/types/shared/infrastructures/http/HttpStatus";
 import { UnhandledBusinessException } from "@/types/shared/Errors/UnhandledBusinessException";
 import { useMutationWithError } from "@/types/shared/hooks/useMutationWithError";
+import { addUser } from "../../shared/services/user/register/addUser";
 
 export type OnInvalidAddressErrorProps = {
   registerUserRequest: RegisterUserRequest;
@@ -25,41 +26,26 @@ export const useRegistration = () => {
     OnInvalidAddressErrorProps | undefined
   >();
 
-  const {mutate} = useMutationWithError(() => );
-
-  const registerMutation = useMutation<unknown, HttpError, RegisterUserRequest>({
-    mutationFn: async (request: RegisterUserRequest) => {
-      try {
-        const response = await axiosClient.post<RegisterUserRequest>(REGISTER, request);
-        return response;
-      } catch (error: any) {
-        if (error.response && (error.response.status === HttpStatus.BAD_REQUEST || error.response.status === HttpStatus.CONFLICT)) {
-          throw new UnhandledBusinessException(error.response.data?.payload.errorMessages || []);
-        } else {
-          throw error;
-        }
-      }
-    },
-    onSuccess: () => {
+  const {mutate: registerMutation, isPending, isSuccess } = useMutationWithError(addUser, {
+    onSuccess: async () => {
       // ToDo: This should handle the success part after the user registration.
-      return true;
+      // Force login and redirect to the user cPanel should be done here.
     },
-    onError: (error: HttpError) => {
-      // ToDo: this should be changed to throw an error regarding the error.
-      console.log(error);
+    onError: async (error: unknown) => {
+      // ToDo: Update the errorMessages state regarding the error.
     }
   });
 
   const submit = (request: RegisterUserRequest) => {
     setErrorMessages([]);
 
-    registerMutation.mutate(request);
+    registerMutation(request);
   };
 
   return {
     submit,
     errorMessages,
-    isPending: registerMutation.isPending,
-    isSuccess: registerMutation.isSuccess
+    isPending,
+    isSuccess
   };
 };
