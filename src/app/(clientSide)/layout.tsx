@@ -1,5 +1,8 @@
+import './globals.css';
+
 import { dir } from 'i18next';
 import { getServerSession } from 'next-auth';
+import { useTranslation } from 'react-i18next';
 
 import ReactQueryProvider from '@/types/components/ReactQueryProvider/ReactQueryProvider';
 import SessionProvider from '@/types/components/SessionProvider/SessionProvider';
@@ -8,7 +11,6 @@ import { RootLayoutProps } from '@/types/shared/types/layout';
 import { roboto, vazirmatn } from '@/types/styles/fonts';
 import ThemeModeScript from '@/types/theme/ThemeModeScript';
 import ThemeProvider from '@/types/theme/ThemeProvider';
-import './globals.css';
 import { I18nProvider } from '@/types/utils/i18n/i18n-context';
 import { getServerTranslations } from '@/types/utils/i18n/server';
 
