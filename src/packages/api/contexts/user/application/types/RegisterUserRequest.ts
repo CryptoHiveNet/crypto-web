@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { ZodParsedType, ZodType, z } from "zod";
 import { GenderType } from "@/types/shared/types/user/userProfile";
 
 export type RegisterUserRequest = z.infer<typeof RegisterUserSchema>;
