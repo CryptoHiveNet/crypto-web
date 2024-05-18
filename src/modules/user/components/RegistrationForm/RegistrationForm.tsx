@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FormEventHandler, useEffect } from 'react';
 
 import TextBox from '@/types/components/textBox/TextBox';
 import { useTranslation } from '@/types/utils/i18n';
@@ -9,11 +9,8 @@ import { TextInputType } from '@/types/types/components/textBox';
 import CheckBox from '@/types/components/checkBox/CheckBox';
 import { NoticeMessage } from '@/types/shared/types/components/NoticeMessage';
 import { RegisterUserRequest } from '@/types/shared/types/user/register';
-export type RegistrationFormProps = {
-  submit: (request: RegisterUserRequest) => void;
-  isPending: boolean;
-  errorMessages: NoticeMessage[];
-}
+import { useRegistration } from '../../hooks/useRegisterUser';
+import { getFormValues } from '@/types/modules/shared/components/Forms/FormUtils';
 
 enum Fields {
 Username = 'username',
@@ -22,14 +19,41 @@ RePassword = 'repassword',
 Agreement = 'agreement',
 }
 
+/**
+ * ToDo List: 
+ * Show loading when isPending is true.
+ * Show warning/Success message when you have a result from the hook as we discussed today.
+ * Add all of the necessary fields and also their validation to the RegistrationForm.isValid
+ * Disable the registration button and also form submission when isPending is true
+ * After a successful registration we need to hide the from and show a success message box to ask the user for going to the login page
+ * After making the login form we need to do a login for that user automatically
+ * We need to add CSRF token to the registration form
+ * We need to add all texts into the language files(All languages)
+ * 
+ */
+
 export type FieldValues = {
   [Key in Fields]: string;
 };
-export default async function  RegistrationForm({ submit, isPending, errorMessages } : RegistrationFormProps) {
+export default async function  RegistrationForm() {
   const { t } = await useTranslation();
+  const { submit, isPending, errorMessages, isSuccess } = useRegistration();
+
+  const onHandleFormSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+    const values = getFormValues(event) as Partial<FieldValues>;
+
+    if (RegistrationForm.isValid(values)) {
+        submit(values);
+    }
+};
+
+  useEffect(() => {
+// ToDo show an error message
+  }, [isSuccess])
+
   return (
     <div>
-       <form className='flex max-w-md flex-col gap-4' data-testid="registrationForm">
+       <form onSubmit={onHandleFormSubmit} className='flex max-w-md flex-col gap-4' data-testid="registrationForm">
         <div>
           <TextBox
            name={Fields.Username}
@@ -37,7 +61,7 @@ export default async function  RegistrationForm({ submit, isPending, errorMessag
             type={TextInputType.text}
             labelText={t('email-place-holder')}
             placeholder={t('your-email')}
-            icon="HiMail"
+            icon="HiMail" // ToDo: Change icon type to be string not a real icon here. Do the same thing for the rest component in a separate ticket. 
           />
         </div>
         <div>
