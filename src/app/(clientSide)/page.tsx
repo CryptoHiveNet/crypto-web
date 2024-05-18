@@ -1,11 +1,12 @@
+'use client';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 
 import { LanguageSwitcher } from '@/types/components/LanguageSwitcher/LanguageSwitcher';
 import { getServerTranslations } from '@/types/utils/i18n/server';
 
-export default async function Page() {
-    const { t, i18n } = await getServerTranslations();
+export default function Page() {
+    const { t } = useTranslation();
     return (
         <>
             <h1>
