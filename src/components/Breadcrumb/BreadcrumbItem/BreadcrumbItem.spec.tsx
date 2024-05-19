@@ -1,33 +1,71 @@
-import { test_children_text } from '@/types/__mocks__/textMock';
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import BreadcrumbItem from './BreadcrumbItem';
 
+const onClickMock = jest.fn();
+const onMouseEnterMock = jest.fn();
+const onMouseLeaveMock = jest.fn();
+
+const mockProps = {
+    id: 'test-id',
+    href: '#home',
+    icon: 'icon',
+    className: 'test-class',
+    testId: 'breadcrumb-item-test-id',
+    onClick: onClickMock,
+    onMouseEnter: onMouseEnterMock,
+    onMouseLeave: onMouseLeaveMock,
+};
+
+const mockChildren = 'Test Children';
+
 describe('BreadcrumbItem component unit tests', () => {
-    const onClickMock = jest.fn();
-    const mockProps = {
-        id: 'test-id',
-        href: '#home',
-        testId: 'test-breadcrumb-item',
-        onClick: onClickMock,
-    };
-    const { getByTestId, getByText } = render(
-        <BreadcrumbItem {...mockProps}>{test_children_text}</BreadcrumbItem>,
-    );
+    beforeEach(() => {
+        onClickMock.mockClear();
+        onMouseEnterMock.mockClear();
+        onMouseLeaveMock.mockClear();
+    });
     it('should render BreadcrumbItem component with required props', () => {
-        waitFor(() => {
-            expect(getByTestId('test-breadcrumb-item')).toBeInTheDocument();
-        });
+        render(<BreadcrumbItem {...mockProps}>{mockChildren}</BreadcrumbItem>);
+        const breadcrumbItemComponent = screen.getByTestId(
+            'breadcrumb-item-test-id',
+        );
+        const linkElement = breadcrumbItemComponent.querySelector('a');
+        expect(breadcrumbItemComponent).toBeInTheDocument();
+        expect(breadcrumbItemComponent).toHaveAttribute('id', 'test-id');
+        expect(linkElement).toHaveAttribute('href', '#home');
+        expect(breadcrumbItemComponent).toHaveClass('test-class');
     });
+
     it('should handle onClick event', () => {
-        waitFor(() => {
-            fireEvent.click(getByTestId('test-breadcrumb-item'));
-            expect(onClickMock).toHaveBeenCalled();
-        });
+        render(<BreadcrumbItem {...mockProps}>{mockChildren}</BreadcrumbItem>);
+        const breadcrumbItemComponent = screen.getByTestId(
+            'breadcrumb-item-test-id',
+        );
+        fireEvent.click(breadcrumbItemComponent);
+        expect(onClickMock).toHaveBeenCalled();
     });
+
+    it('should handle onMouseEnter event', () => {
+        render(<BreadcrumbItem {...mockProps}>{mockChildren}</BreadcrumbItem>);
+        const breadcrumbItemComponent = screen.getByTestId(
+            'breadcrumb-item-test-id',
+        );
+        fireEvent.mouseEnter(breadcrumbItemComponent);
+        expect(onMouseEnterMock).toHaveBeenCalled();
+    });
+
+    it('should handle onMouseLeave event', () => {
+        render(<BreadcrumbItem {...mockProps}>{mockChildren}</BreadcrumbItem>);
+        const breadcrumbItemComponent = screen.getByTestId(
+            'breadcrumb-item-test-id',
+        );
+        fireEvent.mouseLeave(breadcrumbItemComponent);
+        expect(onMouseLeaveMock).toHaveBeenCalled();
+    });
+
     it('should render children', () => {
-        waitFor(() => {
-            expect(getByText(test_children_text)).toBeInTheDocument();
-        });
+        render(<BreadcrumbItem {...mockProps}>{mockChildren}</BreadcrumbItem>);
+        expect(screen.getByText(mockChildren)).toBeInTheDocument();
     });
 });
