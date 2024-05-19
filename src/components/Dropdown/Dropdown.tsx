@@ -18,7 +18,6 @@ const Dropdown = forwardRef<any, DropdownProps>(
             className,
             children,
             testId,
-            onClick,
             onMouseEnter,
             onMouseLeave,
             ...rest
@@ -36,10 +35,8 @@ const Dropdown = forwardRef<any, DropdownProps>(
                 renderTrigger={renderTrigger}
                 className={className}
                 data-testid={testId}
-                onClick={onClick}
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
-                // ref={ref}
                 {...rest}
             >
                 {children}
