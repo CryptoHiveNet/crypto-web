@@ -1,40 +1,64 @@
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import FileInput from './FileInput';
 
-describe('FileInput component unit tests', () => {
-    const onClickMock = jest.fn();
-    const fileInputMockProps = {
-        id: 'test-id',
-        name: 'test-name', // Adding the required name prop
-        testId: 'test-file-input',
-        onClick: onClickMock,
-        multiple: true,
-    };
+const onClickMock = jest.fn();
+const onMouseEnterMock = jest.fn();
+const onMouseLeaveMock = jest.fn();
 
+const fileInputMockProps = {
+    id: 'test-id',
+    name: 'test-name',
+    className: 'test-class',
+    helperText: 'Select a file',
+    multiple: true,
+    sizing: 'lg',
+    testId: 'test-file-input',
+    onClick: onClickMock,
+    onMouseEnter: onMouseEnterMock,
+    onMouseLeave: onMouseLeaveMock,
+};
+
+describe('FileInput component unit tests', () => {
     it('should render FileInput component with required props', () => {
-        const { getByTestId } = render(<FileInput {...fileInputMockProps} />);
-        waitFor(() => {
-            expect(getByTestId('test-file-input')).toBeInTheDocument();
-            expect(getByTestId('test-file-input')).toHaveAttribute(
-                'name',
-                'test-name',
-            );
-        });
+        render(<FileInput {...fileInputMockProps} />);
+        const fileInput = screen.getByTestId('test-file-input');
+        expect(fileInput).toBeInTheDocument();
+        expect(fileInput).toHaveAttribute('name', 'test-name');
     });
 
     it('should handle onClick event', () => {
-        const { getByTestId } = render(<FileInput {...fileInputMockProps} />);
-        waitFor(() => {
-            fireEvent.click(getByTestId('test-file-input'));
-            expect(onClickMock).toHaveBeenCalled();
-        });
+        render(<FileInput {...fileInputMockProps} />);
+        fireEvent.click(screen.getByTestId('test-file-input'));
+        expect(onClickMock).toHaveBeenCalled();
     });
 
-    it('should render with multiple', () => {
-        const { getByTestId } = render(<FileInput {...fileInputMockProps} />);
-        waitFor(() => {
-            expect(getByTestId('test-file-input')).toHaveAttribute('multiple');
-        });
+    it('should render with multiple attribute', () => {
+        render(<FileInput {...fileInputMockProps} />);
+        const fileInput = screen.getByTestId('test-file-input');
+        expect(fileInput).toHaveAttribute('multiple');
+    });
+
+    it('should display helper text', () => {
+        render(<FileInput {...fileInputMockProps} />);
+        expect(screen.getByText('Select a file')).toBeInTheDocument();
+    });
+
+    it('should handle onMouseEnter event', () => {
+        render(<FileInput {...fileInputMockProps} />);
+        fireEvent.mouseEnter(screen.getByTestId('test-file-input'));
+        expect(onMouseEnterMock).toHaveBeenCalled();
+    });
+
+    it('should handle onMouseLeave event', () => {
+        render(<FileInput {...fileInputMockProps} />);
+        fireEvent.mouseLeave(screen.getByTestId('test-file-input'));
+        expect(onMouseLeaveMock).toHaveBeenCalled();
+    });
+
+    it('should render with the correct sizing', () => {
+        render(<FileInput {...fileInputMockProps} />);
+        const fileInput = screen.getByTestId('test-file-input');
+        expect(fileInput).toHaveClass('sm:text-base');
     });
 });
