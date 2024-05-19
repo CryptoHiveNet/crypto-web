@@ -1,30 +1,48 @@
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import FooterTitle from './FooterTitle';
 
+const onClickMock = jest.fn();
+const mockProps = {
+    id: 'test-id',
+    title: 'Footer Title',
+    testId: 'test-footer-title',
+    onClick: onClickMock,
+    onMouseEnter: jest.fn(),
+    onMouseLeave: jest.fn(),
+    className: 'test-class',
+};
+
 describe('FooterTitle component unit tests', () => {
-    const onClickMock = jest.fn();
-    const mockProps = {
-        id: 'test-id',
-        title: 'Footer Title',
-        testId: 'test-footer-title',
-        onClick: onClickMock,
-    };
-    const { getByTestId, getByText } = render(<FooterTitle {...mockProps} />);
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
     it('should render FooterTitle component with required props', () => {
-        waitFor(() => {
-            expect(getByTestId('test-footer-title')).toBeInTheDocument();
-        });
+        const { getByTestId } = render(<FooterTitle {...mockProps} />);
+        expect(getByTestId('test-footer-title')).toBeInTheDocument();
     });
+
     it('should handle onClick event', () => {
-        waitFor(() => {
-            fireEvent.click(getByTestId('test-footer-title'));
-            expect(onClickMock).toHaveBeenCalled();
-        });
+        const { getByTestId } = render(<FooterTitle {...mockProps} />);
+        fireEvent.click(getByTestId('test-footer-title'));
+        expect(onClickMock).toHaveBeenCalled();
     });
+
     it('should render title', () => {
-        waitFor(() => {
-            expect(getByText('Footer Title')).toBeInTheDocument();
-        });
+        const { getByText } = render(<FooterTitle {...mockProps} />);
+        expect(getByText('Footer Title')).toBeInTheDocument();
+    });
+
+    it('should apply className prop', () => {
+        const { container } = render(<FooterTitle {...mockProps} />);
+        expect(container.firstChild).toHaveClass('test-class');
+    });
+
+    it('should call onMouseEnter and onMouseLeave events', () => {
+        const { getByTestId } = render(<FooterTitle {...mockProps} />);
+        fireEvent.mouseEnter(getByTestId('test-footer-title'));
+        fireEvent.mouseLeave(getByTestId('test-footer-title'));
+        expect(mockProps.onMouseEnter).toHaveBeenCalled();
+        expect(mockProps.onMouseLeave).toHaveBeenCalled();
     });
 });
