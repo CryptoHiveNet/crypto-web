@@ -28,7 +28,6 @@ i18next
     )
     .init({
         ...getOptions(),
-        // lng: 'undefined', // let detect the language on client side
         detection: {
             order: ['path', 'cookie', 'navigator', 'htmlTag'],
         },

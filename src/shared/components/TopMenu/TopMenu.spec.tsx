@@ -11,7 +11,7 @@ describe('TopMenu', () => {
             />,
         );
         const navbar = screen.getByTestId('navbar-test-id');
-        expect(navbar).toBeInTheDocument(); // Use the toBeInTheDocument function
+        expect(navbar).toBeInTheDocument();
     });
 
     it('renders NavbarBrand with correct content', () => {
