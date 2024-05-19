@@ -1,40 +1,66 @@
-import { test_children_text } from '@/types/__mocks__/textMock';
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import AvatarGroup from './AvatarGroup';
 
-describe('AvatarGroup component unit tests', () => {
-    const mockChildren = (
-        <div>
-            <span>{test_children_text} 1</span>
-            <span>{test_children_text} 2</span>
-        </div>
-    );
-    const onClickMock = jest.fn();
-    const mockProps = {
-        id: 'test-id',
-        testId: 'test-avatar-group',
-        onClick: onClickMock,
-    };
-    it('should render AvatarGroup component with required props', () => {
-        const { getByTestId } = render(<AvatarGroup {...mockProps} />);
+const mockChildren = (
+    <div>
+        <span>Test Children 1</span>
+        <span>Test Children 2</span>
+    </div>
+);
+const onClickMock = jest.fn();
+const onMouseEnterMock = jest.fn();
+const onMouseLeaveMock = jest.fn();
 
-        waitFor(() => {
-            expect(getByTestId('test-avatar-group')).toBeInTheDocument();
-        });
+const mockProps = {
+    id: 'test-id',
+    className: 'test-class',
+    testId: 'test-avatar-group',
+    onClick: onClickMock,
+    onMouseEnter: onMouseEnterMock,
+    onMouseLeave: onMouseLeaveMock,
+};
+
+describe('AvatarGroup component unit tests', () => {
+    beforeEach(() => {
+        onClickMock.mockClear();
+        onMouseEnterMock.mockClear();
+        onMouseLeaveMock.mockClear();
     });
+
+    it('should render AvatarGroup component with required props', () => {
+        render(<AvatarGroup {...mockProps} />);
+        const avatarGroupComponent = screen.getByTestId('test-avatar-group');
+
+        expect(avatarGroupComponent).toBeInTheDocument();
+        expect(avatarGroupComponent).toHaveAttribute('id', 'test-id');
+        expect(avatarGroupComponent).toHaveClass('test-class');
+    });
+
     it('should handle onClick event', () => {
-        const { getByTestId } = render(<AvatarGroup {...mockProps} />);
-        waitFor(() => {
-            fireEvent.click(getByTestId('test-avatar-group'));
-            expect(onClickMock).toHaveBeenCalled();
-        });
+        render(<AvatarGroup {...mockProps} />);
+        const avatarGroupComponent = screen.getByTestId('test-avatar-group');
+        fireEvent.click(avatarGroupComponent);
+        expect(onClickMock).toHaveBeenCalled();
     });
+
+    it('should handle onMouseEnter event', () => {
+        render(<AvatarGroup {...mockProps} />);
+        const avatarGroupComponent = screen.getByTestId('test-avatar-group');
+        fireEvent.mouseEnter(avatarGroupComponent);
+        expect(onMouseEnterMock).toHaveBeenCalled();
+    });
+
+    it('should handle onMouseLeave event', () => {
+        render(<AvatarGroup {...mockProps} />);
+        const avatarGroupComponent = screen.getByTestId('test-avatar-group');
+        fireEvent.mouseLeave(avatarGroupComponent);
+        expect(onMouseLeaveMock).toHaveBeenCalled();
+    });
+
     it('should render children', () => {
-        const { getByText } = render(<AvatarGroup>{mockChildren}</AvatarGroup>);
-        waitFor(() => {
-            expect(getByText(`${test_children_text} 1`)).toBeInTheDocument();
-            expect(getByText(`${test_children_text} 2`)).toBeInTheDocument();
-        });
+        render(<AvatarGroup {...mockProps}>{mockChildren}</AvatarGroup>);
+        expect(screen.getByText('Test Children 1')).toBeInTheDocument();
+        expect(screen.getByText('Test Children 2')).toBeInTheDocument();
     });
 });
