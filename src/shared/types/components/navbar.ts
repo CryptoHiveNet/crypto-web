@@ -26,7 +26,6 @@ export type NavbarToggleProps = {
     id?: string;
     className?: string;
     testId?: string;
-    // onClick?: () => void;
     onMouseEnter?: () => void;
     onMouseLeave?: () => void;
 };

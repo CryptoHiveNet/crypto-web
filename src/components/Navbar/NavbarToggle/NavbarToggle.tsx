@@ -11,7 +11,6 @@ const NavbarToggle = forwardRef<any, NavbarToggleProps>(
             id,
             className,
             testId,
-            // onClick,
             onMouseEnter,
             onMouseLeave,
             ...rest
@@ -23,7 +22,6 @@ const NavbarToggle = forwardRef<any, NavbarToggleProps>(
                 id={id}
                 className={className}
                 data-testid={testId}
-                // onClick={onClick}
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
                 ref={ref}
