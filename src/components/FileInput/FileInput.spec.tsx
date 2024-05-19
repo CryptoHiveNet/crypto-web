@@ -20,6 +20,9 @@ const fileInputMockProps = {
 };
 
 describe('FileInput component unit tests', () => {
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
     it('should render FileInput component with required props', () => {
         render(<FileInput {...fileInputMockProps} />);
         const fileInput = screen.getByTestId('test-file-input');
