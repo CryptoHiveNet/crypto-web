@@ -1,17 +1,10 @@
 import { FC, ReactNode, SVGProps } from 'react';
 
-export enum TextInputType {
-    text = 'text',
-    passwords = 'passwords',
-    number = 'number',
-    email = 'email',
-}
 export type TextBoxProps = {
     id?: string;
-    type: TextInputType;
+    type: string;
     sizing?: string;
     labelText: string;
-    className?: string;
     placeholder?: string;
     shadow?: boolean;
     required?: boolean;
