@@ -13,7 +13,6 @@ const TextBox = forwardRef<any, TextBoxProps>(
             type,
             sizing,
             labelText,
-            className,
             placeholder,
             shadow,
             required,
@@ -37,7 +36,6 @@ const TextBox = forwardRef<any, TextBoxProps>(
                 id={id}
                 type={type}
                 sizing={sizing}
-                className={className}
                 placeholder={placeholder}
                 shadow={shadow}
                 color={color}
