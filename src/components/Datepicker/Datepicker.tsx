@@ -44,7 +44,6 @@ const Datepicker = forwardRef<any, DatepickerProps>(
                 onClick={onClick}
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
-                // ref={ref}
                 {...rest}
             />
         );
