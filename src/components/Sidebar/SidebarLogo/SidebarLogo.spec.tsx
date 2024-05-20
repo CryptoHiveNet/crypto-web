@@ -34,7 +34,6 @@ describe('SidebarLogo component unit tests', () => {
         expect(sidebarLogoComponent).toBeInTheDocument();
         expect(sidebarLogoComponent).toHaveClass('custom-sidebar-logo');
         expect(screen.getByAltText('Logo')).toBeInTheDocument();
-        // Add additional assertions based on the specific behavior of the SidebarLogo component
     });
 
     it('should handle onClick event', () => {
