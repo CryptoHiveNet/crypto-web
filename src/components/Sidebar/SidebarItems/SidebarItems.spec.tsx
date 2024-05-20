@@ -30,7 +30,6 @@ describe('SidebarItems component unit tests', () => {
         const sidebarItemsComponent = screen.getByTestId('test-sidebar-items');
         expect(sidebarItemsComponent).toBeInTheDocument();
         expect(sidebarItemsComponent).toHaveClass('custom-sidebar-items');
-        // Add additional assertions based on the specific behavior of the SidebarItems component
     });
 
     it('should handle onClick event', () => {

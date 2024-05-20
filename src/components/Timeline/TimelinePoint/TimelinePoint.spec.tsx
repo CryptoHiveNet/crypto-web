@@ -23,7 +23,7 @@ describe('TimelinePoint component unit tests', () => {
             const timelinePoint = getByTestId('test-timeline-point');
             expect(timelinePoint).toBeInTheDocument();
             expect(timelinePoint).toHaveClass('timeline-point');
-            expect(timelinePoint).toHaveClass('fas fa-circle'); // Ensure icon class is applied
+            expect(timelinePoint).toHaveClass('fas fa-circle');
         });
     });
 });
