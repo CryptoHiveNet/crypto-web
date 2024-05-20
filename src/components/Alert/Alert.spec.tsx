@@ -1,7 +1,6 @@
 import { HiEye } from 'react-icons/hi';
 
-import { waitFor } from '@testing-library/dom';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import Alert from './Alert';
 
@@ -48,7 +47,7 @@ describe('Alert component unit tests', () => {
         expect(screen.getByText('Additional Content')).toBeInTheDocument();
     });
 
-    it('should render the close button and close the alert when clicked', () => {
+    it('should render the close button and close the alert when clicked', async () => {
         render(<Alert {...mockProps}>This is an alert message.</Alert>);
         const alertComponent = screen.getByTestId('my-alert');
         const closeButton = alertComponent.querySelector(
@@ -60,44 +59,36 @@ describe('Alert component unit tests', () => {
 
         fireEvent.click(closeButton);
 
-        waitFor(() => {
+        await waitFor(() => {
             expect(alertComponent).not.toBeInTheDocument();
         });
     });
 
-    it('calls onDismiss function when dismiss button is clicked', () => {
+    it('calls onDismiss function when dismiss button is clicked', async () => {
         render(<Alert {...mockProps}>Hello</Alert>);
         const closeButton = screen.getByLabelText('Dismiss');
         fireEvent.click(closeButton);
-        waitFor(() => {
-            expect(onDismissMock).toHaveBeenCalledTimes(1);
-        });
+        expect(mockOnDismiss).toHaveBeenCalledTimes(1);
     });
 
     it('should call onClick when clicked', () => {
         render(<Alert {...mockProps}>Clickable Alert</Alert>);
         const alertComponent = screen.getByTestId('my-alert');
         fireEvent.click(alertComponent);
-        waitFor(() => {
-            expect(mockProps.onClick).toHaveBeenCalled();
-        });
+        expect(mockProps.onClick).toHaveBeenCalled();
     });
 
     it('should call onMouseEnter when mouse enters', () => {
         render(<Alert {...mockProps}>Hoverable Alert</Alert>);
         const alertComponent = screen.getByTestId('my-alert');
         fireEvent.mouseEnter(alertComponent);
-        waitFor(() => {
-            expect(mockProps.onMouseEnter).toHaveBeenCalled();
-        });
+        expect(mockProps.onMouseEnter).toHaveBeenCalled();
     });
 
     it('should call onMouseLeave when mouse leaves', () => {
         render(<Alert {...mockProps}>Hoverable Alert</Alert>);
         const alertComponent = screen.getByTestId('my-alert');
         fireEvent.mouseLeave(alertComponent);
-        waitFor(() => {
-            expect(mockProps.onMouseLeave).toHaveBeenCalled();
-        });
+        expect(mockProps.onMouseLeave).toHaveBeenCalled();
     });
 });
