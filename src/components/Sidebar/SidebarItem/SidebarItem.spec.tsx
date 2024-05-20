@@ -41,7 +41,6 @@ describe('SidebarItem component unit tests', () => {
         expect(sidebarItemComponent).toBeInTheDocument();
         expect(sidebarItemComponent).toHaveAttribute('href', '/home');
         expect(sidebarItemComponent).toHaveClass('custom-sidebar-item');
-        // Add additional assertions based on the specific behavior of the SidebarItem component
     });
 
     it('should handle onClick event', () => {
