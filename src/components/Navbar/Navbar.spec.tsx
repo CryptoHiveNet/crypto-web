@@ -1,32 +1,65 @@
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import Navbar from './Navbar';
 
+const onClickMock = jest.fn();
+const onMouseEnterMock = jest.fn();
+const onMouseLeaveMock = jest.fn();
+
+const mockProps = {
+    id: 'test-id',
+    className: 'custom-navbar',
+    fluid: true,
+    rounded: false,
+    testId: 'test-navbar',
+    onClick: onClickMock,
+    onMouseEnter: onMouseEnterMock,
+    onMouseLeave: onMouseLeaveMock,
+    children: 'Test Navbar Content',
+};
+
 describe('Navbar component unit tests', () => {
-    const onClickMock = jest.fn();
-    const mockProps = {
-        id: 'test-id',
-        testId: 'test-navbar',
-        fluid: true,
-        rounded: false,
-        onClick: onClickMock,
-    };
-    const { getByTestId } = render(<Navbar {...mockProps} />);
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
+
     it('should render Navbar component with required props', () => {
-        waitFor(() => {
-            expect(getByTestId('test-navbar')).toBeInTheDocument();
-        });
+        render(<Navbar {...mockProps} />);
+        const navbarComponent = screen.getByTestId('test-navbar');
+        expect(navbarComponent).toBeInTheDocument();
+        expect(navbarComponent).toHaveClass('custom-navbar');
+        expect(screen.getByText('Test Navbar Content')).toBeInTheDocument();
     });
+
     it('should handle onClick event', () => {
-        waitFor(() => {
-            fireEvent.click(getByTestId('test-navbar'));
-            expect(onClickMock).toHaveBeenCalled();
-        });
+        render(<Navbar {...mockProps} />);
+        const navbarComponent = screen.getByTestId('test-navbar');
+        fireEvent.click(navbarComponent);
+        expect(onClickMock).toHaveBeenCalled();
     });
-    it('should render fluid and rounded props', () => {
-        waitFor(() => {
-            expect(getByTestId('test-navbar')).toHaveClass('fluid');
-            expect(getByTestId('test-navbar')).not.toHaveClass('rounded');
-        });
+
+    it('should handle onMouseEnter event', () => {
+        render(<Navbar {...mockProps} />);
+        const navbarComponent = screen.getByTestId('test-navbar');
+        fireEvent.mouseEnter(navbarComponent);
+        expect(onMouseEnterMock).toHaveBeenCalled();
+    });
+
+    it('should handle onMouseLeave event', () => {
+        render(<Navbar {...mockProps} />);
+        const navbarComponent = screen.getByTestId('test-navbar');
+        fireEvent.mouseLeave(navbarComponent);
+        expect(onMouseLeaveMock).toHaveBeenCalled();
+    });
+
+    it('should render rounded prop correctly', () => {
+        render(<Navbar {...mockProps} />);
+        const navbarComponent = screen.getByTestId('test-navbar');
+        expect(navbarComponent).not.toHaveClass('navbar-rounded');
+    });
+
+    it('should render children correctly', () => {
+        render(<Navbar {...mockProps} />);
+        expect(screen.getByText('Test Navbar Content')).toBeInTheDocument();
     });
 });
