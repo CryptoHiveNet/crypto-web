@@ -1,6 +1,7 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import Tabs from './Tabs';
+import TabsItem from './TabsItem/TabsItem';
 
 const onClickMock = jest.fn();
 const onMouseEnterMock = jest.fn();
@@ -22,7 +23,32 @@ describe('Tabs component unit tests', () => {
     beforeEach(() => {
         jest.clearAllMocks();
     });
+    it('should render Tabs component with required props', () => {
+        render(
+            <Tabs {...mockProps}>
+                <TabsItem title="Tab 1">Tab 1 Content</TabsItem>
+                <TabsItem title="Tab 2">Tab 2 Content</TabsItem>
+            </Tabs>,
+        );
 
+        const tabsComponent = screen.getByTestId('test-tabs');
+
+        expect(tabsComponent).toBeInTheDocument();
+        expect(tabsComponent).toHaveAttribute('aria-label', 'Test Tabs');
+        expect(tabsComponent).toHaveClass('custom-tabs');
+    });
+
+    it('should fire onActiveTabChange callback when a tab is clicked', () => {
+        render(
+            <Tabs {...mockProps}>
+                <TabsItem title="Tab 1">Tab 1 Content</TabsItem>
+                <TabsItem title="Tab 2">Tab 2 Content</TabsItem>
+            </Tabs>,
+        );
+
+        fireEvent.click(screen.getByText('Tab 2'));
+        expect(onActiveTabChangeMock).toHaveBeenCalledWith(1);
+    });
     it('should render Tabs component with required props', () => {
         render(<Tabs {...mockProps}>Tabs Content</Tabs>);
         const tabsComponent = screen.getByTestId('test-tabs');

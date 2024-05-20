@@ -16,9 +16,6 @@ const TabsItem = forwardRef<any, TabsItemProps>(
             className,
             children,
             testId,
-            onClick,
-            onMouseEnter,
-            onMouseLeave,
             ...rest
         }: TabsItemProps,
         ref: React.Ref<any> | null,
@@ -32,9 +29,6 @@ const TabsItem = forwardRef<any, TabsItemProps>(
                 icon={icon}
                 className={className}
                 data-testid={testId}
-                onClick={onClick}
-                onMouseEnter={onMouseEnter}
-                onMouseLeave={onMouseLeave}
                 ref={ref}
                 {...rest}
             >
