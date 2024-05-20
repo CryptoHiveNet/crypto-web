@@ -19,7 +19,6 @@ export type AccordionItemProps = {
     content: ReactNode;
     titleTestId?: string;
     contentTestId?: string;
-    onClick?: () => void;
     onMouseEnter?: () => void;
     onMouseLeave?: () => void;
 };
