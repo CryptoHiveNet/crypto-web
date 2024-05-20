@@ -1,44 +1,70 @@
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
+import Button from '../Button/Button';
 import Tooltip from './Tooltip';
 
-describe('Tooltip component unit tests', () => {
-    const mockProps = {
-        id: 'test-tooltip',
-        content: 'Tooltip content',
-        placement: 'top',
-        trigger: 'hover',
-        animation: true,
-        arrow: true,
-        className: 'custom-tooltip',
-        testId: 'test-tooltip',
-    };
+const onClickMock = jest.fn();
+const onMouseEnterMock = jest.fn();
+const onMouseLeaveMock = jest.fn();
 
-    const { getByTestId, getByText, queryByText } = render(
-        <Tooltip {...mockProps}>Hover me</Tooltip>,
-    );
+const mockProps = {
+    id: 'test-tooltip',
+    content: 'Tooltip content',
+    style: {},
+    placement: 'top',
+    trigger: 'hover',
+    animation: 'fade',
+    arrow: true,
+    className: 'custom-tooltip',
+    testId: 'test-tooltip-id',
+    onClick: onClickMock,
+    onMouseEnter: onMouseEnterMock,
+    onMouseLeave: onMouseLeaveMock,
+    children: <Button testId="test-button-id">Hover me</Button>,
+};
+
+describe('Tooltip component unit tests', () => {
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
+
     it('should render Tooltip component with required props', () => {
-        waitFor(() => {
-            const tooltipComponent = getByTestId('test-tooltip');
-            expect(tooltipComponent).toBeInTheDocument();
-            expect(tooltipComponent).toHaveClass('custom-tooltip');
-        });
+        render(<Tooltip {...mockProps} />);
+        const tooltipComponent = screen.getByTestId('test-tooltip-id');
+        expect(tooltipComponent).toBeInTheDocument();
+        expect(tooltipComponent).toHaveClass('custom-tooltip');
+        expect(tooltipComponent).toHaveAttribute('id', 'test-tooltip');
     });
-    it('should show tooltip content on mouse enter', () => {
-        waitFor(() => {
-            const triggerElement = getByText('Hover me');
-            fireEvent.mouseEnter(triggerElement);
-            const tooltipContent = getByText('Tooltip content');
-            expect(tooltipContent).toBeInTheDocument();
-        });
+
+    it('should display content on hover', async () => {
+        render(<Tooltip {...mockProps} />);
+        const tooltipTrigger = screen.getByTestId('test-tooltip-id');
+        fireEvent.mouseEnter(tooltipTrigger);
+        expect(onMouseEnterMock).toHaveBeenCalled();
+        const tooltipContent = await screen.findByText('Tooltip content');
+        expect(tooltipContent).toBeInTheDocument();
+        fireEvent.mouseLeave(tooltipTrigger);
+        expect(onMouseLeaveMock).toHaveBeenCalled();
     });
-    it('should hide tooltip content on mouse leave', () => {
-        waitFor(() => {
-            const triggerElement = getByText('Hover me');
-            fireEvent.mouseEnter(triggerElement);
-            fireEvent.mouseLeave(triggerElement);
-            const tooltipContent = queryByText('Tooltip content');
-            expect(tooltipContent).not.toBeInTheDocument();
-        });
+
+    it('should handle onClick event', () => {
+        render(<Tooltip {...mockProps} />);
+        const tooltipTrigger = screen.getByTestId('test-tooltip-id');
+        fireEvent.click(tooltipTrigger);
+        expect(onClickMock).toHaveBeenCalled();
+    });
+
+    it('should handle onMouseEnter event', () => {
+        render(<Tooltip {...mockProps} />);
+        const tooltipTrigger = screen.getByTestId('test-tooltip-id');
+        fireEvent.mouseEnter(tooltipTrigger);
+        expect(onMouseEnterMock).toHaveBeenCalled();
+    });
+
+    it('should handle onMouseLeave event', () => {
+        render(<Tooltip {...mockProps} />);
+        const tooltipTrigger = screen.getByTestId('test-tooltip-id');
+        fireEvent.mouseLeave(tooltipTrigger);
+        expect(onMouseLeaveMock).toHaveBeenCalled();
     });
 });
