@@ -20,7 +20,6 @@ const AccordionItem = forwardRef<any, AccordionItemProps>(
             content,
             titleTestId,
             contentTestId,
-            onClick,
             onMouseEnter,
             onMouseLeave,
             ...rest
@@ -31,7 +30,6 @@ const AccordionItem = forwardRef<any, AccordionItemProps>(
             <AccordionPanel
                 id={id}
                 className={className}
-                onClick={onClick}
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
                 ref={ref}

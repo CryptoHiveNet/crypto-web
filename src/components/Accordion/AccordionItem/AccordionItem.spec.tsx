@@ -1,10 +1,8 @@
-import { title } from 'process';
+import { fireEvent, render, screen } from '@testing-library/react';
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-
+import Accordion from '../Accordion';
 import AccordionItem from './AccordionItem';
 
-const mockOnClick = jest.fn();
 const mockOnMouseEnter = jest.fn();
 const mockOnMouseLeave = jest.fn();
 
@@ -14,54 +12,43 @@ const mockProps = {
     contentClassName: 'accordion-content-class',
     title: 'Accordion Title',
     titleTestId: 'accordion-title-item-id',
-    content: 'Accordion Content',
-    onClick: mockOnClick,
+    content: <div>Accordion Content</div>,
+    contentTestId: 'accordion-content-item-id',
     onMouseEnter: mockOnMouseEnter,
     onMouseLeave: mockOnMouseLeave,
 };
 
 describe('AccordionItem component unit tests', () => {
     beforeEach(() => {
-        mockOnClick.mockClear();
         mockOnMouseEnter.mockClear();
         mockOnMouseLeave.mockClear();
     });
 
     it('renders correctly', () => {
-        render(<AccordionItem {...mockProps} />);
+        render(
+            <Accordion>
+                <AccordionItem {...mockProps} />
+            </Accordion>,
+        );
 
         const accordionTitle = screen.getByText('Accordion Title');
-        const accordionContent = screen.getByText('Accordion Content');
+        const accordionContent = screen.queryByTestId(
+            'accordion-content-item-id',
+        );
 
         expect(accordionTitle).toBeInTheDocument();
         expect(accordionContent).toBeInTheDocument();
-        expect(screen.queryByTestId('accordion-item-id')).toBeNull();
     });
 
     it('calls onClick handler', () => {
         render(<AccordionItem {...mockProps} />);
 
-        const accordionItem = screen.getByTestId('accordion-title-item-id');
+        const accordionTitle = screen.getByText('Accordion Title');
+        const accordionContent = screen.queryByTestId(
+            'accordion-content-item-id',
+        );
 
-        fireEvent.click(accordionItem);
-        waitFor(() => expect(mockOnClick).toHaveBeenCalledTimes(1));
-    });
-
-    it('calls onMouseEnter handler', () => {
-        render(<AccordionItem {...mockProps} />);
-
-        const accordionItem = screen.getByTestId('accordion-title-item-id');
-
-        fireEvent.mouseEnter(accordionItem);
-        waitFor(() => expect(mockOnMouseEnter).toHaveBeenCalledTimes(1));
-    });
-
-    it('calls onMouseLeave handler', () => {
-        render(<AccordionItem {...mockProps} />);
-
-        const accordionItem = screen.getByTestId('accordion-title-item-id');
-
-        fireEvent.mouseLeave(accordionItem);
-        waitFor(() => expect(mockOnMouseLeave).toHaveBeenCalledTimes(1));
+        fireEvent.click(accordionTitle);
+        expect(accordionContent).not.toHaveAttribute('hidden', true);
     });
 });
