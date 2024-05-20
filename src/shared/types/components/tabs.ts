@@ -23,7 +23,4 @@ export type TabsItemProps = {
     className?: string;
     children: React.ReactNode;
     testId?: string;
-    onClick?: () => void;
-    onMouseEnter?: () => void;
-    onMouseLeave?: () => void;
 };
