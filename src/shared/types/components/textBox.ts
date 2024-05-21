@@ -10,8 +10,8 @@ export type TextBoxProps = {
     required?: boolean;
     disabled?: boolean;
     value?: string;
-    icon?: FC<SVGProps<SVGSVGElement>>;
-    rightIcon?: FC<SVGProps<SVGSVGElement>>;
+    icon?: string;
+    rightIcon?: string;
     color?: string;
     helperText?: ReactNode | string;
     addon?: string;

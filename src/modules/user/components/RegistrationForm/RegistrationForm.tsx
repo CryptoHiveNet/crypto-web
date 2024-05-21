@@ -68,7 +68,7 @@ export default function RegistrationForm() {
                         type={TextInputType.text}
                         labelText={t('email-place-holder')}
                         placeholder={t('your-email')}
-                        icon="HiMail" // ToDo: Change icon type to be string not a real icon here. Do the same thing for the rest component in a separate ticket.
+                        icon="HiEnvelope" // ToDo: Change icon type to be string not a real icon here. Do the same thing for the rest component in a separate ticket.
                     />
                 </div>
                 <div>
