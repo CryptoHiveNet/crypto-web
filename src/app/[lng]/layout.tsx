@@ -7,16 +7,10 @@ import { getServerSession } from 'next-auth';
 import ReactQueryProvider from '@/types/components/ReactQueryProvider/ReactQueryProvider';
 import SessionProvider from '@/types/components/SessionProvider/SessionProvider';
 import TopMenu from '@/types/components/TopMenu/TopMenu';
+import { RootLayoutProps } from '@/types/shared/types/layout';
 import { roboto, vazirmatn } from '@/types/styles/fonts';
 import ThemeProvider from '@/types/theme/ThemeProvider';
-<<<<<<< HEAD
-import { RootLayoutProps } from '@/types/types/layout';
 import { languages } from '@/types/utils/i18n/settings';
-=======
-
-import { languages } from '../../utils/i18n/settings';
-import { roboto, vazirmatn } from '@/types/styles/fonts';
->>>>>>> 30863e1 (refactor layout and add add register form)
 
 export async function generateStaticParams() {
     return languages.map((lng) => ({ lng }));
@@ -29,7 +23,6 @@ export default async function RootLayout({
     children,
     params: { lng },
 }: RootLayoutProps) {
-<<<<<<< HEAD
     const session = await getServerSession();
 
     return (
@@ -51,27 +44,5 @@ export default async function RootLayout({
                 </ReactQueryProvider>
             </body>
         </html>
-=======
-  
-  const session = await getServerSession();
-
-    return (
-      <html
-        lang={lng}
-        dir={dir(lng)}
-        className={ dir(lng) === 'rtl' ? vazirmatn.className : roboto.className }
-      >
-        <body>
-          <React_query_provider>
-            <SessionProvider session={session}>
-              <ThemeProvider>
-                <TopMenu />
-                {children}
-              </ThemeProvider>
-            </SessionProvider>
-          </React_query_provider>
-        </body>
-      </html>
->>>>>>> 30863e1 (refactor layout and add add register form)
     );
 }
