@@ -1,7 +1,14 @@
 {
-  "home_page_title": "The DE title of the home page",
-  "hello": "Hallo",
-  "metadata_title": "The DE metadata title of the page",
-  "metadata_description": "The DE metadata description of the page",
-  "second-page": "Zweite Seite"
+    "home_page_title": "The DE title of the home page",
+    "hello": "Hallo",
+    "metadata_title": "The DE metadata title of the page",
+    "metadata_description": "The DE metadata description of the page",
+    "your-email": "Deine E-Mail",
+    "email-place-holder": "Ihre E-Mail eingeben",
+    "your-password": "Ihr Passwort",
+    "enter-your-password": "Geben Sie Ihr Passwort ein",
+    "repeat-your-password": "Wiederholen Sie Ihr Passwort",
+    "repeat-your-password-placeholder": "Wiederholen Sie Ihr Passwort",
+    "i-agree-with-the": "Ich stimme mit dem",
+    "terms-and-conditions": "Bedingungen und Konditionen"
 }
