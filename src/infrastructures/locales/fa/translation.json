@@ -3,5 +3,12 @@
     "hello": "سلام",
     "metadata_title": "The FA metadata title of the page",
     "metadata_description": "The FA metadata description of the page",
-    "second-page": "صفحه دوم"
+    "your-email": "ایمیل شما",
+    "email-place-holder": "ایمیل خود را وارد کنید",
+    "your-password": "کلمه عبور شما",
+    "enter-your-password": "کلمه عبور خود را وارد کنید",
+    "repeat-your-password": "تکرار کلمه عبور",
+    "repeat-your-password-placeholder": "کلمه عبور خود را تکرار کنید",
+    "i-agree-with-the": "من موافقم با",
+    "terms-and-conditions": "شرایط و ضوابط"
 }

@@ -66,9 +66,9 @@ export default function RegistrationForm() {
                         name={Fields.Username}
                         required
                         type={TextInputType.text}
-                        labelText={t('email-place-holder')}
-                        placeholder={t('your-email')}
-                        icon="HiEnvelope" // ToDo: Change icon type to be string not a real icon here. Do the same thing for the rest component in a separate ticket.
+                        labelText={t('your-email')}
+                        placeholder={t('email-place-holder')}
+                        icon="HiEnvelope"
                     />
                 </div>
                 <div>
@@ -78,6 +78,7 @@ export default function RegistrationForm() {
                         type={TextInputType.passwords}
                         labelText={t('your-password')}
                         placeholder={t('enter-your-password')}
+                        icon="MdOutlinePassword"
                     />
                 </div>
                 <div>
@@ -86,7 +87,8 @@ export default function RegistrationForm() {
                         required
                         type={TextInputType.passwords}
                         labelText={t('repeat-your-password')}
-                        placeholder={t('repeat-your-password')}
+                        placeholder={t('repeat-your-password-placeholder')}
+                        icon="MdOutlinePassword"
                     />
                 </div>
                 <div className="flex items-center gap-2">
@@ -95,7 +97,7 @@ export default function RegistrationForm() {
                         htmlFor="agree"
                         className="flex"
                     >
-                        I agree with the&nbsp;
+                        {t('i-agree-with-the')}&nbsp;
                         <Link
                             href="#"
                             className="text-cyan-600 hover:underline dark:text-cyan-500"
