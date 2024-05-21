@@ -3,6 +3,7 @@ import { forwardRef } from 'react';
 
 import { TextInput } from 'flowbite-react';
 
+import Icon from '@/types/modules/shared/components/Icon/Icon';
 import { TextBoxProps } from '@/types/shared/types/components/textBox';
 
 // eslint-disable-next-line react/display-name
@@ -31,6 +32,10 @@ const TextBox = forwardRef<any, TextBoxProps>(
         }: TextBoxProps,
         ref: React.Ref<any> | null,
     ) => {
+        const iconComponent = icon ? () => <Icon name={icon} /> : undefined;
+        const rightIconComponent = rightIcon
+            ? () => <Icon name={rightIcon} />
+            : undefined;
         return (
             <TextInput
                 id={id}
@@ -42,8 +47,8 @@ const TextBox = forwardRef<any, TextBoxProps>(
                 helperText={helperText}
                 addon={addon}
                 value={value}
-                icon={icon}
-                rightIcon={rightIcon}
+                icon={iconComponent}
+                rightIcon={rightIconComponent}
                 required={required}
                 disabled={disabled}
                 data-testid={testId}
