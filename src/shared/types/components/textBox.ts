@@ -1,10 +1,18 @@
 import { FC, ReactNode, SVGProps } from 'react';
 
+export enum TextInputType {
+    text = 'text',
+    password = 'password',
+    number = 'number',
+    email = 'email',
+}
 export type TextBoxProps = {
     id?: string;
-    type: string;
+    name: string;
+    type: TextInputType;
     sizing?: string;
-    labelText: string;
+    labelText?: string;
+    className?: string;
     placeholder?: string;
     shadow?: boolean;
     required?: boolean;
@@ -16,6 +24,7 @@ export type TextBoxProps = {
     helperText?: ReactNode | string;
     addon?: string;
     testId?: string;
+    autoComplete?: 'true' | 'false';
     onClick?: () => void;
     onMouseEnter?: () => void;
     onMouseLeave?: () => void;

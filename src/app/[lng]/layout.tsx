@@ -7,6 +7,7 @@ import { getServerSession } from 'next-auth';
 import ReactQueryProvider from '@/types/components/ReactQueryProvider/ReactQueryProvider';
 import SessionProvider from '@/types/components/SessionProvider/SessionProvider';
 import TopMenu from '@/types/components/TopMenu/TopMenu';
+import { ToastContextProvider } from '@/types/modules/shared/components/Toast/ToastContextProvider';
 import { RootLayoutProps } from '@/types/shared/types/layout';
 import { roboto, vazirmatn } from '@/types/styles/fonts';
 import ThemeProvider from '@/types/theme/ThemeProvider';
@@ -37,8 +38,10 @@ export default async function RootLayout({
                 <ReactQueryProvider>
                     <SessionProvider session={session}>
                         <ThemeProvider>
-                            <TopMenu />
-                            {children}
+                            <ToastContextProvider>
+                                <TopMenu />
+                                {children}
+                            </ToastContextProvider>
                         </ThemeProvider>
                     </SessionProvider>
                 </ReactQueryProvider>

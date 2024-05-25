@@ -1,9 +1,11 @@
-export type CheckBoxProps = {
+export type SelectBoxProps = {
     id?: string;
     name?: string;
     className?: string;
-    defaultChecked?: boolean;
+    required?: boolean;
     disabled?: boolean;
+    labelText?: string;
+    options: { value: string; label: string }[];
     testId?: string;
     onClick?: () => void;
     onMouseEnter?: () => void;

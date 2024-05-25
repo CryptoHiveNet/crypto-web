@@ -1,7 +1,7 @@
 'use client';
 import { forwardRef } from 'react';
 
-import { TextInput } from 'flowbite-react';
+import { Label, TextInput } from 'flowbite-react';
 
 import Icon from '@/types/modules/shared/components/Icon/Icon';
 import { TextBoxProps } from '@/types/shared/types/components/textBox';
@@ -11,8 +11,10 @@ const TextBox = forwardRef<any, TextBoxProps>(
     (
         {
             id,
+            name,
             type,
             sizing,
+            className,
             labelText,
             placeholder,
             shadow,
@@ -25,6 +27,7 @@ const TextBox = forwardRef<any, TextBoxProps>(
             helperText,
             addon,
             testId,
+            autoComplete,
             onClick,
             onMouseEnter,
             onMouseLeave,
@@ -37,27 +40,40 @@ const TextBox = forwardRef<any, TextBoxProps>(
             ? () => <Icon name={rightIcon} />
             : undefined;
         return (
-            <TextInput
-                id={id}
-                type={type}
-                sizing={sizing}
-                placeholder={placeholder}
-                shadow={shadow}
-                color={color}
-                helperText={helperText}
-                addon={addon}
-                value={value}
-                icon={iconComponent}
-                rightIcon={rightIconComponent}
-                required={required}
-                disabled={disabled}
-                data-testid={testId}
-                onClick={onClick}
-                onMouseEnter={onMouseEnter}
-                onMouseLeave={onMouseLeave}
-                ref={ref}
-                {...rest}
-            />
+            <>
+                {labelText && (
+                    <div className="mb-2 block">
+                        <Label
+                            htmlFor={id}
+                            value={labelText}
+                        />
+                    </div>
+                )}
+                <TextInput
+                    id={id}
+                    name={name}
+                    type={type}
+                    sizing={sizing}
+                    className={className}
+                    placeholder={placeholder}
+                    shadow={shadow}
+                    color={color}
+                    helperText={helperText}
+                    addon={addon}
+                    value={value}
+                    icon={iconComponent}
+                    rightIcon={rightIconComponent}
+                    required={required}
+                    disabled={disabled}
+                    data-testid={testId}
+                    autoComplete={autoComplete}
+                    onClick={onClick}
+                    onMouseEnter={onMouseEnter}
+                    onMouseLeave={onMouseLeave}
+                    ref={ref}
+                    {...rest}
+                />
+            </>
         );
     },
 );

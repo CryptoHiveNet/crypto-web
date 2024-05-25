@@ -1,14 +1,18 @@
+'use client';
+import React, { createContext, useContext, useState } from 'react';
+
+import { useTranslation } from 'react-i18next';
+
+import { ToastProps, ToastType } from '@/types/shared/types/components/toast';
 import { useQueryClient } from '@tanstack/react-query';
-import React, { useContext, useState, createContext } from 'react';
 
 import { QueryKey } from '../../types/QueryKey';
-import { ToastProps, ToastType } from '@/types/shared/types/components/toast';
-import { useTranslation } from 'react-i18next';
 
 export type ToastContextProps = {
     toastList: Array<ToastProps>;
     createToast: (toastData: ToastData) => number;
     deleteToast: (id: number) => void;
+    deleteAllToasts: () => void;
 };
 
 export type ToastContextInitialProps = {
@@ -23,7 +27,8 @@ export type ToastData = {
     ctaLabel?: string;
 };
 
-type QueryKeyLiteralType = `query_error.${(typeof QueryKey)[keyof typeof QueryKey]}`;
+type QueryKeyLiteralType =
+    `query_error.${(typeof QueryKey)[keyof typeof QueryKey]}`;
 
 const ToastContext = createContext<ToastContextProps>({} as ToastContextProps);
 
@@ -35,7 +40,9 @@ const ToastContextProvider = ({ children }: ToastContextInitialProps) => {
     const queryClient = useQueryClient();
 
     queryClient.getQueryCache().config.onError = (error, query) => {
-        const queryKey = Array.isArray(query.queryKey) ? query.queryKey[0] : query.queryKey;
+        const queryKey = Array.isArray(query.queryKey)
+            ? query.queryKey[0]
+            : query.queryKey;
 
         if (queryKey === QueryKey.UserInfo) return;
 
@@ -43,27 +50,41 @@ const ToastContextProvider = ({ children }: ToastContextInitialProps) => {
 
         createToast({
             message: t(toastTranslation as unknown as TemplateStringsArray),
-            type: ToastType.Danger
+            type: ToastType.Danger,
         });
     };
 
     const createToast = (toastData: ToastData) => {
         const nextToastId = toastId;
 
-        setToastList([...toastList, {
-            id: nextToastId.toString(), ...toastData,
-            children: toastData.message
-        }]);
+        setToastList([
+            ...toastList,
+            {
+                id: nextToastId.toString(),
+                ...toastData,
+                children: toastData.message,
+            },
+        ]);
         setToastId(nextToastId + 1);
 
         return nextToastId;
     };
 
     const deleteToast = (id: number) => {
-        setToastList((prevState) => prevState.filter((toast) => id.toString() !== toast.id));
+        setToastList((prevState) =>
+            prevState.filter((toast) => id.toString() !== toast.id),
+        );
     };
-
-    return <ToastContext.Provider value={{ toastList, deleteToast, createToast }}>{children}</ToastContext.Provider>;
+    const deleteAllToasts = () => {
+        setToastList([]);
+    };
+    return (
+        <ToastContext.Provider
+            value={{ toastList, deleteToast, deleteAllToasts, createToast }}
+        >
+            {children}
+        </ToastContext.Provider>
+    );
 };
 
 const useToastContext = (): ToastContextProps => useContext(ToastContext);
