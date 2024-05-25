@@ -2,7 +2,6 @@ import './globals.css';
 
 import { dir } from 'i18next';
 import { getServerSession } from 'next-auth';
-import { useTranslation } from 'react-i18next';
 
 import ReactQueryProvider from '@/types/components/ReactQueryProvider/ReactQueryProvider';
 import SessionProvider from '@/types/components/SessionProvider/SessionProvider';
@@ -23,10 +22,9 @@ export async function generateMetadata() {
 }
 export default async function RootLayout({ children }: RootLayoutProps) {
     const session = await getServerSession().catch((e) => {
-        console.log('error: ', e);
         return null;
     });
-    const { t, i18n } = await getServerTranslations();
+    const { i18n } = await getServerTranslations();
     const language = i18n.resolvedLanguage;
 
     return (

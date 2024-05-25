@@ -1,4 +1,7 @@
 {
+  "home_page_title": "The EN title of the home page",
+  "metadata_title": "The metadata title of the page",
+  "metadata_description": "The metadata description of the page",
   "test": "Hello",
   "email-place-holder": "email-place-holder",
   "your-email": "your-email",
