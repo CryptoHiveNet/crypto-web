@@ -21,6 +21,7 @@ const Datepicker = forwardRef<any, DatepickerProps>(
             inline,
             className,
             labelText,
+            errorMessage,
             testId,
             onClick,
             onMouseEnter,
@@ -34,6 +35,7 @@ const Datepicker = forwardRef<any, DatepickerProps>(
                 {labelText && (
                     <div className="mb-2 block">
                         <Label
+                            color={errorMessage && 'failure'}
                             htmlFor={id}
                             value={labelText}
                         />
@@ -41,6 +43,7 @@ const Datepicker = forwardRef<any, DatepickerProps>(
                 )}
                 <FlowbiteDatepicker
                     id={id}
+                    color={errorMessage && 'failure'}
                     name={name}
                     language={language}
                     labelTodayButton={labelTodayButton}

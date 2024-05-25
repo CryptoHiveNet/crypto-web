@@ -1,17 +1,18 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { act, renderHook } from '@testing-library/react';
 import { ReactNode } from 'react';
 
-import { ToastContextProvider, useToastContext } from './ToastContextProvider';
 import { ToastType } from '@/types/shared/types/components/toast';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { act, renderHook } from '@testing-library/react';
+
+import { ToastContextProvider, useToastContext } from './ToastContextProvider';
 
 jest.mock('react-i18next', () => ({
     // this mock makes sure any components using the translate hook can use it without a warning being shown
     useTranslation: () => {
         return {
-            t: (str: string): string => str
+            t: (str: string): string => str,
         };
-    }
+    },
 }));
 
 const wrapper = ({ children }: { children: ReactNode }) => (
@@ -31,7 +32,10 @@ describe('ToastContextProvider', () => {
 
         for (let i = 0; i < 10; i++) {
             act(() => {
-                result.current.createToast({ message: 'test', type: ToastType.Danger });
+                result.current.createToast({
+                    message: 'test',
+                    type: ToastType.Danger,
+                });
             });
         }
 
@@ -45,7 +49,12 @@ describe('ToastContextProvider', () => {
 
         for (let i = 0; i < 10; i++) {
             act(() => {
-                toastIds.push(result.current.createToast({ message: i + '', type: ToastType.Success }));
+                toastIds.push(
+                    result.current.createToast({
+                        message: i + '',
+                        type: ToastType.Success,
+                    }),
+                );
             });
         }
         // array before deletions => | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |

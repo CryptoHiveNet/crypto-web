@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 
 export type ToastProps = {
-    type: ToastType,
     id?: string;
     className?: string;
     children: ReactNode;
@@ -24,5 +23,5 @@ export type ToastToggleProps = {
 export enum ToastType {
     Success = 'critical',
     Warning = 'warning',
-    Danger = 'danger'
+    Danger = 'danger',
 }

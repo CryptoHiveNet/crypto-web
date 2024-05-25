@@ -1,6 +1,11 @@
 import { FunctionComponent, SVGProps } from 'react';
 
-import { HiEnvelope, HiExclamationCircle, HiOutlineUser } from 'react-icons/hi2';
+import { HiCheck, HiExclamation, HiX } from 'react-icons/hi';
+import {
+    HiEnvelope,
+    HiExclamationCircle,
+    HiOutlineUser,
+} from 'react-icons/hi2';
 import { MdOutlinePassword } from 'react-icons/md';
 import { PiUserList } from 'react-icons/pi';
 
@@ -10,6 +15,9 @@ const iconMap: { [key: string]: FunctionComponent<SVGProps<SVGSVGElement>> } = {
     MdOutlinePassword,
     HiOutlineUser,
     PiUserList,
+    HiCheck,
+    HiExclamation,
+    HiX,
 };
 
 const Icon = ({ name, className }: { name?: string; className?: string }) => {

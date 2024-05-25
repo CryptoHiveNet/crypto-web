@@ -16,6 +16,7 @@ const SelectBox = forwardRef<any, SelectBoxProps>(
             disabled,
             labelText,
             options,
+            errorMessage,
             testId,
             onClick,
             onMouseEnter,
@@ -28,6 +29,7 @@ const SelectBox = forwardRef<any, SelectBoxProps>(
             <>
                 <div className="mb-2 block">
                     <Label
+                        color={errorMessage && 'failure'}
                         htmlFor={id}
                         value={labelText}
                     />
@@ -35,6 +37,7 @@ const SelectBox = forwardRef<any, SelectBoxProps>(
                 <Select
                     id={id}
                     name={name}
+                    color={errorMessage && 'failure'}
                     className={className}
                     required={required}
                     disabled={disabled}
