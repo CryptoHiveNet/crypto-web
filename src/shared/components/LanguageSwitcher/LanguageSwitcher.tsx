@@ -2,10 +2,11 @@
 import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 
+import Button from '@/types/components/Button/Button';
 import { languages } from '@/types/utils/i18n/settings';
 
 export const LanguageSwitcher = () => {
-    const { t, i18n } = useTranslation();
+    const { i18n } = useTranslation();
     const router = useRouter();
     const currentLanguage = i18n.resolvedLanguage;
 
@@ -22,12 +23,9 @@ export const LanguageSwitcher = () => {
                 }
                 return (
                     <span key={index}>
-                        <button
-                            onClick={() => changeLanguage(language)}
-                            type="button"
-                        >
+                        <Button onClick={() => changeLanguage(language)}>
                             {language}
-                        </button>
+                        </Button>
                     </span>
                 );
             })}
