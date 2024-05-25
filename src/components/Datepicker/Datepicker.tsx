@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 
-import { Datepicker as FlowbiteDatepicker } from 'flowbite-react';
+import { Datepicker as FlowbiteDatepicker, Label } from 'flowbite-react';
 
 import { DatepickerProps } from '@/types/shared/types/components/datepicker';
 
@@ -9,6 +9,7 @@ const Datepicker = forwardRef<any, DatepickerProps>(
     (
         {
             id,
+            name,
             language,
             labelTodayButton,
             labelClearButton,
@@ -19,6 +20,7 @@ const Datepicker = forwardRef<any, DatepickerProps>(
             title,
             inline,
             className,
+            labelText,
             testId,
             onClick,
             onMouseEnter,
@@ -28,24 +30,36 @@ const Datepicker = forwardRef<any, DatepickerProps>(
         ref: React.Ref<any> | null,
     ) => {
         return (
-            <FlowbiteDatepicker
-                id={id}
-                language={language}
-                labelTodayButton={labelTodayButton}
-                labelClearButton={labelClearButton}
-                minDate={minDate}
-                maxDate={maxDate}
-                weekStart={weekStart}
-                autoHide={autoHide}
-                title={title}
-                inline={inline}
-                className={className}
-                data-testid={testId}
-                onClick={onClick}
-                onMouseEnter={onMouseEnter}
-                onMouseLeave={onMouseLeave}
-                {...rest}
-            />
+            <>
+                {labelText && (
+                    <div className="mb-2 block">
+                        <Label
+                            htmlFor={id}
+                            value={labelText}
+                        />
+                    </div>
+                )}
+                <FlowbiteDatepicker
+                    id={id}
+                    name={name}
+                    language={language}
+                    labelTodayButton={labelTodayButton}
+                    labelClearButton={labelClearButton}
+                    minDate={minDate}
+                    maxDate={maxDate}
+                    weekStart={weekStart}
+                    autoHide={autoHide}
+                    title={title}
+                    inline={inline}
+                    className={className}
+                    data-testid={testId}
+                    onClick={onClick}
+                    onMouseEnter={onMouseEnter}
+                    onMouseLeave={onMouseLeave}
+                    // ref={ref}
+                    {...rest}
+                />
+            </>
         );
     },
 );
