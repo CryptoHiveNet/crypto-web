@@ -1,6 +1,6 @@
 {
   "home_page_title": "The IR title of the home page",
   "hello": "سلام",
-  "metadata_title": "برنامه بعدی را ایجاد کنید",
-  "metadata_description": "ایجاد شده توسط ایجاد برنامه بعدی"
+  "metadata_title": "The FA metadata title of the page",
+  "metadata_description": "The FA metadata description of the page"
 }
