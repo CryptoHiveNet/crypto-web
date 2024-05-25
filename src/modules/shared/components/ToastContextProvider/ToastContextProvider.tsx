@@ -3,10 +3,12 @@ import React, { createContext, useContext, useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
+import Toast from '@/types/components/Toast/Toast';
 import { ToastProps, ToastType } from '@/types/shared/types/components/toast';
 import { useQueryClient } from '@tanstack/react-query';
 
 import { QueryKey } from '../../types/QueryKey';
+import NotificationToast from '../NotificationToast/NotificationToast';
 
 export type ToastContextProps = {
     toastList: Array<ToastProps>;
@@ -78,11 +80,23 @@ const ToastContextProvider = ({ children }: ToastContextInitialProps) => {
     const deleteAllToasts = () => {
         setToastList([]);
     };
+    console.log(toastList);
     return (
         <ToastContext.Provider
             value={{ toastList, deleteToast, deleteAllToasts, createToast }}
         >
             {children}
+            {toastList.length > 0 && (
+                <div className="flex flex-col gap-4 fixed bottom-5 left-5 w-fit">
+                    {toastList.map((item, index) => (
+                        <NotificationToast
+                            type={item.type}
+                            key={item.id}
+                            message={item.message}
+                        />
+                    ))}
+                </div>
+            )}
         </ToastContext.Provider>
     );
 };

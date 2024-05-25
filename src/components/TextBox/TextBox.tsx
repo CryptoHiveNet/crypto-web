@@ -28,6 +28,7 @@ const TextBox = forwardRef<any, TextBoxProps>(
             addon,
             testId,
             autoComplete,
+            errorMessage,
             onClick,
             onMouseEnter,
             onMouseLeave,
@@ -44,6 +45,7 @@ const TextBox = forwardRef<any, TextBoxProps>(
                 {labelText && (
                     <div className="mb-2 block">
                         <Label
+                            color={errorMessage && 'failure'}
                             htmlFor={id}
                             value={labelText}
                         />
@@ -57,8 +59,8 @@ const TextBox = forwardRef<any, TextBoxProps>(
                     className={className}
                     placeholder={placeholder}
                     shadow={shadow}
-                    color={color}
-                    helperText={helperText}
+                    color={errorMessage ? 'failure' : color}
+                    helperText={errorMessage ? errorMessage : helperText}
                     addon={addon}
                     value={value}
                     icon={iconComponent}

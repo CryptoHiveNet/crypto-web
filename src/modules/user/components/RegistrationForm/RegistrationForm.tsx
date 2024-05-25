@@ -1,44 +1,23 @@
 'use client';
-import React, { FormEventHandler, useEffect } from 'react';
+import React, { FormEventHandler, useEffect, useState } from 'react';
 
 import { Label } from 'flowbite-react';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
-import { z } from 'zod';
 
 import Button from '@/types/components/Button/Button';
 import CheckBox from '@/types/components/CheckBox/CheckBox';
 import Datepicker from '@/types/components/Datepicker/Datepicker';
 import SelectBox from '@/types/components/SelectBox/SelectBox';
 import TextBox from '@/types/components/TextBox/TextBox';
-import Toast from '@/types/components/Toast/Toast';
-import ToastToggle from '@/types/components/Toast/ToastToggle/ToastToggle';
 import { getFormValues } from '@/types/modules/shared/components/Forms/FormUtils';
-import Icon from '@/types/modules/shared/components/Icon/Icon';
-import { useToastContext } from '@/types/modules/shared/components/Toast/ToastContextProvider';
-import {
-    RegisterUserSchema
-} from '@/types/packages/api/contexts/user/application/types/RegisterUserRequest';
-import { NoticeMessage } from '@/types/shared/types/components/NoticeMessage';
+import { useToastContext } from '@/types/modules/shared/components/ToastContextProvider/ToastContextProvider';
+import { RegisterUserSchema } from '@/types/packages/api/contexts/user/application/types/RegisterUserRequest';
 import { TextInputType } from '@/types/shared/types/components/textBox';
 import { ToastType } from '@/types/shared/types/components/toast';
-import { RegisterUserRequest } from '@/types/shared/types/user/register';
 import { GenderType } from '@/types/shared/types/user/userProfile';
 
 import { useRegistration } from '../../hooks/useRegisterUser';
-
-/**
- * ToDo List:
- * Show loading when isPending is true.
- * Show warning/Success message when you have a result from the hook as we discussed today.
- * Add all of the necessary fields and also their validation to the RegistrationForm.isValid
- * Disable the registration button and also form submission when isPending is true
- * After a successful registration we need to hide the from and show a success message box to ask the user for going to the login page
- * After making the login form we need to do a login for that user automatically
- * We need to add CSRF token to the registration form
- * We need to add all texts into the language files(All languages)
- *
- */
 
 enum Fields {
     Username = 'loginUserName',
@@ -72,34 +51,40 @@ export default function RegistrationForm() {
     const { t } = useTranslation();
     const { submit, isPending, errorMessages, isSuccess } = useRegistration();
     const { createToast, deleteToast, deleteAllToasts } = useToastContext();
+    const [validationErrors, setValidationErrors] = useState<{
+        [key: string]: string;
+    }>({});
 
     const onHandleFormSubmit: FormEventHandler<HTMLFormElement> = (event) => {
-        event.preventDefault(); // Prevent the default form submission
+        event.preventDefault();
+        setValidationErrors({});
         const values = getFormValues(event) as Partial<FieldValues>;
-        if (RegistrationForm.isValid(values)) {
+        const formValidationResult = RegistrationForm.isValid(
+            values,
+            setValidationErrors,
+        );
+        if (formValidationResult) {
             submit(values);
+            setValidationErrors({});
         } else {
-            // Handle invalid form submission
-            console.log(values);
-            console.log('invalid form submission');
             createToast({
-                message: t('form-invalid'),
+                message: 'validationErrors',
                 type: ToastType.Danger,
             });
         }
     };
 
     useEffect(() => {
-        // ToDo show an error message
+        // Show an error message
         if (!isSuccess) {
             let message: string = '';
             if (errorMessages.length > 0) {
                 message = errorMessages.join('\n');
+                createToast({
+                    message: message,
+                    type: ToastType.Danger,
+                });
             }
-            createToast({
-                message: message,
-                type: ToastType.Danger,
-            });
         } else {
             deleteAllToasts();
         }
@@ -121,6 +106,7 @@ export default function RegistrationForm() {
                         labelText={t('username')}
                         placeholder={t('username-place-holder')}
                         icon="HiOutlineUser"
+                        errorMessage={validationErrors[Fields.Username]}
                     />
                 </div>
                 <div>
@@ -132,6 +118,7 @@ export default function RegistrationForm() {
                         labelText={t('email')}
                         placeholder={t('email-place-holder')}
                         icon="HiEnvelope"
+                        errorMessage={validationErrors[Fields.Email]}
                     />
                 </div>
                 <div className="w-full flex items-center justify-between">
@@ -144,6 +131,7 @@ export default function RegistrationForm() {
                             labelText={t('first-name')}
                             placeholder={t('first-name-place-holder')}
                             icon="PiUserList"
+                            errorMessage={validationErrors[Fields.FirstName]}
                         />
                     </div>
                     <div>
@@ -155,6 +143,7 @@ export default function RegistrationForm() {
                             labelText={t('last-name')}
                             placeholder={t('last-name-place-holder')}
                             icon="PiUserList"
+                            errorMessage={validationErrors[Fields.LastName]}
                         />
                     </div>
                 </div>
@@ -174,6 +163,7 @@ export default function RegistrationForm() {
                                     label: GenderType.Female,
                                 },
                             ]}
+                            errorMessage={validationErrors[Fields.Gender]}
                         />
                     </div>
                     <div className="w-2/3">
@@ -181,6 +171,7 @@ export default function RegistrationForm() {
                             name={Fields.DateOfBirth}
                             labelText={t('date-of-birth')}
                             title={t('date-of-birth')}
+                            errorMessage={validationErrors[Fields.DateOfBirth]}
                         />
                     </div>
                 </div>
@@ -196,6 +187,9 @@ export default function RegistrationForm() {
                             type={TextInputType.text}
                             placeholder={t('phone-number-prefix-place-holder')}
                             addon="+"
+                            errorMessage={
+                                validationErrors[Fields.PhoneNumberPrefix]
+                            }
                         />
                         <TextBox
                             className="w-full"
@@ -204,6 +198,7 @@ export default function RegistrationForm() {
                             required
                             type={TextInputType.text}
                             placeholder={t('phone-number-place-holder')}
+                            errorMessage={validationErrors[Fields.PhoneNumber]}
                         />
                     </div>
                 </div>
@@ -216,6 +211,7 @@ export default function RegistrationForm() {
                         labelText={t('password')}
                         placeholder={t('enter-password')}
                         icon="MdOutlinePassword"
+                        errorMessage={validationErrors[Fields.Password]}
                     />
                 </div>
                 <div>
@@ -227,22 +223,25 @@ export default function RegistrationForm() {
                         labelText={t('repeat-password')}
                         placeholder={t('repeat-password-placeholder')}
                         icon="MdOutlinePassword"
+                        errorMessage={validationErrors[Fields.RePassword]}
                     />
                 </div>
                 <div className="flex items-center gap-2">
-                    <CheckBox name={Fields.Agreement} />
-                    <Label
-                        htmlFor="agree"
-                        className="flex"
-                    >
-                        {t('i-agree-with-the')}&nbsp;
-                        <Link
-                            href="#"
-                            className="text-cyan-600 hover:underline dark:text-cyan-500"
-                        >
-                            {t('terms-and-conditions')}
-                        </Link>
-                    </Label>
+                    <CheckBox
+                        name={Fields.Agreement}
+                        labelText={
+                            <>
+                                {t('i-agree-with-the')}&nbsp;
+                                <Link
+                                    href="#"
+                                    className="text-cyan-600 hover:underline dark:text-cyan-500"
+                                >
+                                    {t('terms-and-conditions')}
+                                </Link>
+                            </>
+                        }
+                        errorMessage={validationErrors[Fields.Agreement]}
+                    />
                 </div>
                 <Button
                     type="submit"
@@ -258,10 +257,12 @@ export default function RegistrationForm() {
 
 RegistrationForm.isValid = (
     values: Partial<FieldValues>,
+    setValidationErrors: React.Dispatch<
+        React.SetStateAction<{ [key: string]: string }>
+    >,
 ): values is FieldValues => {
     try {
-        // Check if all values are valid according to the schema
-        const checkValues = RegisterUserSchema.parse({
+        RegisterUserSchema.parse({
             loginUserName: values[Fields.Username],
             email: values[Fields.Email],
             firstName: values[Fields.FirstName],
@@ -272,15 +273,31 @@ RegistrationForm.isValid = (
             phoneNumberPrefix: values[Fields.PhoneNumberPrefix],
             password: values[Fields.Password],
         });
-        console.log(checkValues);
-        // Additional validation: check if passwords match
+
+        // Check if passwords match
         if (values[Fields.Password] !== values[Fields.RePassword]) {
-            console.log("passwords doesn't match");
+            setValidationErrors((prev) => ({
+                ...prev,
+                [Fields.RePassword]: 'Passwords do not match',
+            }));
             return false;
         }
 
+        setValidationErrors({});
         return true;
     } catch (error) {
+        if (error.errors) {
+            const errors = error.errors.reduce(
+                (acc: { [key: string]: string }, curr: any) => {
+                    acc[curr.path[0]] = curr.message;
+                    return acc;
+                },
+                {},
+            );
+            setValidationErrors(errors);
+        } else {
+            setValidationErrors({});
+        }
         return false;
     }
 };

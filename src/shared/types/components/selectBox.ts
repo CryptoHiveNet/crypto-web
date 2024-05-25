@@ -6,6 +6,7 @@ export type SelectBoxProps = {
     disabled?: boolean;
     labelText?: string;
     options: { value: string; label: string }[];
+    errorMessage?: string;
     testId?: string;
     onClick?: () => void;
     onMouseEnter?: () => void;

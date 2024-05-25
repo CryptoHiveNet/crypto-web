@@ -25,6 +25,7 @@ export type TextBoxProps = {
     addon?: string;
     testId?: string;
     autoComplete?: 'true' | 'false';
+    errorMessage?: string;
     onClick?: () => void;
     onMouseEnter?: () => void;
     onMouseLeave?: () => void;

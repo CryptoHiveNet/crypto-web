@@ -1,7 +1,7 @@
 'use client';
 import { forwardRef } from 'react';
 
-import { Checkbox as CHB } from 'flowbite-react';
+import { Checkbox as CHB, Label } from 'flowbite-react';
 
 import { CheckBoxProps } from '@/types/shared/types/components/checkBox';
 
@@ -10,6 +10,8 @@ const CheckBox = forwardRef<any, CheckBoxProps>(
     (
         {
             id,
+            labelText,
+            errorMessage,
             className,
             defaultChecked,
             disabled,
@@ -22,18 +24,31 @@ const CheckBox = forwardRef<any, CheckBoxProps>(
         ref: React.Ref<any> | null,
     ) => {
         return (
-            <CHB
-                id={id}
-                className={className}
-                defaultChecked={defaultChecked}
-                disabled={disabled}
-                data-testid={testId}
-                onClick={onClick}
-                onMouseEnter={onMouseEnter}
-                onMouseLeave={onMouseLeave}
-                ref={ref}
-                {...rest}
-            />
+            <>
+                {labelText && (
+                    <div className="mb-2 block">
+                        <Label
+                            color={errorMessage && 'failure'}
+                            htmlFor={id}
+                            value={labelText}
+                        />
+                    </div>
+                )}
+
+                <CHB
+                    id={id}
+                    color={errorMessage && 'failure'}
+                    className={className}
+                    defaultChecked={defaultChecked}
+                    disabled={disabled}
+                    data-testid={testId}
+                    onClick={onClick}
+                    onMouseEnter={onMouseEnter}
+                    onMouseLeave={onMouseLeave}
+                    ref={ref}
+                    {...rest}
+                />
+            </>
         );
     },
 );

@@ -2,8 +2,12 @@ import { useEffect } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import { useToastContext } from '@/types/modules/shared/components/Toast/ToastContextProvider';
-import { MutationFunction, useMutation, UseMutationOptions } from '@tanstack/react-query';
+import { useToastContext } from '@/types/modules/shared/components/ToastContextProvider/ToastContextProvider';
+import {
+    MutationFunction,
+    useMutation,
+    UseMutationOptions,
+} from '@tanstack/react-query';
 
 import { ToastType } from '../types/components/toast';
 

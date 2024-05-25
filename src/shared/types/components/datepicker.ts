@@ -12,6 +12,7 @@ export type DatepickerProps = {
     inline?: boolean;
     className?: string;
     labelText?: string;
+    errorMessage?: string;
     testId?: string;
     onClick?: () => void;
     onMouseEnter?: () => void;
