@@ -21,9 +21,7 @@ export async function generateMetadata() {
     };
 }
 export default async function RootLayout({ children }: RootLayoutProps) {
-    const session = await getServerSession().catch((e) => {
-        return null;
-    });
+    const session = await getServerSession();
     const { i18n } = await getServerTranslations();
     const language = i18n.resolvedLanguage;
 
