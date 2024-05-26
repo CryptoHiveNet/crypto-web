@@ -19,6 +19,19 @@ import { GenderType } from '@/types/shared/types/user/userProfile';
 
 import { useRegistration } from '../../hooks/useRegisterUser';
 
+/**
+ * ToDo List:
+ * Show loading when isPending is true.
+ * Show warning/Success message when you have a result from the hook as we discussed today.
+ * Add all of the necessary fields and also their validation to the RegistrationForm.isValid
+ * Disable the registration button and also form submission when isPending is true
+ * After a successful registration we need to hide the from and show a success message box to ask the user for going to the login page
+ * After making the login form we need to do a login for that user automatically
+ * We need to add CSRF token to the registration form
+ * We need to add all texts into the language files(All languages)
+ *
+ */
+
 enum Fields {
     Username = 'loginUserName',
     Email = 'email',
