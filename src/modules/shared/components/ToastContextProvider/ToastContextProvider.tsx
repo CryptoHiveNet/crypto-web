@@ -80,7 +80,6 @@ const ToastContextProvider = ({ children }: ToastContextInitialProps) => {
     const deleteAllToasts = () => {
         setToastList([]);
     };
-    console.log(toastList);
     return (
         <ToastContext.Provider
             value={{ toastList, deleteToast, deleteAllToasts, createToast }}

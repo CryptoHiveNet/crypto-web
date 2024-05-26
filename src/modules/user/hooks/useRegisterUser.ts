@@ -3,19 +3,13 @@ import { useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import {
-    RegisterUserRequest
-} from '@/types/packages/api/contexts/user/application/types/RegisterUserRequest';
-import { UnhandledBusinessException } from '@/types/shared/Errors/UnhandledBusinessException';
+import { RegisterUserRequest } from '@/types/packages/api/contexts/user/application/types/RegisterUserRequest';
 import { useMutationWithError } from '@/types/shared/hooks/useMutationWithError';
-import { axiosClient } from '@/types/shared/infrastructures/http/AxiosClient';
-import { HttpError } from '@/types/shared/infrastructures/http/HttpError';
-import HttpStatus from '@/types/shared/infrastructures/http/HttpStatus';
-import { NoticeMessage, Severity } from '@/types/shared/types/components/NoticeMessage';
+import { NoticeMessage } from '@/types/shared/types/components/NoticeMessage';
+import { ToastType } from '@/types/shared/types/components/toast';
 import { Address } from '@/types/shared/types/user/Address';
-import { useMutation } from '@tanstack/react-query';
 
-import { REGISTER } from '../../shared/constants/apiRoutes';
+import { useToastContext } from '../../shared/components/ToastContextProvider/ToastContextProvider';
 import { addUser } from '../../shared/services/user/register/addUser';
 
 export type OnInvalidAddressErrorProps = {
@@ -29,7 +23,7 @@ export const useRegistration = () => {
     const [invalidAddressError, setInvalidAddressError] = useState<
         OnInvalidAddressErrorProps | undefined
     >();
-
+    const { createToast, deleteToast, deleteAllToasts } = useToastContext();
     const {
         mutate: registerMutation,
         isPending,
@@ -38,11 +32,15 @@ export const useRegistration = () => {
         onSuccess: async () => {
             // ToDo: This should handle the success part after the user registration.
             // Force login and redirect to the user cPanel should be done here.
-            console.log('success');
+            setErrorMessages([]);
+            createToast({
+                message: t('user-has-been-registered-successfully'),
+                type: ToastType.Success,
+            });
         },
         onError: async (error: unknown) => {
             // ToDo: Update the errorMessages state regarding the error.
-            console.log(error);
+            setErrorMessages([...errorMessages, error as NoticeMessage]);
         },
     });
 

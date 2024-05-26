@@ -1,17 +1,23 @@
-import { axiosClient } from "@/types/shared/infrastructures/http/AxiosClient";
-import { REGISTER } from "../../../constants/apiRoutes";
 import {
-  RegisterUserRequest,
-  RegisterUserSchema,
-} from "@/types/packages/api/contexts/user/application/types/RegisterUserRequest";
+    RegisterUserRequest,
+    RegisterUserSchema,
+} from '@/types/packages/api/contexts/user/application/types/RegisterUserRequest';
 
-export const addUser = (params: RegisterUserRequest) => {
-  const result = RegisterUserSchema.safeParse(params);
+import { REGISTER } from '../../../constants/apiRoutes';
 
-  // ToDo: Change REGISTER with registerApiRoute
-  if (result.success) return axiosClient.post(REGISTER, params);
+export const addUser = async (params: RegisterUserRequest) => {
+    const result = RegisterUserSchema.safeParse(params);
 
-  throw new Error(
-    `BAD_REQUEST: Parameters for ${REGISTER} are invalid!` + params
-  );
+    // ToDo: Change REGISTER with registerApiRoute
+    // if (result.success) return axiosClient.post(REGISTER, params);
+
+    // Handle mock request
+    if (result.success) {
+        // Wait for 2 seconds before returning the params
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        return params;
+    }
+    throw new Error(
+        `BAD_REQUEST: Parameters for ${REGISTER} are invalid!` + params,
+    );
 };
