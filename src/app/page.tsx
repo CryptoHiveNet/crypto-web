@@ -1,5 +1,4 @@
 'use client';
-import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 
 import { LanguageSwitcher } from '@/types/shared/components/LanguageSwitcher/LanguageSwitcher';
@@ -9,7 +8,6 @@ export default function Page() {
     return (
         <>
             <h1>{t('home_page_title')}</h1>
-            <Link href={`/second-page`}>{t('second-page')}</Link>
             <LanguageSwitcher />
         </>
     );
