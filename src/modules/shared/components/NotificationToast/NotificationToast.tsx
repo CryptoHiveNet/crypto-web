@@ -11,7 +11,7 @@ const NotificationToast = ({
 }: {
     testId?: string;
     message: string;
-    type: ToastType;
+    type?: ToastType;
 }) => {
     let iconName;
     let containerColor;

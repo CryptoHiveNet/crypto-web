@@ -67,6 +67,7 @@ export default function RegistrationForm() {
     const [validationErrors, setValidationErrors] = useState<{
         [key: string]: string;
     }>({});
+    // const [isFormValid, setIsFormValid] = useState(false);
 
     const onHandleFormSubmit: FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
@@ -90,6 +91,14 @@ export default function RegistrationForm() {
             });
         }
     };
+
+    // const handleFieldChange = (event: React.ChangeEvent<HTMLFormElement>) => {
+    //     event.preventDefault();
+    //     let values = getFormValues(event) as Partial<FieldValues>;
+    //     values.dateOfBirth = new Date(values.dateOfBirth?.toString() as string);
+    //     const formValidationResult = RegistrationForm.isValid(values);
+    //     setIsFormValid(formValidationResult);
+    // };
 
     useEffect(() => {
         // Show an error message
@@ -119,6 +128,7 @@ export default function RegistrationForm() {
                     onSubmit={onHandleFormSubmit}
                     className="flex max-w-md flex-col gap-4"
                     data-testid="registrationForm"
+                    // onChange={handleFieldChange}
                 >
                     <div>
                         <TextBox
@@ -276,6 +286,7 @@ export default function RegistrationForm() {
                     </div>
                     <Button
                         type="submit"
+                        // disabled={isPending || !isFormValid}
                         disabled={isPending}
                         isProcessing={isPending}
                     >
@@ -293,7 +304,6 @@ RegistrationForm.isValid = (
         React.SetStateAction<{ [key: string]: string }>
     >,
 ): values is FieldValues => {
-    const { t } = useTranslation();
     try {
         RegisterUserSchema.parse({
             loginUserName: values[Fields.Username],
@@ -309,14 +319,16 @@ RegistrationForm.isValid = (
 
         // Check if passwords match
         if (values[Fields.Password] !== values[Fields.RePassword]) {
+            const { t } = useTranslation();
+
             setValidationErrors((prev) => ({
                 ...prev,
                 [Fields.RePassword]: t('passwords-do-not-match'),
             }));
             return false;
         }
-
         setValidationErrors({});
+
         return true;
     } catch (error) {
         if (error.errors) {
