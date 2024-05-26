@@ -21,14 +21,14 @@ import { useRegistration } from '../../hooks/useRegisterUser';
 
 /**
  * ToDo List:
- * Show loading when isPending is true.
- * Show warning/Success message when you have a result from the hook as we discussed today.
- * Add all of the necessary fields and also their validation to the RegistrationForm.isValid
- * Disable the registration button and also form submission when isPending is true
- * After a successful registration we need to hide the from and show a success message box to ask the user for going to the login page
+ * Show loading when isPending is true. --> Done
+ * Show warning/Success message when you have a result from the hook as we discussed today.--> Done
+ * Add all of the necessary fields and also their validation to the RegistrationForm.isValid --> Done
+ * Disable the registration button and also form submission when isPending is true --> Done
+ * After a successful registration we need to hide the from and show a success message box to ask the user for going to the login page --> Done
  * After making the login form we need to do a login for that user automatically
  * We need to add CSRF token to the registration form
- * We need to add all texts into the language files(All languages)
+ * We need to add all texts into the language files(All languages) --> Done
  *
  */
 
@@ -71,17 +71,21 @@ export default function RegistrationForm() {
     const onHandleFormSubmit: FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
         setValidationErrors({});
-        const values = getFormValues(event) as Partial<FieldValues>;
+        deleteAllToasts();
+
+        let values = getFormValues(event) as Partial<FieldValues>;
+        values.dateOfBirth = new Date(values.dateOfBirth?.toString() as string);
+
         const formValidationResult = RegistrationForm.isValid(
             values,
             setValidationErrors,
         );
-        if (formValidationResult) {
+        if (formValidationResult && !isPending) {
             submit(values);
             setValidationErrors({});
         } else {
             createToast({
-                message: 'validationErrors',
+                message: t('one-or-more-fields-are-invalid'),
                 type: ToastType.Danger,
             });
         }
@@ -89,7 +93,9 @@ export default function RegistrationForm() {
 
     useEffect(() => {
         // Show an error message
-        if (!isSuccess) {
+        if (isSuccess) {
+            deleteAllToasts();
+        } else {
             let message: string = '';
             if (errorMessages.length > 0) {
                 message = errorMessages.join('\n');
@@ -98,172 +104,185 @@ export default function RegistrationForm() {
                     type: ToastType.Danger,
                 });
             }
-        } else {
-            deleteAllToasts();
         }
     }, [isSuccess]);
 
     return (
         <div>
-            <form
-                onSubmit={onHandleFormSubmit}
-                className="flex max-w-md flex-col gap-4"
-                data-testid="registrationForm"
-            >
-                <div>
-                    <TextBox
-                        autoComplete="true"
-                        name={Fields.Username}
-                        required
-                        type={TextInputType.text}
-                        labelText={t('username')}
-                        placeholder={t('username-place-holder')}
-                        icon="HiOutlineUser"
-                        errorMessage={validationErrors[Fields.Username]}
-                    />
-                </div>
-                <div>
-                    <TextBox
-                        autoComplete="true"
-                        name={Fields.Email}
-                        required
-                        type={TextInputType.email}
-                        labelText={t('email')}
-                        placeholder={t('email-place-holder')}
-                        icon="HiEnvelope"
-                        errorMessage={validationErrors[Fields.Email]}
-                    />
-                </div>
-                <div className="w-full flex items-center justify-between">
+            {isSuccess ? (
+                <>
+                    <div>{t('please-go-to-the-login-page')}</div>
+                    <Link href="/login">{t('login')}</Link>
+                </>
+            ) : (
+                <form
+                    onSubmit={onHandleFormSubmit}
+                    className="flex max-w-md flex-col gap-4"
+                    data-testid="registrationForm"
+                >
                     <div>
                         <TextBox
                             autoComplete="true"
-                            name={Fields.FirstName}
+                            name={Fields.Username}
                             required
                             type={TextInputType.text}
-                            labelText={t('first-name')}
-                            placeholder={t('first-name-place-holder')}
-                            icon="PiUserList"
-                            errorMessage={validationErrors[Fields.FirstName]}
+                            labelText={t('username')}
+                            placeholder={t('enter-your-username')}
+                            icon="HiOutlineUser"
+                            errorMessage={validationErrors[Fields.Username]}
                         />
                     </div>
                     <div>
                         <TextBox
                             autoComplete="true"
-                            name={Fields.LastName}
+                            name={Fields.Email}
                             required
-                            type={TextInputType.text}
-                            labelText={t('last-name')}
-                            placeholder={t('last-name-place-holder')}
-                            icon="PiUserList"
-                            errorMessage={validationErrors[Fields.LastName]}
+                            type={TextInputType.email}
+                            labelText={t('email')}
+                            placeholder={t('email-place-holder')}
+                            icon="HiEnvelope"
+                            errorMessage={validationErrors[Fields.Email]}
                         />
-                    </div>
-                </div>
-                <div className="flex items-center justify-between">
-                    <div className="w-1/3 mr-2">
-                        <SelectBox
-                            name={Fields.Gender}
-                            required
-                            labelText={t('gender')}
-                            options={[
-                                {
-                                    value: GenderType.Male,
-                                    label: GenderType.Male,
-                                },
-                                {
-                                    value: GenderType.Female,
-                                    label: GenderType.Female,
-                                },
-                            ]}
-                            errorMessage={validationErrors[Fields.Gender]}
-                        />
-                    </div>
-                    <div className="w-2/3">
-                        <Datepicker
-                            name={Fields.DateOfBirth}
-                            labelText={t('date-of-birth')}
-                            title={t('date-of-birth')}
-                            errorMessage={validationErrors[Fields.DateOfBirth]}
-                        />
-                    </div>
-                </div>
-                <div>
-                    <div className="mb-2 block">
-                        <Label value={t('phone-number')} />
                     </div>
                     <div className="w-full flex items-center justify-between">
+                        <div>
+                            <TextBox
+                                autoComplete="true"
+                                name={Fields.FirstName}
+                                required
+                                type={TextInputType.text}
+                                labelText={t('first-name')}
+                                placeholder={t('enter-your-first-name')}
+                                icon="PiUserList"
+                                errorMessage={
+                                    validationErrors[Fields.FirstName]
+                                }
+                            />
+                        </div>
+                        <div>
+                            <TextBox
+                                autoComplete="true"
+                                name={Fields.LastName}
+                                required
+                                type={TextInputType.text}
+                                labelText={t('last-name')}
+                                placeholder={t('enter-your-last-name')}
+                                icon="PiUserList"
+                                errorMessage={validationErrors[Fields.LastName]}
+                            />
+                        </div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                        <div className="w-1/3 mr-2">
+                            <SelectBox
+                                name={Fields.Gender}
+                                required
+                                labelText={t('gender')}
+                                options={[
+                                    {
+                                        value: GenderType.Male,
+                                        label: t('male'),
+                                    },
+                                    {
+                                        value: GenderType.Female,
+                                        label: t('female'),
+                                    },
+                                ]}
+                                errorMessage={validationErrors[Fields.Gender]}
+                            />
+                        </div>
+                        <div className="w-2/3">
+                            <Datepicker
+                                name={Fields.DateOfBirth}
+                                labelText={t('date-of-birth')}
+                                title={t('date-of-birth')}
+                                errorMessage={
+                                    validationErrors[Fields.DateOfBirth]
+                                }
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <div className="mb-2 block">
+                            <Label value={t('phone-number')} />
+                        </div>
+                        <div className="w-full flex items-center justify-between">
+                            <TextBox
+                                className="w-50 mr-2"
+                                autoComplete="true"
+                                name={Fields.PhoneNumberPrefix}
+                                type={TextInputType.text}
+                                placeholder={t(
+                                    'enter-your-countrys-prefix-number',
+                                )}
+                                addon="+"
+                                errorMessage={
+                                    validationErrors[Fields.PhoneNumberPrefix]
+                                }
+                            />
+                            <TextBox
+                                className="w-full"
+                                autoComplete="true"
+                                name={Fields.PhoneNumber}
+                                required
+                                type={TextInputType.text}
+                                placeholder={t('enter-your-phone-number')}
+                                errorMessage={
+                                    validationErrors[Fields.PhoneNumber]
+                                }
+                            />
+                        </div>
+                    </div>
+                    <div>
                         <TextBox
-                            className="w-50 mr-2"
                             autoComplete="true"
-                            name={Fields.PhoneNumberPrefix}
-                            type={TextInputType.text}
-                            placeholder={t('phone-number-prefix-place-holder')}
-                            addon="+"
-                            errorMessage={
-                                validationErrors[Fields.PhoneNumberPrefix]
-                            }
-                        />
-                        <TextBox
-                            className="w-full"
-                            autoComplete="true"
-                            name={Fields.PhoneNumber}
+                            name={Fields.Password}
                             required
-                            type={TextInputType.text}
-                            placeholder={t('phone-number-place-holder')}
-                            errorMessage={validationErrors[Fields.PhoneNumber]}
+                            type={TextInputType.password}
+                            labelText={t('password')}
+                            placeholder={t('enter-your-password')}
+                            icon="MdOutlinePassword"
+                            errorMessage={validationErrors[Fields.Password]}
                         />
                     </div>
-                </div>
-                <div>
-                    <TextBox
-                        autoComplete="true"
-                        name={Fields.Password}
-                        required
-                        type={TextInputType.password}
-                        labelText={t('password')}
-                        placeholder={t('enter-password')}
-                        icon="MdOutlinePassword"
-                        errorMessage={validationErrors[Fields.Password]}
-                    />
-                </div>
-                <div>
-                    <TextBox
-                        autoComplete="true"
-                        name={Fields.RePassword}
-                        required
-                        type={TextInputType.password}
-                        labelText={t('repeat-password')}
-                        placeholder={t('repeat-password-placeholder')}
-                        icon="MdOutlinePassword"
-                        errorMessage={validationErrors[Fields.RePassword]}
-                    />
-                </div>
-                <div className="flex items-center gap-2">
-                    <CheckBox
-                        name={Fields.Agreement}
-                        labelText={
-                            <>
-                                {t('i-agree-with-the')}&nbsp;
-                                <Link
-                                    href="#"
-                                    className="text-cyan-600 hover:underline dark:text-cyan-500"
-                                >
-                                    {t('terms-and-conditions')}
-                                </Link>
-                            </>
-                        }
-                        errorMessage={validationErrors[Fields.Agreement]}
-                    />
-                </div>
-                <Button
-                    type="submit"
-                    disabled={isPending}
-                    isProcessing={isPending}
-                >
-                    {t('register-new-user')}
-                </Button>
-            </form>
+                    <div>
+                        <TextBox
+                            autoComplete="true"
+                            name={Fields.RePassword}
+                            required
+                            type={TextInputType.password}
+                            labelText={t('repeat-password')}
+                            placeholder={t('enter-your-password-again')}
+                            icon="MdOutlinePassword"
+                            errorMessage={validationErrors[Fields.RePassword]}
+                        />
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <CheckBox
+                            name={Fields.Agreement}
+                            labelText={
+                                <>
+                                    {t('i-agree-with-the')}&nbsp;
+                                    <Link
+                                        href="#"
+                                        className="text-cyan-600 hover:underline dark:text-cyan-500"
+                                    >
+                                        {t('terms-and-conditions')}
+                                    </Link>
+                                </>
+                            }
+                            errorMessage={validationErrors[Fields.Agreement]}
+                        />
+                    </div>
+                    <Button
+                        type="submit"
+                        disabled={isPending}
+                        isProcessing={isPending}
+                    >
+                        {t('register-new-user')}
+                    </Button>
+                </form>
+            )}
         </div>
     );
 }
@@ -274,6 +293,7 @@ RegistrationForm.isValid = (
         React.SetStateAction<{ [key: string]: string }>
     >,
 ): values is FieldValues => {
+    const { t } = useTranslation();
     try {
         RegisterUserSchema.parse({
             loginUserName: values[Fields.Username],
@@ -291,7 +311,7 @@ RegistrationForm.isValid = (
         if (values[Fields.Password] !== values[Fields.RePassword]) {
             setValidationErrors((prev) => ({
                 ...prev,
-                [Fields.RePassword]: 'Passwords do not match',
+                [Fields.RePassword]: t('passwords-do-not-match'),
             }));
             return false;
         }
