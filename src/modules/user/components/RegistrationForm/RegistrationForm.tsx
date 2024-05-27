@@ -12,6 +12,7 @@ import SelectBox from '@/types/components/SelectBox/SelectBox';
 import TextBox from '@/types/components/TextBox/TextBox';
 import { getFormValues } from '@/types/modules/shared/components/Forms/FormUtils';
 import { useToastContext } from '@/types/modules/shared/components/ToastContextProvider/ToastContextProvider';
+import { CSRF } from '@/types/modules/shared/constants/apiRoutes';
 import { RegisterUserSchema } from '@/types/packages/api/contexts/user/application/types/RegisterUserRequest';
 import { TextInputType } from '@/types/shared/types/components/textBox';
 import { ToastType } from '@/types/shared/types/components/toast';
@@ -27,12 +28,13 @@ import { useRegistration } from '../../hooks/useRegisterUser';
  * Disable the registration button and also form submission when isPending is true --> Done
  * After a successful registration we need to hide the from and show a success message box to ask the user for going to the login page --> Done
  * After making the login form we need to do a login for that user automatically
- * We need to add CSRF token to the registration form
+ * We need to add CSRF token to the registration form --> Done
  * We need to add all texts into the language files(All languages) --> Done
  *
  */
 
 enum Fields {
+    CSRFToken = 'csrfToken',
     Username = 'loginUserName',
     Email = 'email',
     FirstName = 'firstName',
@@ -47,6 +49,7 @@ enum Fields {
 }
 
 export type FieldValues = {
+    [Fields.CSRFToken]: string;
     [Fields.Username]: string;
     [Fields.Email]: string;
     [Fields.FirstName]: string;
@@ -68,6 +71,27 @@ export default function RegistrationForm() {
         [key: string]: string;
     }>({});
     // const [isFormValid, setIsFormValid] = useState(false);
+    const [csrfToken, setCsrfToken] = useState<string>('');
+
+    useEffect(() => {
+        // Fetch the CSRF token from the server
+        const fetchCsrfToken = async () => {
+            try {
+                const response = await fetch(CSRF);
+                if (response.ok) {
+                    const data = await response.json();
+                    setCsrfToken(data.token);
+                }
+            } catch (error) {
+                createToast({
+                    message: t('error-in-fetching-csrf-token'),
+                    type: ToastType.Danger,
+                });
+            }
+        };
+
+        fetchCsrfToken();
+    }, []);
 
     const onHandleFormSubmit: FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
@@ -130,6 +154,11 @@ export default function RegistrationForm() {
                     data-testid="registrationForm"
                     // onChange={handleFieldChange}
                 >
+                    <input
+                        type="hidden"
+                        name={Fields.CSRFToken}
+                        value={csrfToken}
+                    />
                     <div>
                         <TextBox
                             autoComplete="true"
