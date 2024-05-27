@@ -13,6 +13,8 @@ import ThemeProvider from '@/types/theme/ThemeProvider';
 import { I18nProvider } from '@/types/utils/i18n/i18n-context';
 import { getServerTranslations } from '@/types/utils/i18n/server';
 
+import { ToastContextProvider } from '../modules/shared/components/ToastContextProvider/ToastContextProvider';
+
 export async function generateMetadata() {
     const { t } = await getServerTranslations();
     return {
@@ -39,8 +41,10 @@ export default async function RootLayout({ children }: RootLayoutProps) {
                     <SessionProvider session={session}>
                         <I18nProvider language={language}>
                             <ThemeProvider>
-                                <TopMenu />
-                                {children}
+                                <ToastContextProvider>
+                                    <TopMenu />
+                                    {children}
+                                </ToastContextProvider>
                             </ThemeProvider>
                         </I18nProvider>
                     </SessionProvider>
