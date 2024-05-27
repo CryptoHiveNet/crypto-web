@@ -3,7 +3,6 @@ import React, { createContext, useContext, useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import Toast from '@/types/components/Toast/Toast';
 import { ToastProps, ToastType } from '@/types/shared/types/components/toast';
 import { useQueryClient } from '@tanstack/react-query';
 
