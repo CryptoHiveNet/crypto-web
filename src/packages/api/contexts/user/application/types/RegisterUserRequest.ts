@@ -5,6 +5,7 @@ import { GenderType } from '@/types/shared/types/user/userProfile';
 export type RegisterUserRequest = z.infer<typeof RegisterUserSchema>;
 
 export const RegisterUserSchema = z.object({
+    csrfToken: z.string(),
     loginUserName: z.string(),
     email: z.string().email(),
     firstName: z.string(),

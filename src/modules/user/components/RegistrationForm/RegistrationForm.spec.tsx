@@ -1,9 +1,4 @@
-import '@testing-library/jest-dom';
-
-import { useTranslation } from 'react-i18next';
-
 import { useToastContext } from '@/types/modules/shared/components/ToastContextProvider/ToastContextProvider';
-import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 import {
     fireEvent,
     render,
@@ -46,6 +41,7 @@ describe('RegistrationForm', () => {
             createToast: createToastMock,
             deleteToast: jest.fn(),
             deleteAllToasts: deleteAllToastsMock,
+            toastList: [],
         });
     });
 
@@ -80,39 +76,6 @@ describe('RegistrationForm', () => {
         });
         expect(submitButton).toBeInTheDocument();
     });
-
-    // it('should disable the submit button if the form is not completed yet', () => {
-    //     render(<RegistrationForm />);
-    //     const registrationForm = screen.getByTestId('registrationForm');
-    //     const submitButton = within(registrationForm).getByRole('button', {
-    //         name: 'register-new-user',
-    //     });
-    //     expect(submitButton).toBeDisabled();
-    // });
-
-    // it('should disable the submit button if the form is not completed correctly', async () => {
-    //     render(<RegistrationForm />);
-    //     const registrationForm = screen.getByTestId('registrationForm');
-
-    //     fireEvent.change(screen.getByPlaceholderText('enter-your-username'), {
-    //         target: { value: 'testuser' },
-    //     });
-    //     fireEvent.change(screen.getByPlaceholderText('email-place-holder'), {
-    //         target: { value: 'invalid-email' },
-    //     });
-    //     fireEvent.change(screen.getByPlaceholderText('enter-your-password'), {
-    //         target: { value: 'password123' },
-    //     });
-    //     fireEvent.change(
-    //         screen.getByPlaceholderText('enter-your-password-again'),
-    //         { target: { value: 'password123' } },
-    //     );
-
-    //     const submitButton = within(registrationForm).getByRole('button', {
-    //         name: 'register-new-user',
-    //     });
-    //     expect(submitButton).toBeDisabled();
-    // });
 
     it('should show an error if the username has been taken', async () => {
         useRegistrationMock.mockReturnValue({
@@ -153,7 +116,9 @@ describe('RegistrationForm', () => {
         });
         fireEvent.change(
             screen.getByPlaceholderText('enter-your-password-again'),
-            { target: { value: 'password123' } },
+            {
+                target: { value: 'password123' },
+            },
         );
         fireEvent.click(screen.getByText('i-agree-with-the'));
 
@@ -179,9 +144,8 @@ describe('RegistrationForm', () => {
         fireEvent.click(submitButton);
 
         await waitFor(() => {
-            const spinner = screen.getByRole('status');
             expect(submitButton).toBeDisabled();
-            expect(spinner).toBeInTheDocument();
+            expect(screen.getByRole('status')).toBeInTheDocument();
         });
     });
 
@@ -211,7 +175,7 @@ describe('RegistrationForm', () => {
         });
     });
 
-    it('should hide the submit button and show a success message if the user is being registered successfully', async () => {
+    it('should hide the form and show a success message if the user is registered successfully', async () => {
         useRegistrationMock.mockReturnValue({
             submit: submitMock,
             isPending: false,
@@ -228,6 +192,65 @@ describe('RegistrationForm', () => {
             expect(
                 screen.queryByTestId('registrationForm'),
             ).not.toBeInTheDocument();
+        });
+    });
+
+    it('should fetch and set CSRF token on mount', async () => {
+        global.fetch = jest.fn(() =>
+            Promise.resolve({
+                ok: true,
+                json: () => Promise.resolve({ token: 'csrf-token' }),
+            }),
+        ) as jest.Mock;
+
+        render(<RegistrationForm />);
+
+        await waitFor(() => {
+            expect(global.fetch).toHaveBeenCalledWith('/api/csrf-token');
+            expect(screen.getByDisplayValue('csrf-token')).toBeInTheDocument();
+        });
+    });
+
+    it('should display an error message if fetching CSRF token fails', async () => {
+        global.fetch = jest.fn(() =>
+            Promise.reject('API is down'),
+        ) as jest.Mock;
+
+        render(<RegistrationForm />);
+
+        await waitFor(() => {
+            expect(createToastMock).toHaveBeenCalledWith({
+                message: 'error-in-fetching-csrf-token',
+                type: 'danger',
+            });
+        });
+    });
+
+    it('should display validation errors when fields are invalid', async () => {
+        render(<RegistrationForm />);
+        const registrationForm = screen.getByTestId('registrationForm');
+
+        fireEvent.change(screen.getByPlaceholderText('enter-your-username'), {
+            target: { value: '' },
+        });
+        fireEvent.change(screen.getByPlaceholderText('email-place-holder'), {
+            target: { value: 'invalid-email' },
+        });
+        fireEvent.change(screen.getByPlaceholderText('enter-your-password'), {
+            target: { value: 'short' },
+        });
+        fireEvent.change(
+            screen.getByPlaceholderText('enter-your-password-again'),
+            {
+                target: { value: 'short' },
+            },
+        );
+        fireEvent.click(screen.getByText('register-new-user'));
+
+        await waitFor(() => {
+            expect(
+                screen.getByText('one-or-more-fields-are-invalid'),
+            ).toBeInTheDocument();
         });
     });
 });
