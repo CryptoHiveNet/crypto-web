@@ -1,4 +1,4 @@
-import NextAuth, { NextAuthOptions } from 'next-auth';
+import NextAuth, { NextAuthOptions, User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GithubProvider from 'next-auth/providers/github';
 import TwitterProvider from 'next-auth/providers/twitter';
@@ -20,19 +20,25 @@ export const authOptions: NextAuthOptions = {
                     placeholder: 'Password',
                 },
             },
-            async authorize(credentials, req) {
+            async authorize(credentials, req): Promise<User | null> {
                 if (!credentials?.username || !credentials?.password)
                     return null;
                 const { username, password } = credentials;
-                const res = await fetch(LOGIN_URL, {
-                    method: 'POST',
-                    body: JSON.stringify({ username, password }),
-                    headers: { 'Content-Type': 'application/json' },
-                });
-                if (res.status === 401) {
-                    return null;
-                }
-                const user = await res.json();
+                // const res = await fetch(LOGIN_URL, {
+                //     method: 'POST',
+                //     body: JSON.stringify({ username, password }),
+                //     headers: { 'Content-Type': 'application/json' },
+                // });
+                // if (res.status === 401) {
+                //     return null;
+                // }
+                // const user = await res.json();
+                const mockUser: User = {
+                    id: '1',
+                    name: username,
+                    email: `${username}@gmail.com`,
+                };
+                const user: User | null = mockUser;
                 return user;
             },
         }),
@@ -50,6 +56,17 @@ export const authOptions: NextAuthOptions = {
         //   clientSecret: process.env.FACEBOOK_CLIENT_SECRET
         // }),
     ],
+    // callbacks: {
+    //     async jwt({ token, user }) {
+    //         if (user) return { ...token, ...user };
+    //         return token;
+    //     },
+    //     async session({ session, token }) {
+    //         session.user = token.user;
+    //         session.tokens = token.tokens;
+    //         return session;
+    //     },
+    // },
 };
 
 export const handler = NextAuth(authOptions);

@@ -11,5 +11,7 @@
   "register-new-user": "register-new-user",
   "hello": "Hi",
   "second-page": "Second Page",
-  "register": "Register"
+  "register": "Register",
+  "login": "Login",
+  "logout": "Logout"
 }

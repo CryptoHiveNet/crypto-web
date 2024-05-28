@@ -4,5 +4,7 @@
   "metadata_title": "The DE metadata title of the page",
   "metadata_description": "The DE metadata description of the page",
   "second-page": "Zweite Seite",
-  "register": "Registrieren"
+  "register": "Registrieren",
+  "login": "Anmeldung",
+  "logout": "Abmeldung"
 }

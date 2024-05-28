@@ -4,5 +4,7 @@
   "metadata_title": "The FA metadata title of the page",
   "metadata_description": "The FA metadata description of the page",
   "second-page": "صفحه دوم",
-  "register": "ثبت نام"
+  "register": "ثبت نام",
+  "login": "ورود",
+  "logout": "خروج"
 }
