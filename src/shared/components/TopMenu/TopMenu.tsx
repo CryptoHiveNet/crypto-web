@@ -1,87 +1,45 @@
 'use client';
-import { Avatar, DarkThemeToggle, Dropdown, Navbar } from 'flowbite-react';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { forwardRef } from 'react';
 
-const TopMenu = () => {
-    const { data: session } = useSession();
+import Image from 'next/image';
 
-    function userAuthStatus() {
-        if (session)
-            return (
-                <>
-                    {session.user.name},
-                    <button
-                        type="button"
-                        onClick={() => signOut()}
-                    >
-                        Sign out
-                    </button>
-                </>
-            );
+import Navbar from '../../../components/Navbar/Navbar';
+import NavbarBrand from '../../../components/Navbar/NavbarBrand/NavbarBrand';
+import NavbarCollapse from '../../../components/Navbar/NavbarCollapse/NavbarCollapse';
+import NavbarToggle from '../../../components/Navbar/NavbarToggle/NavbarToggle';
+import profilePic from '../../../public/next.svg';
+import TopMenuLinks from './TopMenuLinks/TopMenuLinks';
+import TopUserMenu from './TopUserMenu/TopUserMenu';
 
+// eslint-disable-next-line react/display-name
+const TopMenu = forwardRef<any, { lng: string; testId?: string }>(
+    (
+        { lng, testId }: { lng: string; testId?: string },
+        ref: React.Ref<any> | null,
+    ) => {
         return (
-            <button
-                type="button"
-                onClick={() => signIn()}
+            <Navbar
+                rounded
+                testId={testId}
+                ref={ref}
             >
-                Sign in
-            </button>
+                <NavbarBrand href="/">
+                    <Image
+                        src={profilePic}
+                        className="h-6 sm:h-9 w-fit"
+                        alt="Flowbite React Logo"
+                    />
+                </NavbarBrand>
+                <div className="flex md:order-2">
+                    <TopUserMenu lng={lng} />
+                    <NavbarToggle />
+                </div>
+                <NavbarCollapse>
+                    <TopMenuLinks lng={lng} />
+                </NavbarCollapse>
+            </Navbar>
         );
-    }
-
-    return (
-        <Navbar
-            fluid
-            rounded
-        >
-            <Navbar.Brand href="#">
-                <DarkThemeToggle />
-                img here
-                <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-                    Flowbite React
-                </span>
-            </Navbar.Brand>
-            <div className="flex md:order-2">
-                <Dropdown
-                    arrowIcon={false}
-                    inline
-                    label={
-                        <Avatar
-                            alt="User settings"
-                            img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                            rounded
-                        />
-                    }
-                >
-                    <Dropdown.Header>
-                        <span className="block text-sm">Bonnie Green</span>
-                        <span className="block truncate text-sm font-medium">
-                            name@flowbite.com
-                        </span>
-                    </Dropdown.Header>
-                    <Dropdown.Item>Dashboard</Dropdown.Item>
-                    <Dropdown.Item>Settings</Dropdown.Item>
-                    <Dropdown.Item>Earnings</Dropdown.Item>
-                    <Dropdown.Divider />
-                    <Dropdown.Item>Sign out</Dropdown.Item>
-                </Dropdown>
-                <Navbar.Toggle />
-            </div>
-            <Navbar.Collapse>
-                <Navbar.Link
-                    href="#"
-                    active
-                >
-                    Home
-                </Navbar.Link>
-                <Navbar.Link href="#">About</Navbar.Link>
-                <Navbar.Link href="#">Services</Navbar.Link>
-                <Navbar.Link href="#">Pricing</Navbar.Link>
-                <Navbar.Link href="#">Contact</Navbar.Link>
-                <Navbar.Link href="#">{userAuthStatus()}</Navbar.Link>
-            </Navbar.Collapse>
-        </Navbar>
-    );
-};
+    },
+);
 
 export default TopMenu;

@@ -1,26 +1,25 @@
 import { forwardRef } from 'react';
 
-import { NavbarCollapse as FlowbiteNavbarCollapse } from 'flowbite-react';
+import { DropdownDivider as FlowbiteDropdownDivider } from 'flowbite-react';
 
-import { NavbarCollapseProps } from '@/types/shared/types/components/navbar';
+import { DropdownDividerProps } from '@/types/shared/types/components/dropdown';
 
 // eslint-disable-next-line react/display-name
-const NavbarCollapse = forwardRef<any, NavbarCollapseProps>(
+const DropdownDivider = forwardRef<any, DropdownDividerProps>(
     (
         {
             id,
-            children,
             className,
             testId,
             onClick,
             onMouseEnter,
             onMouseLeave,
             ...rest
-        }: NavbarCollapseProps,
+        }: DropdownDividerProps,
         ref: React.Ref<any> | null,
     ) => {
         return (
-            <FlowbiteNavbarCollapse
+            <FlowbiteDropdownDivider
                 id={id}
                 className={className}
                 data-testid={testId}
@@ -29,11 +28,9 @@ const NavbarCollapse = forwardRef<any, NavbarCollapseProps>(
                 onMouseLeave={onMouseLeave}
                 ref={ref}
                 {...rest}
-            >
-                {children}
-            </FlowbiteNavbarCollapse>
+            />
         );
     },
 );
 
-export default NavbarCollapse;
+export default DropdownDivider;

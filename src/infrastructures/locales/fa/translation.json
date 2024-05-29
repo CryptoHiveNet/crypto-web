@@ -3,5 +3,13 @@
     "hello": "سلام",
     "metadata_title": "The FA metadata title of the page",
     "metadata_description": "The FA metadata description of the page",
-    "second-page": "صفحه دوم"
+    "home": "صفحه اصلی",
+    "about-us": "درباره ما",
+    "rules": "قوانین",
+    "blog": "وبلاگ",
+    "news": "اخبار",
+    "language": "FA",
+    "sign-out": "خروج",
+    "login": "ورود",
+    "register": "ثبت نام"
 }

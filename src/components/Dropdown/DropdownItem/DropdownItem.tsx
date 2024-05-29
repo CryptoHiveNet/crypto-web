@@ -1,27 +1,35 @@
 import { forwardRef } from 'react';
 
-import { NavbarCollapse as FlowbiteNavbarCollapse } from 'flowbite-react';
+import { DropdownItem as FlowbiteDropdownItem } from 'flowbite-react';
 
-import { NavbarCollapseProps } from '@/types/shared/types/components/navbar';
+import { DropdownItemProps } from '@/types/shared/types/components/dropdown';
 
 // eslint-disable-next-line react/display-name
-const NavbarCollapse = forwardRef<any, NavbarCollapseProps>(
+const DropdownItem = forwardRef<any, DropdownItemProps>(
     (
         {
             id,
-            children,
+            icon,
+            as,
+            href,
+            target,
             className,
+            children,
             testId,
             onClick,
             onMouseEnter,
             onMouseLeave,
             ...rest
-        }: NavbarCollapseProps,
+        }: DropdownItemProps,
         ref: React.Ref<any> | null,
     ) => {
         return (
-            <FlowbiteNavbarCollapse
+            <FlowbiteDropdownItem
                 id={id}
+                icon={icon}
+                as={as}
+                href={href}
+                target={target}
                 className={className}
                 data-testid={testId}
                 onClick={onClick}
@@ -31,9 +39,9 @@ const NavbarCollapse = forwardRef<any, NavbarCollapseProps>(
                 {...rest}
             >
                 {children}
-            </FlowbiteNavbarCollapse>
+            </FlowbiteDropdownItem>
         );
     },
 );
 
-export default NavbarCollapse;
+export default DropdownItem;

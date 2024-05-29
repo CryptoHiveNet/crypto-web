@@ -9,6 +9,7 @@ const NavbarLink = forwardRef<any, NavbarLinkProps>(
     (
         {
             id,
+            active,
             className,
             href,
             children,
@@ -23,6 +24,7 @@ const NavbarLink = forwardRef<any, NavbarLinkProps>(
         return (
             <FlowbiteNavbarLink
                 id={id}
+                active={active}
                 className={className}
                 href={href}
                 data-testid={testId}
