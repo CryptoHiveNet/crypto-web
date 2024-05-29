@@ -6,11 +6,11 @@ import Button from '@/types/components/Button/Button';
 
 const LoginButton = () => {
     const { t } = useTranslation();
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
     return (
         <Button
             color="blue"
-            disabled={session && session.user ? true : false}
+            disabled={status === 'authenticated' ? true : false}
             onClick={() => signIn()}
         >
             {t('login')}

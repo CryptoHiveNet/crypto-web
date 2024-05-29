@@ -34,6 +34,7 @@ export default function Page() {
                     <h6>Session Data:</h6>
                     <div>{session?.user.name}</div>
                     <div>{session?.user.email}</div>
+                    <div>{session?.user.role}</div>
                 </div>
             </div>
         </>

@@ -7,12 +7,12 @@ import Button from '@/types/components/Button/Button';
 
 const RegisterButton = () => {
     const { t } = useTranslation();
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
     const router = useRouter();
     return (
         <Button
             color="blue"
-            disabled={session && session.user ? true : false}
+            disabled={status === 'authenticated' ? true : false}
             onClick={() => router.push('/register')}
         >
             {t('register')}

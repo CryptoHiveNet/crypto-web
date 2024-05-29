@@ -20,7 +20,7 @@ export const authOptions: NextAuthOptions = {
                     placeholder: 'Password',
                 },
             },
-            async authorize(credentials, req): Promise<User | null> {
+            async authorize(credentials, req) {
                 if (!credentials?.username || !credentials?.password)
                     return null;
                 const { username, password } = credentials;
@@ -33,12 +33,13 @@ export const authOptions: NextAuthOptions = {
                 //     return null;
                 // }
                 // const user = await res.json();
-                const mockUser: User = {
+                const mockUser = {
                     id: '1',
                     name: username,
                     email: `${username}@gmail.com`,
+                    role: 'User',
                 };
-                const user: User | null = mockUser;
+                const user = mockUser;
                 return user;
             },
         }),
@@ -56,17 +57,19 @@ export const authOptions: NextAuthOptions = {
         //   clientSecret: process.env.FACEBOOK_CLIENT_SECRET
         // }),
     ],
-    // callbacks: {
-    //     async jwt({ token, user }) {
-    //         if (user) return { ...token, ...user };
-    //         return token;
-    //     },
-    //     async session({ session, token }) {
-    //         session.user = token.user;
-    //         session.tokens = token.tokens;
-    //         return session;
-    //     },
-    // },
+    callbacks: {
+        async jwt({ token, user }) {
+            if (user) return { ...token, ...user };
+            return token;
+        },
+        async session({ session, token }) {
+            console.log('session', session);
+            console.log('token', token);
+            session.user = token.user;
+            // session.tokens = token.tokens;
+            return session;
+        },
+    },
 };
 
 export const handler = NextAuth(authOptions);

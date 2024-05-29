@@ -6,11 +6,11 @@ import Button from '@/types/components/Button/Button';
 
 const LogoutButton = () => {
     const { t } = useTranslation();
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
     return (
         <Button
             color="red"
-            disabled={session && session.user ? false : true}
+            disabled={status === 'authenticated' ? false : true}
             onClick={() => signOut()}
         >
             {t('logout')}
