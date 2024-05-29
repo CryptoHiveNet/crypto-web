@@ -3,5 +3,12 @@
   "hello": "Hallo",
   "metadata_title": "The DE metadata title of the page",
   "metadata_description": "The DE metadata description of the page",
-  "second-page": "Zweite Seite"
+  "second-page": "Zweite Seite",
+  "register": "Registrieren",
+  "login": "Anmeldung",
+  "logout": "Abmeldung",
+  "username": "Benutzername",
+  "password": "Passwort",
+  "cancel": "Abbrechen",
+  "forgot_password": "Passwort vergessen"
 }

@@ -18,3 +18,9 @@ export type ToastToggleProps = {
     onMouseEnter?: () => void;
     onMouseLeave?: () => void;
 };
+
+export enum ToastType {
+    Success = 'critical',
+    Warning = 'warning',
+    Danger = 'danger',
+}

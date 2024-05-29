@@ -39,7 +39,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
                     <SessionProvider session={session}>
                         <I18nProvider language={language}>
                             <ThemeProvider>
-                                <TopMenu />
+                                {/* <TopMenu /> */}
                                 {children}
                             </ThemeProvider>
                         </I18nProvider>

@@ -9,6 +9,7 @@ const Button = forwardRef<any, ButtonProps>(
     (
         {
             id,
+            type,
             color,
             gradientMonochrome,
             gradientDuoTone,
@@ -32,6 +33,7 @@ const Button = forwardRef<any, ButtonProps>(
         return (
             <FlowbiteButton
                 id={id}
+                type={type}
                 className={className}
                 color={color}
                 gradientMonochrome={gradientMonochrome}

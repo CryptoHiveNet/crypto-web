@@ -10,5 +10,12 @@
   "terms-and-conditions": "terms-and-conditions",
   "register-new-user": "register-new-user",
   "hello": "Hi",
-  "second-page": "Second Page"
+  "second-page": "Second Page",
+  "register": "Register",
+  "login": "Login",
+  "logout": "Logout",
+  "username": "Username",
+  "password": "Password",
+  "cancel": "Cancel",
+  "forgot_password": "Forgot Password"
 }

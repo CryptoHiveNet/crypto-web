@@ -1,7 +1,14 @@
 {
-    "home_page_title": "صفحه اصلی",
-    "hello": "سلام",
-    "metadata_title": "The FA metadata title of the page",
-    "metadata_description": "The FA metadata description of the page",
-    "second-page": "صفحه دوم"
+  "home_page_title": "صفحه اصلی",
+  "hello": "سلام",
+  "metadata_title": "The FA metadata title of the page",
+  "metadata_description": "The FA metadata description of the page",
+  "second-page": "صفحه دوم",
+  "register": "ثبت نام",
+  "login": "ورود",
+  "logout": "خروج",
+  "username": "نام کاربری",
+  "password": "کلمه عبور",
+  "cancel": "انصراف",
+  "forgot_password": "فراموشی کلمه عبور"
 }

@@ -1,30 +1,24 @@
-import NextAuth from "next-auth";
-import GithubProvider from "next-auth/providers/github";
-import TwitterProvider from "next-auth/providers/twitter";
+import NextAuth, { NextAuthOptions } from 'next-auth';
 
-console.log(process.env.GITHUB_ID);
-console.log(process.env.GITHUB_SECRET3564355
-  );
+import jwt from '@/types/utils/nextAuth/callbacks/jwt';
+import redirect from '@/types/utils/nextAuth/callbacks/redirect';
+import session from '@/types/utils/nextAuth/callbacks/session';
+import signIn from '@/types/utils/nextAuth/callbacks/signIn';
+import { NextAuthProviders } from '@/types/utils/nextAuth/providers';
 
-export const authOptions = {
-  providers: [
-    GithubProvider({
-      clientId: process.env.GITHUB_CLIENT_ID ?? "",
-      clientSecret: process.env.GITHUB_CLIENT_SECRET ?? "",
-    }),
-    TwitterProvider({
-      clientId: process.env.TWITTER_CLIENT_ID ?? "",
-      clientSecret: process.env.TWITTER_CLIENT_SECRET ?? "",
-      version: "2.0", // opt-in to Twitter OAuth 2.0
-      
-    }),
-    FacebookProvider({
-      clientId: process.env.FACEBOOK_CLIENT_ID,
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET
-    }),
-  ],
-}
+export const authOptions: NextAuthOptions = {
+    providers: NextAuthProviders,
+    callbacks: {
+        signIn,
+        redirect,
+        session,
+        jwt,
+    },
+    pages: {
+        signIn: '/login',
+    },
+};
 
 export const handler = NextAuth(authOptions);
 
-export {handler as POST, handler as GET};
+export { handler as POST, handler as GET };
