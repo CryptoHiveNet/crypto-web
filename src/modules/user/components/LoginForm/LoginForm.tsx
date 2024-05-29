@@ -25,6 +25,7 @@ type Props = {
 };
 const LoginForm = (props: Props) => {
     const { t } = useTranslation();
+    const [providers, setProviders] = useState<any[]>([]);
     const [csrfToken, setCsrfToken] = useState<string>('');
     const { createToast, deleteToast, deleteAllToasts } = useToastContext();
     const router = useRouter();
@@ -51,12 +52,20 @@ const LoginForm = (props: Props) => {
         // Fetch the CSRF token from the server
         const fetchCsrfToken = async () => {
             const token = await getCsrfToken();
-            if (token) {
-                setCsrfToken(token);
+            if (token) setCsrfToken(token);
+        };
+        const fetchProviders = async () => {
+            const providers = await getProviders();
+            console.log('Providers', providers);
+            if (providers) {
+                const providersArray = Object.values(providers).filter(
+                    (provider) => provider.id !== 'credentials',
+                );
+                setProviders(providersArray);
             }
         };
-
         fetchCsrfToken();
+        fetchProviders();
     }, []);
     return (
         <div>
@@ -74,7 +83,7 @@ const LoginForm = (props: Props) => {
                     <TextBox
                         name="username"
                         type={TextInputType.text}
-                        labelText="Username"
+                        labelText={t('username')}
                         onChange={(e) => (username.current = e.target.value)}
                         required
                     />
@@ -83,13 +92,24 @@ const LoginForm = (props: Props) => {
                     <TextBox
                         name="password"
                         type={TextInputType.password}
-                        labelText="Password"
+                        labelText={t('password')}
                         onChange={(e) => (password.current = e.target.value)}
                         required
                     />
                 </div>
-                <SubmitButton text="Login" />
-                <Link href={props.callbackUrl ?? '/'}>Cancel</Link>
+                <SubmitButton text={t('login')} />
+                <Link href={props.callbackUrl ?? '/'}>{t('cancel')}</Link>
+                <Link href="#">{t('forgot_password')}</Link>
+                <div>
+                    <div>or</div>
+                    {providers.map((provider, index) => (
+                        <div key={index}>
+                            <Button onClick={() => signIn(provider.id)}>
+                                Sign in with {provider.name}
+                            </Button>
+                        </div>
+                    ))}
+                </div>
             </form>
         </div>
     );

@@ -6,5 +6,9 @@
   "second-page": "صفحه دوم",
   "register": "ثبت نام",
   "login": "ورود",
-  "logout": "خروج"
+  "logout": "خروج",
+  "username": "نام کاربری",
+  "password": "کلمه عبور",
+  "cancel": "انصراف",
+  "forgot_password": "فراموشی کلمه عبور"
 }

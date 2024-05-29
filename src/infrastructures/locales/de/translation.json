@@ -6,5 +6,9 @@
   "second-page": "Zweite Seite",
   "register": "Registrieren",
   "login": "Anmeldung",
-  "logout": "Abmeldung"
+  "logout": "Abmeldung",
+  "username": "Benutzername",
+  "password": "Passwort",
+  "cancel": "Abbrechen",
+  "forgot_password": "Passwort vergessen"
 }
