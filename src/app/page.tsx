@@ -11,7 +11,6 @@ import RegisterButton from '../shared/components/RegisterButton/RegisterButton';
 export default function Page() {
     const { t } = useTranslation();
     const { data: session } = useSession();
-    console.log(session);
     return (
         <>
             <h1>{t('home_page_title')}</h1>

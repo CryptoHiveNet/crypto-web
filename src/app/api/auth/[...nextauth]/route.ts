@@ -3,11 +3,6 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import GithubProvider from 'next-auth/providers/github';
 import TwitterProvider from 'next-auth/providers/twitter';
 
-import { LOGIN_URL } from '@/types/modules/shared/constants/apiRoutes';
-
-console.log(process.env.GITHUB_ID);
-console.log(process.env.GITHUB_SECRET3564355);
-
 export const authOptions: NextAuthOptions = {
     providers: [
         CredentialsProvider({
@@ -23,7 +18,7 @@ export const authOptions: NextAuthOptions = {
             async authorize(credentials, req) {
                 if (!credentials?.username || !credentials?.password)
                     return null;
-                const { username, password } = credentials;
+
                 // const res = await fetch(LOGIN_URL, {
                 //     method: 'POST',
                 //     body: JSON.stringify({ username, password }),
@@ -33,14 +28,16 @@ export const authOptions: NextAuthOptions = {
                 //     return null;
                 // }
                 // const user = await res.json();
+                // return user;
+
+                // Mock user for demonstration purposes. Replace with real authentication logic.
                 const mockUser = {
                     id: '1',
-                    name: username,
-                    email: `${username}@gmail.com`,
+                    name: credentials.username,
+                    email: `${credentials.username}@gmail.com`,
                     role: 'User',
                 };
-                const user = mockUser;
-                return user;
+                return mockUser ?? null;
             },
         }),
         GithubProvider({
@@ -58,16 +55,40 @@ export const authOptions: NextAuthOptions = {
         // }),
     ],
     callbacks: {
-        async jwt({ token, user }) {
-            if (user) return { ...token, ...user };
-            return token;
+        async signIn({ user, account, profile, email, credentials }) {
+            const isAllowedToSignIn = true;
+            if (isAllowedToSignIn) {
+                return true;
+            } else {
+                // Return false to display a default error message
+                return false;
+                // Or you can return a URL to redirect to:
+                // return '/unauthorized'
+            }
         },
-        async session({ session, token }) {
-            console.log('session', session);
-            console.log('token', token);
-            session.user = token.user;
-            // session.tokens = token.tokens;
+        async redirect({ url, baseUrl }) {
+            // Allows relative callback URLs
+            if (url.startsWith('/')) return `${baseUrl}${url}`;
+            // Allows callback URLs on the same origin
+            else if (new URL(url).origin === baseUrl) return url;
+
+            return baseUrl;
+        },
+        async session({ session, user, token }) {
+            // Send properties to the client, like an access_token and user id from a provider.
+            session.user = token.user ?? session.user;
+
             return session;
+        },
+        async jwt({ token, user }) {
+            // Persist the OAuth access_token and or the user id to the token right after signin
+
+            if (user) {
+                token.user = user;
+                token.role = user.role;
+            }
+
+            return token;
         },
     },
 };

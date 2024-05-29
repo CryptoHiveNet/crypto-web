@@ -1,35 +1,66 @@
-import { withAuth } from 'next-auth/middleware';
-import { NextRequest } from 'next/server';
+import { getToken } from 'next-auth/jwt';
+import { signIn } from 'next-auth/react';
+import { NextResponse } from 'next/server';
 
-import { RoleType } from './types/user/role';
+import { Route } from './modules/shared/constants/routes';
+import { UserToken } from './types/user/token';
 
-export default withAuth({
-    pages: {
-        signIn: '/login',
-    },
-    callbacks: {
-        authorized({ req, token }: { req: NextRequest; token: any }) {
-            const pathName = req.nextUrl.pathname;
-            console.log('pathName', pathName);
-            if (
-                pathName.startsWith('dashboard/cp') &&
-                token.role !== RoleType.Admin
-            ) {
-                return false;
-            }
+import type { NextRequest } from 'next/server';
+export async function middleware(request: NextRequest) {
+    const { pathname }: { pathname: string } = request.nextUrl;
+    const token = await getToken({ req: request });
+    const user: UserToken | null = token?.user as UserToken;
 
-            if (
-                pathName.startsWith('dashboard/user') &&
-                token.role !== RoleType.User
-            ) {
-                return false;
-            }
+    const Redirect = () => {
+        if (user?.role == 'Admin') {
+            return NextResponse.redirect(new URL('/cp/dashboard', request.url));
+        } else if (user?.role == 'User') {
+            return NextResponse.redirect(
+                new URL('/user/dashboard', request.url),
+            );
+        } else {
+            return NextResponse.redirect(
+                new URL(
+                    Route.login +
+                        '?callbackUrl=' +
+                        encodeURIComponent(request.url),
+                    request.url,
+                ),
+            );
+        }
+    };
+    const authRoutes: Route[] = [Route.login, Route.register];
 
-            return true;
-        },
-    },
-});
+    if (!!token && authRoutes.includes(pathname as Route)) {
+        return Redirect();
+    }
+    if (
+        (!!token && pathname.startsWith('/cp') && user.role !== 'Admin') ||
+        (!!token && pathname.startsWith('/user') && user.role !== 'User')
+    ) {
+        return Redirect();
+    }
+
+    if (!token) {
+        if (pathname.includes('/cp') || pathname.includes('/user')) {
+            return Redirect();
+        }
+    } else {
+        if (
+            (pathname.startsWith('/cp') && user.role !== 'Admin') ||
+            (pathname.startsWith('/user') && user.role !== 'User')
+        ) {
+            return Redirect();
+        }
+    }
+}
 
 export const config = {
-    matcher: ['/dashboard/:path*'],
+    matcher: [
+        Route.login,
+        Route.register,
+        '/forgot-password',
+        '/cp/:path*',
+        '/user/:path*',
+    ],
 };
