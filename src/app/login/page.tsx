@@ -10,9 +10,7 @@ const page = () => {
             header={<></>}
             footer={<></>}
         >
-            <Container>
-                <LoginPage />
-            </Container>
+            <LoginPage />
         </BaseLayout>
     );
 };

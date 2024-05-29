@@ -14,6 +14,9 @@ export const authOptions: NextAuthOptions = {
         session,
         jwt,
     },
+    pages: {
+        signIn: '/login',
+    },
 };
 
 export const handler = NextAuth(authOptions);
