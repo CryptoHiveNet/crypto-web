@@ -56,7 +56,6 @@ const LoginForm = (props: Props) => {
         };
         const fetchProviders = async () => {
             const providers = await getProviders();
-            console.log('Providers', providers);
             if (providers) {
                 const providersArray = Object.values(providers).filter(
                     (provider) => provider.id !== 'credentials',
